@@ -21,31 +21,44 @@ http://cxf.apache.org/core
 http://cxf.apache.org/schemas/core.xsd
 ">
 
+    <context:component-scan base-package="com.github.arven.example.services" scope-resolver="org.springframework.context.annotation.Jsr330ScopeMetadataResolver" />
+    
     <!-- Define Services -->
-    <bean id="helloWorldService" class="com.github.arven.example.services.HelloWorldService" />      
+    <bean id="microBlogRestService" class="com.github.arven.example.services.MicroBlogRestService" />      
 
     <!-- Set JSR250 Method Annotations -->    
     <security:global-method-security jsr250-annotations="enabled" />
-        
-    <!-- Create stateless security with Basic authentication -->
-    <security:http use-expressions="true" create-session="stateless">
-        <security:anonymous />
-        <security:http-basic />
-    </security:http>
     
-    <!-- Create a demo authentication manager with predefined username -->
+    <!-- Create a demo authentication manager with predefined credentials -->
     <security:authentication-manager>
-      <security:authentication-provider>
-        <security:user-service>
-            <security:user name="trfields" password="snowing" authorities="ROLE_USER" />
-        </security:user-service>
-      </security:authentication-provider>
+      <security:authentication-provider user-service-ref="microBlogService" />
     </security:authentication-manager>
     
+    <!-- Create digest filter which processes the user data -->
+    <bean id="digestFilter" class=
+        "org.springframework.security.web.authentication.www.DigestAuthenticationFilter">
+        <property name="userDetailsService" ref="microBlogService"/>
+        <property name="authenticationEntryPoint" ref="digestEntryPoint"/>
+    </bean>
+
+    <!-- Create digest entry point -->
+    <bean id="digestEntryPoint" class=
+        "org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint">
+        <property name="realmName" value="spring-cxf-example"/>
+        <property name="key" value="acegi"/>
+    </bean>    
+        
+    <!-- Create stateless security config with Basic and Digest authentication -->
+    <security:http use-expressions="true" create-session="stateless" entry-point-ref="digestEntryPoint">
+        <security:anonymous />
+        <security:http-basic />
+        <security:custom-filter ref="digestFilter" after="BASIC_AUTH_FILTER" />
+    </security:http>
+    
     <!-- Create a REST endpoint with the defined services at /rest -->
-    <jaxrs:server id="helloWorldRest" address="/rest">
+    <jaxrs:server id="microBlogRest" address="/v1">
         <jaxrs:serviceBeans>
-            <ref bean="helloWorldService" />
+            <ref bean="microBlogRestService" />
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <bean class="org.apache.cxf.jaxrs.impl.WebApplicationExceptionMapper">
