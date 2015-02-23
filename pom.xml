@@ -15,14 +15,6 @@
             <name>SpringSource Repository</name>
             <url>http://repo.springsource.org/release</url>
         </repository>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>http://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>  
     </repositories>
 
     <dependencies>
@@ -48,15 +40,6 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.10</version>
             <scope>compile</scope>
-        </dependency>
-
-        <!-- API dependencies -->
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
         </dependency>
 
         <!-- Spring dependencies -->
@@ -129,21 +112,21 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>4.0.0.RC1</version>
+            <version>3.2.5.RELEASE</version>
             <scope>compile</scope>
         </dependency>  
   
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>4.0.0.RC1</version>
+            <version>3.2.5.RELEASE</version>
             <scope>compile</scope>
         </dependency>
   
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>4.0.0.RC1</version>
+            <version>3.2.5.RELEASE</version>
             <scope>compile</scope>
         </dependency>                                  
 
@@ -155,13 +138,13 @@
             <version>4.1.4.RELEASE</version>
             <scope>test</scope>
         </dependency>
-
+        
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.21</version>
             <scope>test</scope>
-        </dependency>
+        </dependency>        
 
     </dependencies>
 
@@ -189,16 +172,16 @@
                     <scanIntervalSeconds>3</scanIntervalSeconds>
                 </configuration>   
                 <dependencies>
-                <dependency>
-                    <groupId>ch.qos.logback</groupId>
-                    <artifactId>logback-classic</artifactId>
-                    <version>1.1.2</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                    <version>1.7.10</version>
-                </dependency>
+                    <dependency>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-classic</artifactId>
+                        <version>1.1.2</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                        <version>1.7.10</version>
+                    </dependency>
                 </dependencies>
             </plugin>
 

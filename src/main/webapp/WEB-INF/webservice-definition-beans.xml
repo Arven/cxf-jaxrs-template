@@ -25,7 +25,7 @@ http://cxf.apache.org/schemas/core.xsd
     
     <security:global-method-security jsr250-annotations="enabled" />
         
-    <security:http use-expressions="true">
+    <security:http use-expressions="true" create-session="stateless">
         <security:anonymous />
         <security:http-basic />
     </security:http>
@@ -44,6 +44,12 @@ http://cxf.apache.org/schemas/core.xsd
         <jaxrs:serviceBeans>
             <ref bean="helloWorldService" />
         </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <bean class="org.apache.cxf.jaxrs.impl.WebApplicationExceptionMapper">
+                <property name="printStackTrace" value="false" />
+                <property name="addMessageToResponse" value="true" />
+            </bean>
+        </jaxrs:providers>
     </jaxrs:server>
     
 </beans>

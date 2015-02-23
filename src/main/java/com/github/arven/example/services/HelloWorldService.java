@@ -19,9 +19,14 @@ public class HelloWorldService {
      
     final Logger logger = LoggerFactory.getLogger(HelloWorldService.class);
     
-    @GET @Path("hello")
+    @GET @Path("helloWorld")
     public String sayHello() {
-        return "Hello World!!! Local Class!!!";
+        return "Hello World!!!";
+    }
+    
+    @RolesAllowed("ROLE_USER") @GET @Path("hello")
+    public String sayHelloToMe(@Context SecurityContext headers) {
+        return "Hello, " + headers.getUserPrincipal().getName() + "!";
     }
     
     @RolesAllowed("ROLE_USER") @GET @Path("version")
