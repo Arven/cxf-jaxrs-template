@@ -21,15 +21,19 @@ http://cxf.apache.org/core
 http://cxf.apache.org/schemas/core.xsd
 ">
 
+    <!-- Define Services -->
     <bean id="helloWorldService" class="com.github.arven.example.services.HelloWorldService" />      
-    
+
+    <!-- Set JSR250 Method Annotations -->    
     <security:global-method-security jsr250-annotations="enabled" />
         
+    <!-- Create stateless security with Basic authentication -->
     <security:http use-expressions="true" create-session="stateless">
         <security:anonymous />
         <security:http-basic />
     </security:http>
     
+    <!-- Create a demo authentication manager with predefined username -->
     <security:authentication-manager>
       <security:authentication-provider>
         <security:user-service>
@@ -38,8 +42,7 @@ http://cxf.apache.org/schemas/core.xsd
       </security:authentication-provider>
     </security:authentication-manager>
     
-    <!-- <jaxws:endpoint id="helloWorld" implementor="#helloWorldService" address="/soap" /> -->
-
+    <!-- Create a REST endpoint with the defined services at /rest -->
     <jaxrs:server id="helloWorldRest" address="/rest">
         <jaxrs:serviceBeans>
             <ref bean="helloWorldService" />

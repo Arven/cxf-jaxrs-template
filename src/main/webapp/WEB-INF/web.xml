@@ -3,38 +3,43 @@
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
      version="2.5">
-    <display-name>Archetype Created Web Application</display-name>
 
+    <display-name>spring-cxf-example</display-name>
+
+    <!-- Load the beans definitions for Spring and Spring Security -->
     <context-param>
-     <param-name>contextConfigLocation</param-name>
-     <param-value>WEB-INF/webservice-definition-beans.xml</param-value>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>WEB-INF/webservice-definition-beans.xml</param-value>
     </context-param>
 
+    <!-- Spring-Enabled CXF servlet class -->
     <servlet>
-     <servlet-name>CXFServlet</servlet-name>
-     <display-name>CXF Servlet</display-name>
-     <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
-     <load-on-startup>1</load-on-startup>
+        <servlet-name>CXFServlet</servlet-name>
+        <display-name>CXF Servlet</display-name>
+        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <!-- Attach servlet to all patterns -->
     <servlet-mapping>
-     <servlet-name>CXFServlet</servlet-name>
-     <url-pattern>/*</url-pattern>
+        <servlet-name>CXFServlet</servlet-name>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
+    <!-- Context Loader for bootstrapping startup and shutdown -->
     <listener>
-     <listener-class>
-      org.springframework.web.context.ContextLoaderListener
-     </listener-class>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
     </listener>
  
-    <!-- Spring Security -->
+    <!-- Spring Security filter chain defined in webservice-definition-beans.xml -->
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy
-        </filter-class>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
 
+    <!-- Apply the Spring Security filter chain to all patterns -->
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>

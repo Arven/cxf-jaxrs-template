@@ -1,13 +1,17 @@
 <configuration>
 
-  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>%-30(%d{HH:mm:ss.SSS} [%.-15thread]) %-5level %logger{36} - %msg%n%rEx{full,org.springframework.security}</pattern>
-    </encoder>
-  </appender>
+    <!-- Create a formatted logger for STDOUT which will log to the console -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- Define a pattern which shows time, thread, debug level, logger context, the message, as well as exception data -->
+            <!-- If the exception is from Spring Security we will ignore it, as it fills the console -->
+            <pattern>%-30(%d{HH:mm:ss.SSS} [%.-15thread]) %-5level %logger{36} - %msg%n%rEx{full,org.springframework.security}</pattern>
+        </encoder>
+    </appender>
 
-  <root level="INFO">
-    <appender-ref ref="STDOUT" />
-  </root>
+    <!-- Dump all root level messages INFO or higher to STDOUT -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
   
 </configuration>
