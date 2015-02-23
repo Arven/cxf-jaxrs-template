@@ -6,8 +6,11 @@
 package com.github.arven.example.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
@@ -19,10 +22,14 @@ import org.apache.commons.lang.StringUtils;
  * @author Brian Becker
  */
 @XmlRootElement(name = "message")
+@XmlAccessorType(XmlAccessType.NONE)
 public class MessageData {
     
     @XmlAttribute
     public String id;
+    
+    @XmlAttribute
+    public Date date;
     
     @XmlValue
     public String message;
@@ -46,4 +53,9 @@ public class MessageData {
         if(tags.isEmpty()) { return null; }
         return tags;
     }
+    
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    
 }

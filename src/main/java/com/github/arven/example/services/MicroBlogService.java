@@ -6,6 +6,7 @@
 package com.github.arven.example.services;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +58,7 @@ public class MicroBlogService implements UserDetailsService {
     }    
 
     public void addPost( String user, MessageData post ) {
+        post.setDate(Calendar.getInstance().getTime());
         posts.add(user, post);
     }
     
@@ -73,7 +75,7 @@ public class MicroBlogService implements UserDetailsService {
     }
     
     public void addGroupMember( String group, String username ) {
-        members.add(group, new UserData(username));
+        members.add(group, new UserData(username, null, null, null));
     }
     
     @Override
