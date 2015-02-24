@@ -30,8 +30,8 @@ public class UserData {
     @XmlElement
     public String email;
     
-    @XmlJavaTypeAdapter(PasswordStringAdapter.class)
-    public String password;
+    @XmlElement
+    public Password password;
     
     public UserData() { }
     
@@ -39,7 +39,7 @@ public class UserData {
         this.id       = id;
         this.nickname = nickname;
         this.email    = email;
-        this.password = password;
+        this.password = new Password(password);
     }
     
 }

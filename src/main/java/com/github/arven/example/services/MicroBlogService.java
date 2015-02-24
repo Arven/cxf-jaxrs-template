@@ -7,6 +7,7 @@ package com.github.arven.example.services;
 
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ public class MicroBlogService implements UserDetailsService {
     
     public Map<String, UserData> users;
     public MultivaluedMap<String, MessageData> posts;
+    public MultivaluedMap<String, DataReference> friends;
     public Map<String, GroupData> groups;
     public MultivaluedMap<String, DataReference> members;
     
@@ -39,6 +41,7 @@ public class MicroBlogService implements UserDetailsService {
         posts = new MultivaluedHashMap<String, MessageData>();
         groups = new HashMap<String, GroupData>();
         members = new MultivaluedHashMap<String, DataReference>();
+        friends = new MultivaluedHashMap<String, DataReference>();
     }
     
     public UserData getUser( String user ) {
@@ -78,10 +81,28 @@ public class MicroBlogService implements UserDetailsService {
         members.add(group, new DataReference(username));
     }
     
+    public List<DataReference> getFriends( String username ) {
+        if(friends.containsKey(username)) {
+            return friends.get(username);
+        } else {
+            return Collections.EMPTY_LIST;
+        }
+    }
+    
+    public void addFriend( String username, String friendname ) {
+        friends.add(username, new DataReference(friendname));
+    }
+    
+    public void removeFriend( String username, String friendname ) {
+        if(friends.containsKey(username)) {
+            friends.get(username).remove(new DataReference(friendname));
+        }
+    }
+    
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserData data = getUser(username);
-        return new User(data.id, data.password, Arrays.asList(new GrantedAuthority[] { new SimpleGrantedAuthority("ROLE_USER") }) );
+        return new User(data.id, data.password.get(), Arrays.asList(new GrantedAuthority[] { new SimpleGrantedAuthority("ROLE_USER") }) );
     }    
     
 }

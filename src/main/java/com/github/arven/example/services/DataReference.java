@@ -16,4 +16,17 @@ public class DataReference {
     @XmlAttribute   public String id;
     public DataReference() {}
     public DataReference(String id) { this.id = id; }
+    
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof DataReference) {
+            return this.hashCode() == o.hashCode();
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }
