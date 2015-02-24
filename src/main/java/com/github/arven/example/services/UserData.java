@@ -21,15 +21,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.NONE)
 public class UserData {
-    
-    @XmlRootElement(name = "users")
-    @XmlAccessorType(XmlAccessType.NONE)
-    public static class UserDataList {
-        @XmlAnyElement     public List<Object> user;
-        @XmlAttribute   public int getSize() { return user.size(); }
-        public UserDataList() {}
-        public UserDataList(List list) { this.user = list; }
-    }
 
     @XmlAttribute
     public String id;
