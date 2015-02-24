@@ -67,6 +67,16 @@ http://cxf.apache.org/schemas/core.xsd
             </bean>
             <bean class="org.apache.cxf.jaxrs.provider.JAXBElementProvider">
                 <property name="singleJaxbContext" value="true" />
+                <property name="extraClass">
+                    <list>
+                        <value>com.github.arven.example.services.DataReference</value>
+                    </list>
+                </property>
+                <property name="marshallerProperties">
+                    <map>
+                        <entry key="jaxb.formatted.output" value="true" value-type="java.lang.Boolean" />
+                    </map>
+                </property>
             </bean>
         </jaxrs:providers>
     </jaxrs:server>

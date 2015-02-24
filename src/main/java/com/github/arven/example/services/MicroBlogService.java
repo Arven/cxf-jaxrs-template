@@ -32,13 +32,13 @@ public class MicroBlogService implements UserDetailsService {
     public Map<String, UserData> users;
     public MultivaluedMap<String, MessageData> posts;
     public Map<String, GroupData> groups;
-    public MultivaluedMap<String, UserData> members;
+    public MultivaluedMap<String, DataReference> members;
     
     public MicroBlogService() {
         users = new HashMap<String, UserData>();
         posts = new MultivaluedHashMap<String, MessageData>();
         groups = new HashMap<String, GroupData>();
-        members = new MultivaluedHashMap<String, UserData>();
+        members = new MultivaluedHashMap<String, DataReference>();
     }
     
     public UserData getUser( String user ) {
@@ -58,7 +58,7 @@ public class MicroBlogService implements UserDetailsService {
     }    
 
     public void addPost( String user, MessageData post ) {
-        post.setDate(Calendar.getInstance().getTime());
+        post.date = (Calendar.getInstance().getTime());
         posts.add(user, post);
     }
     
@@ -66,7 +66,7 @@ public class MicroBlogService implements UserDetailsService {
         return groups.get(group);
     }
     
-    public List<UserData> getGroupMembers( String group ) {
+    public List<DataReference> getGroupMembers( String group ) {
         return members.get(group);
     }
     
@@ -75,7 +75,7 @@ public class MicroBlogService implements UserDetailsService {
     }
     
     public void addGroupMember( String group, String username ) {
-        members.add(group, new UserData(username, null, null, null));
+        members.add(group, new DataReference(username));
     }
     
     @Override

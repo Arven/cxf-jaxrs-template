@@ -54,8 +54,4 @@ public class MessageData {
         return tags;
     }
     
-    public void setDate(Date date) {
-        this.date = date;
-    }
-    
 }

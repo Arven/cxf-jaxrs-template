@@ -5,13 +5,12 @@
  */
 package com.github.arven.example.services;
 
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Simple User POJO for the MicroBlog server. 
@@ -31,7 +30,7 @@ public class UserData {
     @XmlElement
     public String email;
     
-    @XmlElement
+    @XmlJavaTypeAdapter(PasswordStringAdapter.class)
     public String password;
     
     public UserData() { }

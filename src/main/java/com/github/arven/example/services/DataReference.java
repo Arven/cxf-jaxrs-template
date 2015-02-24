@@ -5,18 +5,15 @@
  */
 package com.github.arven.example.services;
 
-import java.util.Collection;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "list")
+@XmlRootElement(name = "ref")
 @XmlAccessorType(XmlAccessType.NONE)
-public class DataList {
-    @XmlAnyElement  public Collection<Object> entry;
-    @XmlAttribute   public int getSize() { return entry.size(); }
-    public DataList() {}
-    public DataList(Collection list) { this.entry = list; }
+public class DataReference {
+    @XmlAttribute   public String id;
+    public DataReference() {}
+    public DataReference(String id) { this.id = id; }
 }
