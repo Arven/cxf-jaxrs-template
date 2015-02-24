@@ -30,11 +30,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 @Named
 public class MicroBlogService implements UserDetailsService {
     
-    public Map<String, UserData> users;
-    public MultivaluedMap<String, MessageData> posts;
-    public MultivaluedMap<String, DataReference> friends;
-    public Map<String, GroupData> groups;
-    public MultivaluedMap<String, DataReference> members;
+    private Map<String, UserData> users;
+    private MultivaluedMap<String, MessageData> posts;
+    private MultivaluedMap<String, DataReference> friends;
+    private Map<String, GroupData> groups;
+    private MultivaluedMap<String, DataReference> members;
     
     public MicroBlogService() {
         users = new HashMap<String, UserData>();
@@ -81,6 +81,20 @@ public class MicroBlogService implements UserDetailsService {
         members.add(group, new DataReference(username));
     }
     
+    public void leaveGroup( String group, String username ) {
+        if(members.containsKey(group)) {
+            members.get(group).remove(new DataReference(username));
+            if(members.get(group).isEmpty()) {
+                removeGroup(group);
+            }
+        }
+    }
+    
+    public void removeGroup( String group ) {
+        members.remove(group);
+        groups.remove(group);
+    }
+    
     public List<DataReference> getFriends( String username ) {
         if(friends.containsKey(username)) {
             return friends.get(username);
@@ -90,11 +104,14 @@ public class MicroBlogService implements UserDetailsService {
     }
     
     public void addFriend( String username, String friendname ) {
-        friends.add(username, new DataReference(friendname));
+        removeFriend(username, friendname);
+        if(users.containsKey(friendname)) {
+            friends.add(username, new DataReference(friendname));
+        }
     }
     
     public void removeFriend( String username, String friendname ) {
-        if(friends.containsKey(username)) {
+        if(friends.containsKey(username) && users.containsKey(friendname)) {
             friends.get(username).remove(new DataReference(friendname));
         }
     }

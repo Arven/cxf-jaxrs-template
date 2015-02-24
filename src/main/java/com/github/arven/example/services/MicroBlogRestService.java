@@ -83,6 +83,11 @@ public class MicroBlogRestService {
         return blogService.getGroup(name);
     }
     
+    @Path("/group/{name}") @DELETE @RolesAllowed({"ROLE_USER"})
+    public void leaveOrDisbandGroup(@PathParam("name") String name, final @Context SecurityContext ctx) {
+        blogService.leaveGroup(name, ctx.getUserPrincipal().getName());
+    }
+    
     @Path("/group/{name}/members") @GET @Produces({ MediaType.APPLICATION_XML })
     public DataList getGroupMembers(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
         return new DataList(blogService.getGroupMembers(name), offset, MAX_LIST_SPAN);
