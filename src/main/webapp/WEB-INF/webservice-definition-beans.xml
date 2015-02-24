@@ -65,6 +65,9 @@ http://cxf.apache.org/schemas/core.xsd
                 <property name="printStackTrace" value="false" />
                 <property name="addMessageToResponse" value="true" />
             </bean>
+            <bean class="org.apache.cxf.jaxrs.provider.JAXBElementProvider">
+                <property name="singleJaxbContext" value="true" />
+            </bean>
         </jaxrs:providers>
     </jaxrs:server>
     

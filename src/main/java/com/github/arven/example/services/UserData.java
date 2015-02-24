@@ -8,6 +8,7 @@ package com.github.arven.example.services;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -24,7 +25,7 @@ public class UserData {
     @XmlRootElement(name = "users")
     @XmlAccessorType(XmlAccessType.NONE)
     public static class UserDataList {
-        @XmlElement     public List<UserData> user;
+        @XmlAnyElement     public List<Object> user;
         @XmlAttribute   public int getSize() { return user.size(); }
         public UserDataList() {}
         public UserDataList(List list) { this.user = list; }
