@@ -25,26 +25,14 @@ import org.apache.commons.lang.StringUtils;
 @XmlRootElement(name = "message")
 @XmlAccessorType(XmlAccessType.NONE)
 public class MessageData {
-   
     
     @XmlRootElement(name = "messages")
     @XmlAccessorType(XmlAccessType.NONE)
-    public static class MessageDataList<T> {
-        
-        @XmlElement
-        public List<T> list;
-        
-        @XmlAttribute
-        public int getSize() {
-            return list.size();
-        }
-        
+    public static class MessageDataList {
+        @XmlElement     public List<MessageData> message;
+        @XmlAttribute   public int getSize() { return message.size(); }
         public MessageDataList() {}
-        
-        public MessageDataList(List<T> list) {
-            this.list = list;
-        }
-        
+        public MessageDataList(List list) { this.message = list; }
     }
     
     @XmlAttribute

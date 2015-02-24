@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlValue;
 
 @XmlRootElement(name = "group")
 @XmlAccessorType(XmlAccessType.NONE)
-public class GroupData {   
+public class GroupData {
 
     @XmlAttribute
     public String id;

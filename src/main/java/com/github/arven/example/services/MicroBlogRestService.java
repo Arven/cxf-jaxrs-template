@@ -7,7 +7,7 @@ package com.github.arven.example.services;
 
 
 import com.github.arven.example.services.MessageData.MessageDataList;
-import java.util.List;
+import com.github.arven.example.services.UserData.UserDataList;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
@@ -49,7 +49,7 @@ public class MicroBlogRestService {
     
     @Path("/post/{name}") @GET @Produces({ MediaType.APPLICATION_XML })
     public MessageDataList getMessagesByUser(@PathParam("name") String name) {
-        return new MessageDataList<MessageData>(blogService.getPosts(name));
+        return new MessageDataList(blogService.getPosts(name));
     }    
     
     @Path("/group") @POST @RolesAllowed({"ROLE_USER"}) @Consumes({ MediaType.APPLICATION_XML })
@@ -64,8 +64,8 @@ public class MicroBlogRestService {
     }
     
     @Path("/group/{name}/members") @GET @Produces({ MediaType.APPLICATION_XML })
-    public List<UserData> getGroupMembers(@PathParam("name") String name) {
-        return blogService.getGroupMembers(name);
+    public UserDataList getGroupMembers(@PathParam("name") String name) {
+        return new UserDataList(blogService.getGroupMembers(name));
     }
     
     @Path("/group/{name}/join") @POST @RolesAllowed({"ROLE_USER"})
