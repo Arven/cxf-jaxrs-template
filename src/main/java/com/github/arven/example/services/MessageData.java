@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 import org.apache.commons.lang.StringUtils;
@@ -24,6 +25,27 @@ import org.apache.commons.lang.StringUtils;
 @XmlRootElement(name = "message")
 @XmlAccessorType(XmlAccessType.NONE)
 public class MessageData {
+   
+    
+    @XmlRootElement(name = "messages")
+    @XmlAccessorType(XmlAccessType.NONE)
+    public static class MessageDataList<T> {
+        
+        @XmlElement
+        public List<T> list;
+        
+        @XmlAttribute
+        public int getSize() {
+            return list.size();
+        }
+        
+        public MessageDataList() {}
+        
+        public MessageDataList(List<T> list) {
+            this.list = list;
+        }
+        
+    }
     
     @XmlAttribute
     public String id;

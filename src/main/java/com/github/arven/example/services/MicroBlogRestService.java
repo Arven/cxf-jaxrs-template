@@ -6,6 +6,7 @@
 package com.github.arven.example.services;
 
 
+import com.github.arven.example.services.MessageData.MessageDataList;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -47,8 +48,8 @@ public class MicroBlogRestService {
     }
     
     @Path("/post/{name}") @GET @Produces({ MediaType.APPLICATION_XML })
-    public List<MessageData> getMessagesByUser(@PathParam("name") String name) {
-        return blogService.getPosts(name);
+    public MessageDataList getMessagesByUser(@PathParam("name") String name) {
+        return new MessageDataList<MessageData>(blogService.getPosts(name));
     }    
     
     @Path("/group") @POST @RolesAllowed({"ROLE_USER"}) @Consumes({ MediaType.APPLICATION_XML })
