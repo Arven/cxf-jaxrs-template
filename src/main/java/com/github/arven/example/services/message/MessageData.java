@@ -1,4 +1,4 @@
-package com.github.arven.example.services;
+package com.github.arven.example.services.message;
 
 import java.util.ArrayList;
 import java.util.Calendar;

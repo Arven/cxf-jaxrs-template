@@ -1,4 +1,4 @@
-package com.github.arven.example.services;
+package com.github.arven.example.types.adapters;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 

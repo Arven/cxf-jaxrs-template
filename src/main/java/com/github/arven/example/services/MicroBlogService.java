@@ -1,6 +1,9 @@
 package com.github.arven.example.services;
 
-import com.github.arven.example.data.DataReference;
+import com.github.arven.example.services.message.MessageData;
+import com.github.arven.example.services.message.UserData;
+import com.github.arven.example.services.message.GroupData;
+import com.github.arven.example.types.DataReference;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;

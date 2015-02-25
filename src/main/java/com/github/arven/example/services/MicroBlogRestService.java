@@ -1,6 +1,9 @@
 package com.github.arven.example.services;
 
-import com.github.arven.example.data.DataList;
+import com.github.arven.example.services.message.MessageData;
+import com.github.arven.example.services.message.UserData;
+import com.github.arven.example.services.message.GroupData;
+import com.github.arven.example.types.DataList;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
