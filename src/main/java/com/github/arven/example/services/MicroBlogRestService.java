@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.github.arven.example.services;
 
 import javax.annotation.security.RolesAllowed;
@@ -21,6 +16,22 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 
+/**
+ * MicroBlogRestService is the REST service front end for the MicroBlogService.
+ * Most of the calls are delegated directly to the MicroBlogService. There are
+ * a number of annotations on each of the paths, which specify the majority of
+ * the REST parameters.
+ * 
+ * @code {
+ *      @Path specifies the REST path in relative form
+ *      @GET @POST @DELETE @PUT specify the REST methods being used
+ *      @Produces specifies the return mime-type of the method
+ *      @Consumes specifies the parameter mime-type of the method
+ *      @RolesAllowed specifies what permissions a method requires
+ * }
+ * 
+ * @author Brian Becker
+ */
 public class MicroBlogRestService {
     
     public static int MAX_LIST_SPAN = 10;

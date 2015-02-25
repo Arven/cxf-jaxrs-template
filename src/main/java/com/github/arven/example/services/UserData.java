@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.github.arven.example.services;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -10,10 +5,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
- * Simple User POJO for the MicroBlog server. 
+ * The UserData class provides all of the general information about a user,
+ * aside from relational data. This consists of a user id, a nickname, an
+ * email address, as well as a password.
  * 
  * @author Brian Becker
  */
@@ -35,6 +31,20 @@ public class UserData {
     
     public UserData() { }
     
+    /**
+     * Create a new UserData with the user id, nickname, email, and password
+     * for the user.
+     * 
+     * NOTE: The password is stored internally in a Password object, which
+     * prevents the marshaling of the actual password to client requests,
+     * regardless of permissions. Either no value at all, or a placeholder
+     * value may be returned.
+     * 
+     * @param   id          User id for the user
+     * @param   nickname    Nickname for the user
+     * @param   email       Email address for the user
+     * @param   password    Password for the user (used for authentication)
+     */
     public UserData(String id, String nickname, String email, String password) {
         this.id       = id;
         this.nickname = nickname;

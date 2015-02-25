@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.github.arven.example.services;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -10,11 +5,31 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * DataReference is a key based reference to another object. It is not a
+ * full object, only a single element which provides a link to the object
+ * in a way that can be programmatically determined. This is useful for
+ * database queries that return a large list of objects which will rarely
+ * be iterated through, or where only the key of a query result actually
+ * matters.
+ * 
+ * @author Brian Becker
+ */
 @XmlRootElement(name = "ref")
 @XmlAccessorType(XmlAccessType.NONE)
-public class DataReference {
+public class DataReference<DataType> {
+
     @XmlAttribute   public String id;
+    
     public DataReference() {}
+    
+    /**
+     * Create a new DataReference with the given string identifier. This
+     * reference will be serialized using the real type name and a single
+     * attribute which labels it as a reference.
+     * 
+     * @param   id      The string identifier to use for the reference
+     */
     public DataReference(String id) { this.id = id; }
     
     @Override
@@ -29,4 +44,5 @@ public class DataReference {
     public int hashCode() {
         return id.hashCode();
     }
+    
 }
