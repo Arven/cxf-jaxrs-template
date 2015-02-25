@@ -89,7 +89,10 @@ http://cxf.apache.org/schemas/core.xsd
                 <property name="mapper">
                     <bean class="com.fasterxml.jackson.databind.ObjectMapper">
                         <property name="serializationInclusion" value="NON_NULL" />
-                    </bean>                    
+                        <property name="annotationIntrospector">
+                        	<bean class="com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector" />
+                        </property>
+                    </bean>
                 </property>
             </bean>
         </jaxrs:providers>
