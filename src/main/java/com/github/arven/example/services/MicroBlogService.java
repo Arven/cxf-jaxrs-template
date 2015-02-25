@@ -64,11 +64,7 @@ public class MicroBlogService implements UserDetailsService {
     }    
     
     public List<MessageData> getPosts( String user ) {
-        if(posts.containsKey(user)) {
-            return posts.get(user);
-        } else {
-            throw new NotFoundException();
-        }
+        return posts.get(user);
     }    
 
     public void addPost( String user, MessageData post ) {
@@ -98,11 +94,9 @@ public class MicroBlogService implements UserDetailsService {
     }
     
     public void leaveGroup( String group, String username ) {
-        if(members.containsKey(group)) {
-            members.get(group).remove(new DataReference(username));
-            if(members.get(group).isEmpty()) {
-                removeGroup(group);
-            }
+        members.remove(group, new DataReference(username));
+        if(members.get(group).isEmpty()) {
+            this.removeGroup(group);
         }
     }
     
@@ -111,29 +105,23 @@ public class MicroBlogService implements UserDetailsService {
     }
     
     public List<DataReference> getFriends( String username ) {
-        if(friends.containsKey(username)) {
-            return friends.get(username);
-        } else {
-            return Collections.EMPTY_LIST;
-        }
+        return friends.get(username);
     }
     
     public void addFriend( String username, String friendname ) {
-        removeFriend(username, friendname);
+        this.removeFriend(username, friendname);
         if(users.containsKey(friendname)) {
             friends.put(username, new DataReference(friendname));
         }
     }
     
     public void removeFriend( String username, String friendname ) {
-        if(friends.containsKey(username) && users.containsKey(friendname)) {
-            friends.get(username).remove(new DataReference(friendname));
-        }
+        friends.remove(username, new DataReference(friendname));
     }
     
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserData data = getUser(username);
+        UserData data = this.getUser(username);
         return new User(data.id, data.password.get(), Arrays.asList(new GrantedAuthority[] { new SimpleGrantedAuthority("ROLE_USER") }) );
     }    
     
