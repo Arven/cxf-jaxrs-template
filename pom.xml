@@ -9,6 +9,11 @@
     <version>1.0-SNAPSHOT</version>
     <name>cxf-jaxrs-template</name>
     <url>http://github.com/Arven/cxf-jaxrs-template</url>
+    
+    <!-- Set Global Project Properties -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <!-- Spring Repository -->
     <repositories>
