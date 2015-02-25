@@ -5,6 +5,9 @@
  */
 package com.github.arven.example.services;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
+
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
@@ -17,8 +20,6 @@ import javax.inject.Singleton;
 import javax.ws.rs.ClientErrorException;
 
 import javax.ws.rs.NotFoundException;
-import javax.ws.rs.core.MultivaluedHashMap;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response.Status;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -33,17 +34,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public class MicroBlogService implements UserDetailsService {
     
     private final Map<String, UserData> users;
-    private final MultivaluedMap<String, MessageData> posts;
-    private final MultivaluedMap<String, DataReference> friends;
+    private final ListMultimap<String, MessageData> posts;
+    private final ListMultimap<String, DataReference> friends;
     private final Map<String, GroupData> groups;
-    private final MultivaluedMap<String, DataReference> members;
+    private final ListMultimap<String, DataReference> members;
     
     public MicroBlogService() {
         users = new HashMap<String, UserData>();
-        posts = new MultivaluedHashMap<String, MessageData>();
+        posts = ArrayListMultimap.create();
         groups = new HashMap<String, GroupData>();
-        members = new MultivaluedHashMap<String, DataReference>();
-        friends = new MultivaluedHashMap<String, DataReference>();
+        members = ArrayListMultimap.create();
+        friends = ArrayListMultimap.create();
     }
     
     public UserData getUser( String user ) {
@@ -72,7 +73,7 @@ public class MicroBlogService implements UserDetailsService {
 
     public void addPost( String user, MessageData post ) {
         post.date = (Calendar.getInstance().getTime());
-        posts.add(user, post);
+        posts.put(user, post);
     }
     
     public GroupData getGroup( String group ) {
@@ -93,7 +94,7 @@ public class MicroBlogService implements UserDetailsService {
     }
     
     public void addGroupMember( String group, String username ) {
-        members.add(group, new DataReference(username));
+        members.put(group, new DataReference(username));
     }
     
     public void leaveGroup( String group, String username ) {
@@ -106,7 +107,6 @@ public class MicroBlogService implements UserDetailsService {
     }
     
     public void removeGroup( String group ) {
-        members.remove(group);
         groups.remove(group);
     }
     
@@ -121,7 +121,7 @@ public class MicroBlogService implements UserDetailsService {
     public void addFriend( String username, String friendname ) {
         removeFriend(username, friendname);
         if(users.containsKey(friendname)) {
-            friends.add(username, new DataReference(friendname));
+            friends.put(username, new DataReference(friendname));
         }
     }
     
