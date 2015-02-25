@@ -6,8 +6,10 @@
 package com.github.arven.example.services;
 
 import com.github.arven.example.services.message.UserData;
+
 import java.util.Arrays;
 import javax.inject.Inject;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
