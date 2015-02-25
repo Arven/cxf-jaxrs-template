@@ -45,7 +45,7 @@ public class MicroBlogRestService {
     
     @Path("/user/{name}/friends") @GET @Produces({ MediaType.APPLICATION_XML })
     public DataList getFriendsList(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
-        return new DataList(blogService.getFriends(name), offset, MAX_LIST_SPAN);
+        return new DataList(blogService.getFriends(name), offset, MAX_LIST_SPAN, false);
     }
     
     @Path("/user/{name}/friends/{friend}") @PUT @RolesAllowed({"ROLE_USER"})
@@ -69,13 +69,12 @@ public class MicroBlogRestService {
     
     @Path("/post/{name}") @GET @Produces({ MediaType.APPLICATION_XML })
     public DataList getMessagesByUser(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
-        return new DataList(blogService.getPosts(name), offset, MAX_LIST_SPAN);
+        return new DataList(blogService.getPosts(name), offset, MAX_LIST_SPAN, true);
     }    
     
     @Path("/group") @POST @RolesAllowed({"ROLE_USER"}) @Consumes({ MediaType.APPLICATION_XML })
     public void createGroup(GroupData group, final @Context SecurityContext ctx) {
-        blogService.addGroup(group);
-        blogService.addGroupMember(group.id, ctx.getUserPrincipal().getName());
+        blogService.addGroup(group, ctx.getUserPrincipal().getName());
     }
     
     @Path("/group/{name}") @GET @Produces({ MediaType.APPLICATION_XML })
@@ -90,7 +89,7 @@ public class MicroBlogRestService {
     
     @Path("/group/{name}/members") @GET @Produces({ MediaType.APPLICATION_XML })
     public DataList getGroupMembers(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
-        return new DataList(blogService.getGroupMembers(name), offset, MAX_LIST_SPAN);
+        return new DataList(blogService.getGroupMembers(name), offset, MAX_LIST_SPAN, false);
     }
     
     @Path("/group/{name}/join") @POST @RolesAllowed({"ROLE_USER"})

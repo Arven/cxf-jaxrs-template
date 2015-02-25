@@ -5,6 +5,7 @@
  */
 package com.github.arven.example.services;
 
+import com.google.common.collect.Lists;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -21,19 +22,23 @@ public class DataList {
     @XmlAttribute   public Integer offset;
     @XmlAttribute   public Integer span;
     @XmlAttribute   public Integer size;
+    @XmlAttribute   public Boolean reverse;
     public DataList() {}
-    public DataList(List list, Integer offset, Integer span) {
+    public DataList(List list, Integer offset, Integer span, Boolean reverse) {
         offset = offset == null ? 0 : offset;
         this.offset = offset;
         this.span = span;
+        
         if(list == null) {
             list = Collections.EMPTY_LIST;
         }
         
+        if(reverse) {
+            list = Lists.reverse(list);
+        }
+        
         this.size = list.size();
-        if(offset > list.size()) {
-            this.entry = Collections.EMPTY_LIST;
-        } else {
+        if(offset <= list.size()) {
             this.entry = list.subList(offset, Math.min(offset + span, list.size()));
         }
     }

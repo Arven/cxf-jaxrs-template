@@ -14,10 +14,12 @@ import java.util.Map;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
+import javax.ws.rs.ClientErrorException;
 
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response.Status;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,11 +32,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 @Named
 public class MicroBlogService implements UserDetailsService {
     
-    private Map<String, UserData> users;
-    private MultivaluedMap<String, MessageData> posts;
-    private MultivaluedMap<String, DataReference> friends;
-    private Map<String, GroupData> groups;
-    private MultivaluedMap<String, DataReference> members;
+    private final Map<String, UserData> users;
+    private final MultivaluedMap<String, MessageData> posts;
+    private final MultivaluedMap<String, DataReference> friends;
+    private final Map<String, GroupData> groups;
+    private final MultivaluedMap<String, DataReference> members;
     
     public MicroBlogService() {
         users = new HashMap<String, UserData>();
@@ -45,19 +47,27 @@ public class MicroBlogService implements UserDetailsService {
     }
     
     public UserData getUser( String user ) {
-        if(!users.containsKey(user))
+        if(users.containsKey(user)) {
+            return users.get(user);            
+        } else {
             throw new NotFoundException();
-        return users.get(user);
+        }
     }
     
     public void addUser( UserData user ) {
-        users.put(user.id, user);
+        if(!users.containsKey(user.id)) {
+            users.put(user.id, user);
+        } else {
+            throw new ClientErrorException(Status.CONFLICT);
+        }
     }    
     
     public List<MessageData> getPosts( String user ) {
-        if(!posts.containsKey(user))
+        if(posts.containsKey(user)) {
+            return posts.get(user);
+        } else {
             throw new NotFoundException();
-        return posts.get(user);
+        }
     }    
 
     public void addPost( String user, MessageData post ) {
@@ -73,8 +83,13 @@ public class MicroBlogService implements UserDetailsService {
         return members.get(group);
     }
     
-    public void addGroup( GroupData group ) {
-        groups.put(group.id, group);
+    public void addGroup( GroupData group, String username ) {
+        if(!groups.containsKey(group.id)) {
+            groups.put(group.id, group);
+            addGroupMember(group.id, username);
+        } else {
+            throw new ClientErrorException(Status.CONFLICT);
+        }
     }
     
     public void addGroupMember( String group, String username ) {
