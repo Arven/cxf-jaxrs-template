@@ -8,8 +8,8 @@
  * 
  * @author Brian Becker
  */
-@XmlSchema(namespace = "http://github.com/Arven/spring-cxf-example", elementFormDefault = XmlNsForm.QUALIFIED,
-        xmlns = @XmlNs(namespaceURI = "http://github.com/Arven/spring-cxf-example", prefix = "api"))
+@XmlSchema(namespace = "http://github.com/Arven/spring-cxf-example/api", elementFormDefault = XmlNsForm.QUALIFIED,
+        xmlns = @XmlNs(namespaceURI = "http://github.com/Arven/spring-cxf-example/api", prefix = "api"))
 package com.github.arven.rs.services.example;
 
 import javax.xml.bind.annotation.XmlNs;
