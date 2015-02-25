@@ -1,8 +1,8 @@
 # cxf-jaxrs-template
 Apache CXF JAXRS Template
 
-## First Postman Tests
-https://www.getpostman.com/collections/410e583a8fc8efe0faee
+### JSON Postman Tests
+https://www.getpostman.com/collections/1a71f7983c259b72efaf
 
-## More Postman Tests
+### XML Postman Tests
 https://www.getpostman.com/collections/7742db79a3aeb438bf0a
