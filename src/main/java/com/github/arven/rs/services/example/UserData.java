@@ -1,6 +1,7 @@
 package com.github.arven.rs.services.example;
 
 import com.github.arven.rs.types.Password;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;

@@ -5,7 +5,6 @@
  */
 package com.github.arven.rs.services.example;
 
-
 import java.util.Arrays;
 import javax.inject.Inject;
 
