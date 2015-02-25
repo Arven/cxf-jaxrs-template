@@ -21,6 +21,7 @@ http://cxf.apache.org/core
 http://cxf.apache.org/schemas/core.xsd
 ">
 
+    <!-- Scan components using the JSR330 Dependency Injection Annotations -->
     <context:component-scan base-package="com.github.arven.example.services" scope-resolver="org.springframework.context.annotation.Jsr330ScopeMetadataResolver" />
     
     <!-- Define Services -->
