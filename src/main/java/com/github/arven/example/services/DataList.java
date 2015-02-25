@@ -69,4 +69,18 @@ public class DataList {
         }
     }
     
+    /**
+     * Create a new List message with the verbatim list contents, from any
+     * valid Java collection. The order of the collection items will be
+     * maintained, if the collection supports order. The duplicity of the
+     * collection items will also be maintained, if the collection supports
+     * duplicates. However, the list will be returned as-is, without a
+     * subset or slice.
+     * 
+     * @param   collection  The collection of elements for the list
+     */
+    public DataList(Collection collection) {
+        this.entry = collection;
+    }
+    
 }
