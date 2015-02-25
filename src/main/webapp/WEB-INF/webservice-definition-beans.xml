@@ -24,6 +24,7 @@ http://cxf.apache.org/schemas/core.xsd
     <context:component-scan base-package="com.github.arven.example.services" scope-resolver="org.springframework.context.annotation.Jsr330ScopeMetadataResolver" />
     
     <!-- Define Services -->
+    <bean id="microBlogUserService" class="com.github.arven.example.services.MicroBlogUserService" />
     <bean id="microBlogRestService" class="com.github.arven.example.services.MicroBlogRestService" />      
 
     <!-- Set JSR250 Method Annotations -->    
@@ -31,13 +32,13 @@ http://cxf.apache.org/schemas/core.xsd
     
     <!-- Create a demo authentication manager with predefined credentials -->
     <security:authentication-manager>
-      <security:authentication-provider user-service-ref="microBlogService" />
+      <security:authentication-provider user-service-ref="microBlogUserService" />
     </security:authentication-manager>
     
     <!-- Create digest filter which processes the user data -->
     <bean id="digestFilter" class=
         "org.springframework.security.web.authentication.www.DigestAuthenticationFilter">
-        <property name="userDetailsService" ref="microBlogService"/>
+        <property name="userDetailsService" ref="microBlogUserService"/>
         <property name="authenticationEntryPoint" ref="digestEntryPoint"/>
     </bean>
 

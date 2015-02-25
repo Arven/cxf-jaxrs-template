@@ -170,10 +170,13 @@
         </dependency>        
 
     </dependencies>
-    
-    <reporting>
+
+    <build>
         
-        <plugins>
+        <!-- Web Archive Name -->
+        <finalName>spring-cxf-example</finalName>
+
+        <plugins>        
             
             <!-- JavaDoc Plugin -->
             <plugin>
@@ -183,17 +186,6 @@
                 <configuration>
                 </configuration>
             </plugin>    
-            
-        </plugins>
-        
-    </reporting>
-
-    <build>
-        
-        <!-- Web Archive Name -->
-        <finalName>spring-cxf-example</finalName>
-
-        <plugins>        
             
             <!-- Embedded Jetty Plugin -->
             <plugin>

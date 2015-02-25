@@ -3,7 +3,6 @@ package com.github.arven.example.services;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +12,6 @@ import javax.inject.Singleton;
 
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ClientErrorException;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
  * MicroBlogService is a backend implementation, with no database or any
@@ -31,7 +23,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 @Singleton
 @Named
-public class MicroBlogService implements UserDetailsService {
+public class MicroBlogService {
     
     private final Map<String, UserData> users;
     private final ListMultimap<String, MessageData> posts;
@@ -217,21 +209,5 @@ public class MicroBlogService implements UserDetailsService {
     public void removeFriend( String username, String friendname ) {
         friends.remove(username, new DataReference(friendname));
     }
-    
-    /**
-     * Load the Spring Security UserDetails by the username. These details
-     * consist of the user id and the password which were created when the
-     * user signed up by posting to the /user resource.
-     * 
-     * @param   username    user id to retrieve user details for
-     * @return  the user details (username, password, credentials)
-     * @throws  UsernameNotFoundException
-     */
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserData data = this.getUser(username);
-        if(data == null) throw new UsernameNotFoundException("User by the requested name was not found.");
-        return new User(data.id, data.password.get(), Arrays.asList(new GrantedAuthority[] { new SimpleGrantedAuthority("ROLE_USER") }) );
-    }    
     
 }
