@@ -20,14 +20,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class DataList {
     @XmlAnyElement  public Collection<Object> entry;
     @XmlAttribute   public Integer offset;
-    @XmlAttribute   public Integer span;
+    @XmlAttribute   public Integer limit;
     @XmlAttribute   public Integer size;
     @XmlAttribute   public Boolean reverse;
     public DataList() {}
     public DataList(List list, Integer offset, Integer span, Boolean reverse) {
+        this.offset = (offset == null || offset == 0) ? null : offset;
         offset = offset == null ? 0 : offset;
-        this.offset = offset;
-        this.span = span;
         
         if(list == null) {
             list = Collections.EMPTY_LIST;
@@ -38,8 +37,11 @@ public class DataList {
         }
         
         this.size = list.size();
+        this.limit = offset + span < size ? span : null;
         if(offset <= list.size()) {
             this.entry = list.subList(offset, Math.min(offset + span, list.size()));
+        } else {
+            this.entry = Collections.EMPTY_LIST;
         }
     }
 }
