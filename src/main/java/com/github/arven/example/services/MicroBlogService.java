@@ -1,5 +1,7 @@
 package com.github.arven.example.services;
 
+import com.github.arven.example.data.DataReference;
+
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 

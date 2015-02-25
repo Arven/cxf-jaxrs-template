@@ -1,5 +1,7 @@
 package com.github.arven.example.services;
 
+import com.github.arven.example.data.DataList;
+
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 
