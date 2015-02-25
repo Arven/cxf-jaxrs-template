@@ -78,7 +78,7 @@ public class MicroBlogService implements UserDetailsService {
      * posts.
      * 
      * @param   user        user id for the user whose posts we want
-     * @return 
+     * @return  a list of posts from the user
      */
     public List<MessageData> getPosts( String user ) {
         return posts.get(user);

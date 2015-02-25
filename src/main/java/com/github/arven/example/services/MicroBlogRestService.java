@@ -26,16 +26,6 @@ import javax.ws.rs.core.SecurityContext;
  * a number of annotations on each of the paths, which specify the majority of
  * the REST parameters.
  * 
- * <pre>
- * {@code
- *      @Path specifies the REST path in relative form
- *      @GET @POST @DELETE @PUT specify the REST methods being used
- *      @Produces specifies the return mime-type of the method
- *      @Consumes specifies the parameter mime-type of the method
- *      @RolesAllowed specifies what permissions a method requires
- * }
- * </pre>
- * 
  * @author Brian Becker
  */
 public class MicroBlogRestService {
