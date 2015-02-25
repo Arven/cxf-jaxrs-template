@@ -48,8 +48,8 @@ http://cxf.apache.org/schemas/core.xsd
         "org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint">
         <property name="realmName" value="spring-cxf-example"/>
         <property name="key" value="acegi"/>
-    </bean>    
-        
+    </bean>
+      
     <!-- Create stateless security config with Basic and Digest authentication -->
     <security:http use-expressions="true" create-session="stateless" entry-point-ref="digestEntryPoint">
         <security:anonymous />
@@ -63,10 +63,13 @@ http://cxf.apache.org/schemas/core.xsd
             <ref bean="microBlogRestService" />
         </jaxrs:serviceBeans>
         <jaxrs:providers>
+            <!-- Configure the Web Application Exception (404, etc) Mapper -->
             <bean class="org.apache.cxf.jaxrs.impl.WebApplicationExceptionMapper">
                 <property name="printStackTrace" value="false" />
                 <property name="addMessageToResponse" value="true" />
             </bean>
+            
+            <!-- Configure the JAXB XML Provider -->
             <bean class="org.apache.cxf.jaxrs.provider.JAXBElementProvider">
                 <property name="singleJaxbContext" value="true" />
                 <property name="extraClass">
@@ -78,6 +81,15 @@ http://cxf.apache.org/schemas/core.xsd
                     <map>
                         <entry key="jaxb.formatted.output" value="true" value-type="java.lang.Boolean" />
                     </map>
+                </property>
+            </bean>
+            
+            <!-- Create the Jackson JSON Provider -->
+            <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider">
+                <property name="mapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <property name="serializationInclusion" value="NON_NULL" />
+                    </bean>                    
                 </property>
             </bean>
         </jaxrs:providers>
