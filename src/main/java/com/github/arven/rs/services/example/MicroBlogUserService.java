@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.arven.example.services;
+package com.github.arven.rs.services.example;
 
-import com.github.arven.example.services.message.UserData;
 
 import java.util.Arrays;
 import javax.inject.Inject;

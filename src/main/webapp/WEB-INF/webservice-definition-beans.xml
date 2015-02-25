@@ -22,11 +22,11 @@ http://cxf.apache.org/schemas/core.xsd
 ">
 
     <!-- Scan components using the JSR330 Dependency Injection Annotations -->
-    <context:component-scan base-package="com.github.arven.example.services" scope-resolver="org.springframework.context.annotation.Jsr330ScopeMetadataResolver" />
+    <context:component-scan base-package="com.github.arven.rs.services.example" scope-resolver="org.springframework.context.annotation.Jsr330ScopeMetadataResolver" />
     
     <!-- Define Services -->
-    <bean id="microBlogUserService" class="com.github.arven.example.services.MicroBlogUserService" />
-    <bean id="microBlogRestService" class="com.github.arven.example.services.MicroBlogRestService" />      
+    <bean id="microBlogUserService" class="com.github.arven.rs.services.example.MicroBlogUserService" />
+    <bean id="microBlogRestService" class="com.github.arven.rs.services.example.MicroBlogRestService" />      
 
     <!-- Set JSR250 Method Annotations -->    
     <security:global-method-security jsr250-annotations="enabled" />
@@ -71,7 +71,7 @@ http://cxf.apache.org/schemas/core.xsd
                 <property name="singleJaxbContext" value="true" />
                 <property name="extraClass">
                     <list>
-                        <value>com.github.arven.example.services.DataReference</value>
+                        <value>com.github.arven.rs.types.DataReference</value>
                     </list>
                 </property>
                 <property name="marshallerProperties">

@@ -1,6 +1,5 @@
-package com.github.arven.example.types;
+package com.github.arven.rs.types;
 
-import com.github.arven.example.types.adapters.PasswordStringAdapter;
 
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;

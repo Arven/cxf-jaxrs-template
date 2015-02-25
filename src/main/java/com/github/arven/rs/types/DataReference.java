@@ -1,4 +1,4 @@
-package com.github.arven.example.types;
+package com.github.arven.rs.types;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

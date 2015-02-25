@@ -1,4 +1,4 @@
-package com.github.arven.example.types;
+package com.github.arven.rs.types;
 
 import com.google.common.collect.Lists;
 

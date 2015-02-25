@@ -1,4 +1,4 @@
-package com.github.arven.example.services.message;
+package com.github.arven.rs.services.example;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
