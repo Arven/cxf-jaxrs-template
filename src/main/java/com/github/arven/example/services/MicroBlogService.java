@@ -10,9 +10,9 @@ import java.util.Map;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
-import javax.ws.rs.ClientErrorException;
 
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.ClientErrorException;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
