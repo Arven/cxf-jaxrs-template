@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public class DataList {
     
-    @XmlAnyElement  public Collection<Object> entry;
+    @XmlAnyElement  public Collection<Object> list;
     @XmlAttribute   public Integer offset;
     @XmlAttribute   public Integer limit;
     @XmlAttribute   public Integer size;
