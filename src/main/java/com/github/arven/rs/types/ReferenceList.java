@@ -5,7 +5,9 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
@@ -20,11 +22,11 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  * @author Brian Becker
  */
-@XmlRootElement(name = "ref")
+@XmlRootElement(name = "references")
 @XmlAccessorType(XmlAccessType.NONE)
 public class ReferenceList {
 
-    @XmlValue public List<String> ids;
+    @XmlElement public List<String> id;
     
     public ReferenceList() {}
     
@@ -35,6 +37,6 @@ public class ReferenceList {
      * 
      * @param   id      The string identifier to use for the reference
      */
-    public ReferenceList(List<String> ids) { this.ids = ids; }
+    public ReferenceList(List<String> id) { this.id = id; }
     
 }
