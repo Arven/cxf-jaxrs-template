@@ -80,6 +80,10 @@ http://cxf.apache.org/schemas/core.xsd
                 <property name="marshallerProperties">
                     <map>
                         <entry key="jaxb.formatted.output" value="true" value-type="java.lang.Boolean" />
+                        <!--  <entry key="com.sun.xml.bind.namespacePrefixMapper">
+                       		<bean>
+                       		</bean>
+                        </entry> -->
                     </map>
                 </property>
             </bean>

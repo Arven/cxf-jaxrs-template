@@ -10,7 +10,12 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlValue;
 
 /**
  * The DataList class provides a list message for JAXB. This works around
@@ -26,11 +31,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public class DataList {
     
-    @XmlAnyElement  public Collection<Object> list;
-    @XmlAttribute   public Integer offset;
-    @XmlAttribute   public Integer limit;
-    @XmlAttribute   public Integer size;
-    @XmlAttribute   public Boolean reverse;
+	@XmlAnyElement		public Collection<Object> list;
+    @XmlAttribute   	public Integer offset;
+    @XmlAttribute   	public Integer limit;
+    @XmlAttribute   	public Integer size;
+    @XmlAttribute   	public Boolean reverse;
     
     private DataList() {}
     

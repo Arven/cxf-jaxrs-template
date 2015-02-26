@@ -21,7 +21,6 @@ public class Password {
      * value whatsoever.
      */
     @XmlJavaTypeAdapter(PasswordStringAdapter.class)
-    
     @XmlValue public String password;
     
     /**

@@ -1,23 +1,20 @@
 package com.github.arven.rs.services.example;
 
+import java.util.List;
+
 import com.github.arven.rs.types.DataList;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
-
 import javax.ws.rs.Path;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.DELETE;
-
 import javax.ws.rs.PathParam;
 import javax.ws.rs.MatrixParam;
-
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
-
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
@@ -54,7 +51,7 @@ public class MicroBlogRestService {
     
     @Path("/user/{name}/friends") @GET @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
     public DataList getFriendsList(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
-        return new DataList(blogService.getFriends(name), offset, MAX_LIST_SPAN, false);
+        return new DataList(blogService.getFriends(name));
     }
     
     @Path("/user/{name}/friends/{friend}") @PUT @RolesAllowed({"ROLE_USER"})
@@ -98,7 +95,7 @@ public class MicroBlogRestService {
     
     @Path("/group/{name}/members") @GET @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
     public DataList getGroupMembers(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
-        return new DataList(blogService.getGroupMembers(name), offset, MAX_LIST_SPAN, false);
+        return new DataList(blogService.getGroupMembers(name));
     }
     
     @Path("/group/{name}/join") @POST @RolesAllowed({"ROLE_USER"})

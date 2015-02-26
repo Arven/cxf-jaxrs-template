@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlValue;
 
 /**
  * DataReference is a key based reference to another object. It is not a
@@ -19,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public class DataReference<DataType> {
 
-    @XmlAttribute   public String id;
+    @XmlValue   public String id;
     
     public DataReference() {}
     
