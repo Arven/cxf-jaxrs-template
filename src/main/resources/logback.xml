@@ -5,7 +5,7 @@
         <encoder>
             <!-- Define a pattern which shows time, thread, debug level, logger context, the message, as well as exception data -->
             <!-- If the exception is from Spring Security we will ignore it, as it fills the console -->
-            <pattern>%-30(%d{HH:mm:ss.SSS} [%.-15thread]) %-5level %logger{36} - %msg%n%rEx{full}</pattern>
+            <pattern>%-25(%d{HH:mm:ss.SSS} [%.-10thread]) %-5level %logger{36} - %msg%n%rEx{full}</pattern>
         </encoder>
     </appender>
 
