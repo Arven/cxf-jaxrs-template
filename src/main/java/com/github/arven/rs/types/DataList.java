@@ -63,9 +63,9 @@ public class DataList {
         this.size = list.size();
         this.limit = offset + span < size ? span : null;
         if(offset <= list.size()) {
-            this.entry = list.subList(offset, Math.min(offset + span, list.size()));
+            this.list = list.subList(offset, Math.min(offset + span, list.size()));
         } else {
-            this.entry = Collections.EMPTY_LIST;
+            this.list = Collections.EMPTY_LIST;
         }
     }
     
@@ -80,7 +80,7 @@ public class DataList {
      * @param   collection  The collection of elements for the list
      */
     public DataList(Collection collection) {
-        this.entry = collection;
+        this.list = collection;
     }
     
 }
