@@ -50,7 +50,7 @@ public class MicroBlogRestService {
     
     @Path("/user/{name}/friends") @GET @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
     public ReferenceList getFriendsList(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
-        return new ReferenceList(blogService.getFriends(name));
+        return new ReferenceList(blogService.getFriends(name), offset, MAX_LIST_SPAN, false);
     }
     
     @Path("/user/{name}/friends/{friend}") @PUT @RolesAllowed({"ROLE_USER"})
@@ -94,7 +94,7 @@ public class MicroBlogRestService {
     
     @Path("/group/{name}/members") @GET @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
     public ReferenceList getGroupMembers(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
-        return new ReferenceList(blogService.getGroupMembers(name));
+        return new ReferenceList(blogService.getGroupMembers(name), offset, MAX_LIST_SPAN, false);
     }
     
     @Path("/group/{name}/join") @POST @RolesAllowed({"ROLE_USER"})
