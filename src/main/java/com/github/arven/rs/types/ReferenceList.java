@@ -1,8 +1,12 @@
 package com.github.arven.rs.types;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 
@@ -18,11 +22,11 @@ import javax.xml.bind.annotation.XmlValue;
  */
 @XmlRootElement(name = "ref")
 @XmlAccessorType(XmlAccessType.NONE)
-public class DataReference<DataType> {
+public class ReferenceList {
 
-    @XmlValue   public String id;
+    @XmlValue public List<String> ids;
     
-    public DataReference() {}
+    public ReferenceList() {}
     
     /**
      * Create a new DataReference with the given string identifier. This
@@ -31,19 +35,6 @@ public class DataReference<DataType> {
      * 
      * @param   id      The string identifier to use for the reference
      */
-    public DataReference(String id) { this.id = id; }
-    
-    @Override
-    public boolean equals(Object o) {
-        if(o instanceof DataReference) {
-            return this.hashCode() == o.hashCode();
-        }
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return id.hashCode();
-    }
+    public ReferenceList(List<String> ids) { this.ids = ids; }
     
 }

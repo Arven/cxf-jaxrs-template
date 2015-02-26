@@ -1,7 +1,5 @@
 package com.github.arven.rs.services.example;
 
-import com.github.arven.rs.types.DataReference;
-
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 
@@ -29,9 +27,9 @@ public class MicroBlogService {
     
     private final Map<String, UserData> users;
     private final ListMultimap<String, MessageData> posts;
-    private final ListMultimap<String, DataReference> friends;
+    private final ListMultimap<String, String> friends;
     private final Map<String, GroupData> groups;
-    private final ListMultimap<String, DataReference> members;
+    private final ListMultimap<String, String> members;
     
     public MicroBlogService() {
         users = new HashMap<String, UserData>();
@@ -109,7 +107,7 @@ public class MicroBlogService {
      * @param   group       group id for the group we want members of
      * @return  The group member list
      */
-    public List<DataReference> getGroupMembers( String group ) {
+    public List<String> getGroupMembers( String group ) {
         return members.get(group);
     }
     
@@ -140,7 +138,7 @@ public class MicroBlogService {
      */
     public void addGroupMember( String group, String username ) {
         if(groups.containsKey(group)) {
-            members.put(group, new DataReference(username));
+            members.put(group, username);
         }
     }
     
@@ -155,7 +153,7 @@ public class MicroBlogService {
      * @param   username    user id which is leaving the group
      */
     public void leaveGroup( String group, String username ) {
-        members.remove(group, new DataReference(username));
+        members.remove(group, username);
         if(members.get(group).isEmpty()) {
             this.removeGroup(group);
         }
@@ -180,7 +178,7 @@ public class MicroBlogService {
      * @param   username    user id for friends list
      * @return  the friends list, or empty if not valid
      */
-    public List<DataReference> getFriends( String username ) {
+    public List<String> getFriends( String username ) {
         return friends.get(username);
     }
     
@@ -196,7 +194,7 @@ public class MicroBlogService {
     public void addFriend( String username, String friendname ) {
         this.removeFriend(username, friendname);
         if(users.containsKey(friendname)) {
-            friends.put(username, new DataReference(friendname));
+            friends.put(username, friendname);
         }
     }
     
@@ -209,7 +207,7 @@ public class MicroBlogService {
      * @param   friendname  user id which is being removed as a friend
      */
     public void removeFriend( String username, String friendname ) {
-        friends.remove(username, new DataReference(friendname));
+        friends.remove(username, friendname);
     }
     
 }

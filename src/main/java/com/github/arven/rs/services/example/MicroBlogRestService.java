@@ -3,6 +3,7 @@ package com.github.arven.rs.services.example;
 import java.util.List;
 
 import com.github.arven.rs.types.DataList;
+import com.github.arven.rs.types.ReferenceList;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
@@ -50,8 +51,8 @@ public class MicroBlogRestService {
     }
     
     @Path("/user/{name}/friends") @GET @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    public DataList getFriendsList(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
-        return new DataList(blogService.getFriends(name));
+    public ReferenceList getFriendsList(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
+        return new ReferenceList(blogService.getFriends(name));
     }
     
     @Path("/user/{name}/friends/{friend}") @PUT @RolesAllowed({"ROLE_USER"})
@@ -94,8 +95,8 @@ public class MicroBlogRestService {
     }
     
     @Path("/group/{name}/members") @GET @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    public DataList getGroupMembers(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
-        return new DataList(blogService.getGroupMembers(name));
+    public ReferenceList getGroupMembers(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
+        return new ReferenceList(blogService.getGroupMembers(name));
     }
     
     @Path("/group/{name}/join") @POST @RolesAllowed({"ROLE_USER"})
