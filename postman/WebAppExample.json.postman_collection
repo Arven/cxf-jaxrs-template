@@ -139,13 +139,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1424987055951,
+			"time": 1424989546184,
 			"name": "Post Message As Humphrey",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<message id=\"DemoMessage01\">\n    This is a really short message which is just here to test the demo #web-app\n</message>"
+			"rawModeData": "<message id=\"DemoMessage01\">This is a really short message which is just here to test the demo #web-app</message>"
 		},
 		{
 			"id": "37933f1f-a89c-2c65-dfc9-2a940129c155",
@@ -186,13 +186,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1424987041323,
+			"time": 1424989582149,
 			"name": "Create Group Omega",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<group id=\"omega\">\n    This is the last group.\n</group>"
+			"rawModeData": "<group id=\"omega\">This is the last group.</group>"
 		},
 		{
 			"id": "3d02e895-bece-9080-4b7e-0be5cf2bc9bf",
@@ -511,13 +511,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1424987012803,
+			"time": 1424989525923,
 			"name": "Create Group Alpha",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<group id=\"alpha\">\n    This is the first group.\n</group>"
+			"rawModeData": "<group id=\"alpha\">This is the first group.</group>"
 		},
 		{
 			"id": "a9053386-f614-42c4-8beb-7358c64ea93f",
@@ -558,13 +558,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1424986996026,
+			"time": 1424989516804,
 			"name": "Post Message",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<message id=\"TestMessage01\">\n    This is #just a #sample #message.\n</message>"
+			"rawModeData": "<message id=\"TestMessage01\">This is #just a #sample #message.</message>"
 		},
 		{
 			"id": "e74b0c09-e180-e84f-a9fb-ebc3ce8d8f72",
