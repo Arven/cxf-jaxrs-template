@@ -139,13 +139,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1424896785401,
+			"time": 1424987055951,
 			"name": "Post Message As Humphrey",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<api:message xmlns:api=\"http://github.com/Arven/spring-cxf-example/api\" id=\"DemoMessage01\">\n    This is a really short message which is just here to test the demo #web-app\n</api:message>"
+			"rawModeData": "<message id=\"DemoMessage01\">\n    This is a really short message which is just here to test the demo #web-app\n</message>"
 		},
 		{
 			"id": "37933f1f-a89c-2c65-dfc9-2a940129c155",
@@ -186,13 +186,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1424896778040,
+			"time": 1424987041323,
 			"name": "Create Group Omega",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<api:group xmlns:api=\"http://github.com/Arven/spring-cxf-example/api\" id=\"omega\">\n    This is the last group.\n</api:group>"
+			"rawModeData": "<group id=\"omega\">\n    This is the last group.\n</group>"
 		},
 		{
 			"id": "3d02e895-bece-9080-4b7e-0be5cf2bc9bf",
@@ -207,13 +207,13 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1424896909954,
+			"time": 1424987091799,
 			"name": "Create User Kate",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<api:user xmlns:api=\"http://github.com/Arven/spring-cxf-example/api\" id=\"katherine\">\n    <nickname>kate</nickname>\n    <email>katherine@trfields.name</email>\n    <password>correcthorsebatterystaple</password>\n</api:user>"
+			"rawModeData": "<user id=\"katherine\">\n    <nickname>kate</nickname>\n    <email>katherine@trfields.name</email>\n    <password>correcthorsebatterystaple</password>\n</user>"
 		},
 		{
 			"id": "53ad5cd5-388b-6744-06c6-297d0393c694",
@@ -390,7 +390,7 @@
 				"id": "basic",
 				"timestamp": 1424800887137
 			},
-			"time": 1424811326381,
+			"time": 1424987072786,
 			"name": "Tom Adds Humphrey",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
@@ -411,13 +411,13 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1424896766744,
+			"time": 1424987027181,
 			"name": "Create User Humphrey",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<api:user xmlns:api=\"http://github.com/Arven/spring-cxf-example/api\" id=\"hp27\">\n    <nickname>humphrey</nickname>\n    <email>hp27@muckdragon.info</email>\n    <password>listing</password>\n</api:user>"
+			"rawModeData": "<user id=\"hp27\">\n    <nickname>humphrey</nickname>\n    <email>hp27@muckdragon.info</email>\n    <password>listing</password>\n</user>"
 		},
 		{
 			"id": "8764959d-5cb5-7cef-2233-c64932c62ba1",
@@ -459,13 +459,13 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1424896540782,
+			"time": 1424986975704,
 			"name": "Create User Tom",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<api:user xmlns:api=\"http://github.com/Arven/spring-cxf-example/api\" xmlns:xt=\"http://github.com/Arven/spring-cxf/example/xt\" id=\"trfields\">\n    <api:nickname>tom</api:nickname>\n    <api:email>tom@trfields.name</api:email>\n    <xt:password>snowing</xt:password>\n</api:user>"
+			"rawModeData": "<user id=\"trfields\">\n    <nickname>tom</nickname>\n    <email>tom@trfields.name</email>\n    <password>snowing</password>\n</user>"
 		},
 		{
 			"id": "8ee942da-7cfd-f51a-8f8e-c672987a1704",
@@ -511,13 +511,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1424896722425,
+			"time": 1424987012803,
 			"name": "Create Group Alpha",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<api:group xmlns:api=\"http://github.com/Arven/spring-cxf-example/api\" id=\"alpha\">\n    This is the first group.\n</api:group>"
+			"rawModeData": "<group id=\"alpha\">\n    This is the first group.\n</group>"
 		},
 		{
 			"id": "a9053386-f614-42c4-8beb-7358c64ea93f",
@@ -558,13 +558,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1424896680734,
+			"time": 1424986996026,
 			"name": "Post Message",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<api:message xmlns:api=\"http://github.com/Arven/spring-cxf-example/api\" id=\"TestMessage01\">\n    This is #just a #sample #message.\n</api:message>"
+			"rawModeData": "<message id=\"TestMessage01\">\n    This is #just a #sample #message.\n</message>"
 		},
 		{
 			"id": "e74b0c09-e180-e84f-a9fb-ebc3ce8d8f72",
