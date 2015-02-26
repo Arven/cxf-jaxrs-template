@@ -1,7 +1,5 @@
 package com.github.arven.rs.services.example;
 
-import java.util.List;
-
 import com.github.arven.rs.types.DataList;
 import com.github.arven.rs.types.ReferenceList;
 

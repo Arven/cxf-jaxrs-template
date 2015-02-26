@@ -1,12 +1,13 @@
 package com.github.arven.rs.services.example;
 
-import com.github.arven.rs.types.Password;
+import com.github.arven.rs.types.PasswordStringAdapter;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * The UserData class provides all of the general information about a user,
@@ -20,16 +21,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UserData {
 
     @XmlAttribute
-    public String id;
+    private String id;
     
     @XmlElement
-    public String nickname;
+    private String nickname;
     
     @XmlElement
-    public String email;
+    private String email;
     
     @XmlElement
-    public Password password;
+    @XmlJavaTypeAdapter(PasswordStringAdapter.class)
+    private String password;
     
     public UserData() { }
     
@@ -51,7 +53,25 @@ public class UserData {
         this.id       = id;
         this.nickname = nickname;
         this.email    = email;
-        this.password = new Password(password);
+        this.password = password;
+    }
+    
+    /**
+     * Get the user id
+     * 
+     * @return	the user's id
+     */
+    public String getId() {
+    	return this.id;
+    }
+    
+    /**
+     * Get the user password
+     * 
+     * @return the user's password
+     */
+    public String getPassword() {
+    	return this.password;
     }
     
 }

@@ -10,13 +10,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlList;
-import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlValue;
 
 /**
  * The DataList class provides a list message for JAXB. This works around
@@ -32,13 +26,13 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlAccessorType(XmlAccessType.NONE)
 public class DataList {
     
-	@XmlAnyElement		public Collection<Object> list;
-    @XmlAttribute   	public Integer offset;
-    @XmlAttribute   	public Integer limit;
-    @XmlAttribute   	public Integer size;
-    @XmlAttribute   	public Boolean reverse;
+	@XmlAnyElement		private Collection<? extends Object> list;
+    @XmlAttribute   	private Integer offset;
+    @XmlAttribute   	private Integer limit;
+    @XmlAttribute   	private Integer size;
+    @XmlAttribute   	private Boolean reverse;
     
-    private DataList() {}
+    public DataList() {}
     
     /**
      * Create a new List message with the following parameters. The list
@@ -53,12 +47,12 @@ public class DataList {
      * @param   span        How many elements that should be returned
      * @param   reverse     Whether to reverse the list before slicing
      */
-    public DataList(List list, Integer offset, Integer span, Boolean reverse) {
+    public DataList(List<? extends Object> list, Integer offset, Integer span, Boolean reverse) {
         this.offset = (offset == null || offset == 0) ? null : offset;
         offset = offset == null ? 0 : offset;
         
         if(list == null) {
-            list = Collections.EMPTY_LIST;
+            list = Collections.emptyList();
         }
         
         if(reverse) {
@@ -71,7 +65,7 @@ public class DataList {
         if(offset <= list.size()) {
             this.list = list.subList(offset, Math.min(offset + span, list.size()));
         } else {
-            this.list = Collections.EMPTY_LIST;
+            this.list = Collections.emptyList();
         }
     }
     
@@ -85,7 +79,7 @@ public class DataList {
      * 
      * @param   collection  The collection of elements for the list
      */
-    public DataList(Collection collection) {
+    public DataList(Collection<Object> collection) {
         this.list = collection;
     }
     

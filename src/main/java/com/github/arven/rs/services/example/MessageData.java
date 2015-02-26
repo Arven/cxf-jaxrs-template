@@ -25,13 +25,13 @@ import org.apache.commons.lang.StringUtils;
 public class MessageData {
     
     @XmlAttribute
-    public String id;
+    private String id;
     
     @XmlAttribute
-    public Date date;
+    private Date date;
     
     @XmlValue
-    public String message;
+    private String message;
     
     public MessageData () {
         this.date = (Calendar.getInstance().getTime());

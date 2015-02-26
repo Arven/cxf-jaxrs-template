@@ -56,8 +56,8 @@ public class MicroBlogService {
      * @param   user        user data for the user, containing user id
      */
     public void addUser( UserData user ) {
-        if(!users.containsKey(user.id)) {
-            users.put(user.id, user);
+        if(!users.containsKey(user.getId())) {
+            users.put(user.getId(), user);
         } else {
             throw new ClientErrorException(Status.CONFLICT);
         }
@@ -121,9 +121,9 @@ public class MicroBlogService {
      * @param   username    username of the person who is creating the group
      */
     public void addGroup( GroupData group, String username ) {
-        if(!groups.containsKey(group.id)) {
-            groups.put(group.id, group);
-            addGroupMember(group.id, username);
+        if(!groups.containsKey(group.getId())) {
+            groups.put(group.getId(), group);
+            addGroupMember(group.getId(), username);
         } else {
             throw new ClientErrorException(Status.CONFLICT);
         }

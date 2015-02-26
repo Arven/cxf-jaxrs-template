@@ -41,7 +41,7 @@ public class MicroBlogUserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserData data = blogService.getUser(username);
         if(data == null) throw new UsernameNotFoundException("User by the requested name was not found.");
-        return new User(data.id, data.password.get(), Arrays.asList(new GrantedAuthority[] { new SimpleGrantedAuthority("ROLE_USER") }) );
+        return new User(data.getId(), data.getPassword(), Arrays.asList(new GrantedAuthority[] { new SimpleGrantedAuthority("ROLE_USER") }) );
     }    
     
 }

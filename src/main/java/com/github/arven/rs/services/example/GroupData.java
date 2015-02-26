@@ -18,10 +18,10 @@ import javax.xml.bind.annotation.XmlValue;
 public class GroupData {
 
     @XmlAttribute
-    public String id;
+    private String id;
     
     @XmlValue
-    public String description;
+    private String description;
     
     public GroupData() { }
     
@@ -34,6 +34,15 @@ public class GroupData {
     public GroupData(String id, String description) {
         this.id = id;
         this.description = description;
+    }
+    
+    /**
+     * Get the group id
+     * 
+     * @return	the group id
+     */
+    public String getId() {
+    	return this.id;
     }
     
 }
