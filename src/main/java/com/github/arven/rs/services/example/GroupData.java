@@ -3,6 +3,7 @@ package com.github.arven.rs.services.example;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 
@@ -17,7 +18,7 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlAccessorType(XmlAccessType.NONE)
 public class GroupData {
 
-    @XmlAttribute
+    @XmlID @XmlAttribute
     private String id;
     
     @XmlValue
