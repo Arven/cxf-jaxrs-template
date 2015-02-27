@@ -3,6 +3,7 @@
 	"name": "WebAppExampleJSON",
 	"description": "",
 	"order": [
+		"1aa9d2d8-b025-07e7-bfb8-b33ca086cee3",
 		"712d0ef3-fd8d-84b2-f63d-a0b75c601d77",
 		"4c8c3443-dbd9-db9e-ce5f-e33d8afcdecc",
 		"a9e49543-a387-5712-82b9-d972bef273ce",
@@ -58,6 +59,27 @@
 			"responses": [],
 			"synced": false,
 			"rawModeData": "{\n    \"group\": {\n        \"@id\": \"alpha\",\n        \"$\": \"This is the first group.\"\n    }\n}"
+		},
+		{
+			"id": "1aa9d2d8-b025-07e7-bfb8-b33ca086cee3",
+			"headers": "Accept: application/json\n",
+			"url": "http://localhost:8080/spring-cxf-example/v1?_wadl",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"name": "Get JSON WADL Schema",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425053100443,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
+			"synced": false
 		},
 		{
 			"id": "1f1144fd-db42-5556-6b46-538ed8870afe",

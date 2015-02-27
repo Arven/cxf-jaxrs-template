@@ -3,6 +3,7 @@
 	"name": "WebAppExample",
 	"description": "",
 	"order": [
+		"8a26c299-99bf-7f9b-60e6-a9ef795aef6c",
 		"8b358fb7-f0ee-c1cd-965e-85b51b24a641",
 		"37933f1f-a89c-2c65-dfc9-2a940129c155",
 		"ddc28c0d-f898-87d7-6cc6-067355577728",
@@ -99,17 +100,12 @@
 			"id": "0d95c870-c3dc-87ac-89ca-961f213a4c39",
 			"headers": "Content-Type: application/xml\nAuthorization: Basic dHJmaWVsZHM6c25vd2luZw==\n",
 			"url": "http://localhost:8080/spring-cxf-example/v1/user/trfields/friends/hp27",
-			"pathVariables": {},
 			"preRequestScript": "",
+			"pathVariables": {},
 			"method": "DELETE",
 			"data": [],
-			"dataMode": "params",
-			"name": "Tom Removes Humphrey",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1424810887619,
+			"dataMode": "raw",
 			"version": 2,
-			"responses": [],
 			"tests": "",
 			"currentHelper": "basicAuth",
 			"helperAttributes": {
@@ -118,8 +114,13 @@
 				"id": "basic",
 				"timestamp": 1424800887137
 			},
+			"time": 1425047486386,
+			"name": "Tom Removes Humphrey",
+			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
-			"synced": false
+			"responses": [],
+			"synced": false,
+			"rawModeData": ""
 		},
 		{
 			"id": "0ea87cf9-cd06-def5-03ad-1fadeb597ef4",
@@ -139,13 +140,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1424989546184,
+			"time": 1425055165374,
 			"name": "Post Message As Humphrey",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<message id=\"DemoMessage01\">This is a really short message which is just here to test the demo #web-app</message>"
+			"rawModeData": "<api:message xmlns:api=\"http://github.com/Arven/cxf-jaxrs-template\" id=\"DemoMessage01\">This is a really short message which is just here to test the demo #web-app</api:message>"
 		},
 		{
 			"id": "37933f1f-a89c-2c65-dfc9-2a940129c155",
@@ -186,13 +187,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1424989582149,
+			"time": 1425055155474,
 			"name": "Create Group Omega",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<group id=\"omega\">This is the last group.</group>"
+			"rawModeData": "<api:group xmlns:api=\"http://github.com/Arven/cxf-jaxrs-template\" id=\"omega\">This is the last group.</api:group>"
 		},
 		{
 			"id": "3d02e895-bece-9080-4b7e-0be5cf2bc9bf",
@@ -207,13 +208,13 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1424987091799,
+			"time": 1425055216911,
 			"name": "Create User Kate",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<user id=\"katherine\">\n    <nickname>kate</nickname>\n    <email>katherine@trfields.name</email>\n    <password>correcthorsebatterystaple</password>\n</user>"
+			"rawModeData": "<api:user xmlns:api=\"http://github.com/Arven/cxf-jaxrs-template\" id=\"katherine\">\n    <nickname>kate</nickname>\n    <email>katherine@trfields.name</email>\n    <password>correcthorsebatterystaple</password>\n</api:user>"
 		},
 		{
 			"id": "53ad5cd5-388b-6744-06c6-297d0393c694",
@@ -411,13 +412,13 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1424987027181,
+			"time": 1425055140938,
 			"name": "Create User Humphrey",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<user id=\"hp27\">\n    <nickname>humphrey</nickname>\n    <email>hp27@muckdragon.info</email>\n    <password>listing</password>\n</user>"
+			"rawModeData": "<api:user xmlns:api=\"http://github.com/Arven/cxf-jaxrs-template\" id=\"hp27\">\n    <nickname>humphrey</nickname>\n    <email>hp27@muckdragon.info</email>\n    <password>listing</password>\n</api:user>"
 		},
 		{
 			"id": "8764959d-5cb5-7cef-2233-c64932c62ba1",
@@ -447,6 +448,27 @@
 			"rawModeData": ""
 		},
 		{
+			"id": "8a26c299-99bf-7f9b-60e6-a9ef795aef6c",
+			"headers": "Accept: application/xml\n",
+			"url": "http://localhost:8080/spring-cxf-example/v1?_wadl",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"name": "Get XML WADL Schema",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425053266696,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
+			"synced": false
+		},
+		{
 			"id": "8b358fb7-f0ee-c1cd-965e-85b51b24a641",
 			"headers": "Content-Type: application/xml\n",
 			"url": "http://localhost:8080/spring-cxf-example/v1/user",
@@ -459,13 +481,13 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1424986975704,
+			"time": 1425055106390,
 			"name": "Create User Tom",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<user id=\"trfields\">\n    <nickname>tom</nickname>\n    <email>tom@trfields.name</email>\n    <password>snowing</password>\n</user>"
+			"rawModeData": "<api:user xmlns:api=\"http://github.com/Arven/cxf-jaxrs-template\" id=\"trfields\">\n    <nickname>tom</nickname>\n    <email>tom@trfields.name</email>\n    <password>snowing</password>\n</api:user>"
 		},
 		{
 			"id": "8ee942da-7cfd-f51a-8f8e-c672987a1704",
@@ -511,13 +533,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1424989525923,
+			"time": 1425055182669,
 			"name": "Create Group Alpha",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<group id=\"alpha\">This is the first group.</group>"
+			"rawModeData": "<api:group xmlns:api=\"http://github.com/Arven/cxf-jaxrs-template\" id=\"alpha\">This is the first group.</api:group>"
 		},
 		{
 			"id": "a9053386-f614-42c4-8beb-7358c64ea93f",
@@ -558,13 +580,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1424989516804,
+			"time": 1425055127658,
 			"name": "Post Message",
 			"description": "",
 			"collectionId": "dbfc8299-3043-32b8-2857-2d560a0dec0f",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "<message id=\"TestMessage01\">This is #just a #sample #message.</message>"
+			"rawModeData": "<api:message xmlns:api=\"http://github.com/Arven/cxf-jaxrs-template\" id=\"TestMessage01\">This is #just a #sample #message.</api:message>"
 		},
 		{
 			"id": "e74b0c09-e180-e84f-a9fb-ebc3ce8d8f72",
