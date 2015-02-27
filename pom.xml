@@ -41,6 +41,14 @@
             <scope>compile</scope>
         </dependency>
         
+        <!-- ORM Providers -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.3.8.Final</version>
+			<scope>compile</scope>
+		</dependency>
+        
         <!-- Jettison Providers -->
 		<dependency>
 			<groupId>org.codehaus.jettison</groupId>
