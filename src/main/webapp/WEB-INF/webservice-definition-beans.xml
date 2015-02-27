@@ -74,9 +74,14 @@ http://cxf.apache.org/schemas/core.xsd
                 <property name="singleJaxbContext" value="true" />
             </bean>
             
+            <!-- Configure the Jettison JSON Provider -->
             <bean class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
                 <property name="singleJaxbContext" value="true" />
-            </bean>                          
+            </bean>
+            
+            <!-- Configure the Jackson YAML Provider -->
+            <bean class="com.github.arven.rs.provider.JacksonJaxbYamlProvider" />
+                       
         </jaxrs:providers>
     </jaxrs:server>
     

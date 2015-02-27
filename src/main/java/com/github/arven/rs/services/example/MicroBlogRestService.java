@@ -26,8 +26,8 @@ import javax.ws.rs.core.SecurityContext;
  * 
  * @author Brian Becker
  */
-@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, "text/yaml" })
+@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, "text/yaml" })
 public class MicroBlogRestService {
     
     public static int MAX_LIST_SPAN = 10;
