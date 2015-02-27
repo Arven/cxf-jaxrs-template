@@ -48,6 +48,14 @@
 			<version>4.3.8.Final</version>
 			<scope>compile</scope>
 		</dependency>
+		
+		<!-- Embedded Database -->
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>10.11.1.1</version>
+			<scope>compile</scope>
+		</dependency>
         
         <!-- Jettison Providers -->
 		<dependency>
