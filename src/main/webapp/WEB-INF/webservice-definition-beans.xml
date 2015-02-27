@@ -76,11 +76,6 @@ http://cxf.apache.org/schemas/core.xsd
             
             <bean class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
                 <property name="singleJaxbContext" value="true" />
-                <property name="namespaceMap">
-					<map>
-						<entry key="http://github.com/Arven/cxf-jaxrs-template" value=""/>
-					</map>
-                </property>
             </bean>                          
         </jaxrs:providers>
     </jaxrs:server>
