@@ -26,29 +26,26 @@ import javax.ws.rs.core.SecurityContext;
  * 
  * @author Brian Becker
  */
+@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 public class MicroBlogRestService {
     
     public static int MAX_LIST_SPAN = 10;
     
     @Inject
     private MicroBlogService blogService;
-    
-    @Path("/version") @GET @Produces({ MediaType.TEXT_PLAIN })
-    public String version() {
-        return "v1.0";
-    }
 
-    @Path("/user") @POST @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+    @Path("/user") @POST 
     public void addUser(UserData user) {
         blogService.addUser(user);
     }
     
-    @Path("/user/{name}") @GET @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+    @Path("/user/{name}") @GET
     public UserData getUser(@PathParam("name") String name) {
         return blogService.getUser(name);
     }
     
-    @Path("/user/{name}/friends") @GET @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+    @Path("/user/{name}/friends") @GET
     public ReferenceList getFriendsList(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
         return new ReferenceList(blogService.getFriends(name), offset, MAX_LIST_SPAN, false);
     }
@@ -67,22 +64,22 @@ public class MicroBlogRestService {
         }
     }
     
-    @Path("/post") @POST @RolesAllowed({"ROLE_USER"}) @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+    @Path("/post") @POST @RolesAllowed({"ROLE_USER"})
     public void postMessage(MessageData post, final @Context SecurityContext ctx) {
         blogService.addPost(ctx.getUserPrincipal().getName(), post);
     }
     
-    @Path("/post/{name}") @GET @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+    @Path("/post/{name}") @GET
     public DataList getMessagesByUser(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
         return new DataList(blogService.getPosts(name), offset, MAX_LIST_SPAN, true);
     }    
     
-    @Path("/group") @POST @RolesAllowed({"ROLE_USER"}) @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+    @Path("/group") @POST @RolesAllowed({"ROLE_USER"})
     public void createGroup(GroupData group, final @Context SecurityContext ctx) {
         blogService.addGroup(group, ctx.getUserPrincipal().getName());
     }
     
-    @Path("/group/{name}") @GET @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+    @Path("/group/{name}") @GET
     public GroupData getGroupInfo(@PathParam("name") String name) {
         return blogService.getGroup(name);
     }
@@ -92,7 +89,7 @@ public class MicroBlogRestService {
         blogService.leaveGroup(name, ctx.getUserPrincipal().getName());
     }
     
-    @Path("/group/{name}/members") @GET @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+    @Path("/group/{name}/members") @GET
     public ReferenceList getGroupMembers(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
         return new ReferenceList(blogService.getGroupMembers(name), offset, MAX_LIST_SPAN, false);
     }

@@ -87,7 +87,7 @@ http://cxf.apache.org/schemas/core.xsd
                 <property name="mapper">
                 	<ref bean="jsonObjectMapper" />
                 </property>
-            </bean>        
+            </bean>
         </jaxrs:providers>
     </jaxrs:server>
     
