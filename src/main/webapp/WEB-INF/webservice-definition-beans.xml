@@ -57,14 +57,6 @@ http://cxf.apache.org/schemas/core.xsd
         <security:custom-filter ref="digestFilter" after="BASIC_AUTH_FILTER" />
     </security:http>
     
-    <!-- Create the Jackson JAXB Json Mapper -->
-	<bean id="jsonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
-	    <property name="serializationInclusion" value="NON_NULL" />
-	    <property name="annotationIntrospector">
-	    	<bean class="com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector" />
-	    </property>
-	</bean>
-    
     <!-- Create a REST endpoint with the defined services at /rest -->
     <jaxrs:server id="microBlogRest" address="/v1">
         <jaxrs:serviceBeans>
@@ -82,12 +74,9 @@ http://cxf.apache.org/schemas/core.xsd
                 <property name="singleJaxbContext" value="true" />
             </bean>
             
-            <!-- Create the Jackson JSON Provider -->
-            <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider">
-                <property name="mapper">
-                	<ref bean="jsonObjectMapper" />
-                </property>
-            </bean>
+            <bean class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
+                <property name="singleJaxbContext" value="true" />
+            </bean>                          
         </jaxrs:providers>
     </jaxrs:server>
     

@@ -1,7 +1,7 @@
 package com.github.arven.rs.services.example;
 
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
+import com.google.common.collect.MultimapBuilder;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +9,6 @@ import java.util.Map;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
-
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ClientErrorException;
 
@@ -33,10 +32,10 @@ public class MicroBlogService {
     
     public MicroBlogService() {
         users = new HashMap<String, UserData>();
-        posts = ArrayListMultimap.create();
+        posts = MultimapBuilder.hashKeys().arrayListValues().build();
         groups = new HashMap<String, GroupData>();
-        members = ArrayListMultimap.create();
-        friends = ArrayListMultimap.create();
+        members = MultimapBuilder.hashKeys().arrayListValues().build();
+        friends = MultimapBuilder.hashKeys().arrayListValues().build();
     }
     
     /**
@@ -61,7 +60,7 @@ public class MicroBlogService {
         } else {
             throw new ClientErrorException(Status.CONFLICT);
         }
-    }    
+    }
     
     /**
      * Get a list of posts from the given user. If the user does not exist,
@@ -86,7 +85,7 @@ public class MicroBlogService {
      * @param   post        message which should be posted by the user
      */
     public void addPost( String user, MessageData post ) {
-        posts.put(user, post);
+		posts.put(user, post);
     }
     
     /**
@@ -137,7 +136,7 @@ public class MicroBlogService {
      * @param   username    username who is joining the group
      */
     public void addGroupMember( String group, String username ) {
-        if(groups.containsKey(group)) {
+        if(groups.containsKey(group) && !members.containsEntry(group, username)) {
             members.put(group, username);
         }
     }
@@ -192,8 +191,7 @@ public class MicroBlogService {
      * @param   friendname  user id which is being added as a friend
      */
     public void addFriend( String username, String friendname ) {
-        this.removeFriend(username, friendname);
-        if(users.containsKey(friendname)) {
+        if(users.containsKey(friendname) && !friends.containsEntry(username, friendname)) {
             friends.put(username, friendname);
         }
     }

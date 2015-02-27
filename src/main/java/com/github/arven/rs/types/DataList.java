@@ -50,7 +50,7 @@ public class DataList {
     public DataList(List<? extends Object> list, Integer offset, Integer span, Boolean reverse) {
         this.offset = (offset == null || offset == 0) ? null : offset;
         offset = offset == null ? 0 : offset;
-        
+
         if(list == null) {
             list = Collections.emptyList();
         }
