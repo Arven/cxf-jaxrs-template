@@ -9,7 +9,7 @@
     <!-- Load the beans definitions for Spring and Spring Security -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>WEB-INF/webservice-definition-beans.xml</param-value>
+        <param-value>classpath:webservice-definition-beans.xml</param-value>
     </context-param>
 
     <!-- Spring-Enabled CXF servlet class -->
