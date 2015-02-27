@@ -9,6 +9,10 @@ import java.util.Map;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ClientErrorException;
 
@@ -23,19 +27,12 @@ import javax.ws.rs.ClientErrorException;
 @Singleton
 @Named
 public class MicroBlogService {
-    
-    private final Map<String, UserData> users;
-    private final ListMultimap<String, MessageData> posts;
-    private final ListMultimap<String, String> friends;
-    private final Map<String, GroupData> groups;
-    private final ListMultimap<String, String> members;
-    
-    public MicroBlogService() {
-        users = new HashMap<String, UserData>();
-        posts = MultimapBuilder.hashKeys().arrayListValues().build();
-        groups = new HashMap<String, GroupData>();
-        members = MultimapBuilder.hashKeys().arrayListValues().build();
-        friends = MultimapBuilder.hashKeys().arrayListValues().build();
+	
+	final EntityManager users;
+        
+    public MicroBlogService() {       
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("users");  
+        users = emf.createEntityManager();    
     }
     
     /**
@@ -44,8 +41,9 @@ public class MicroBlogService {
      * @param   user        user id for the user
      * @return  The data for the user
      */
-    public UserData getUser( String user ) {
-        return users.get(user);
+    public UserData getUser( String userName ) {
+    	UserData user = users.find(UserData.class, userName);
+    	return user;
     }
     
     /**
@@ -55,11 +53,10 @@ public class MicroBlogService {
      * @param   user        user data for the user, containing user id
      */
     public void addUser( UserData user ) {
-        if(!users.containsKey(user.getId())) {
-            users.put(user.getId(), user);
-        } else {
-            throw new ClientErrorException(Status.CONFLICT);
-        }
+    	EntityTransaction tx = users.getTransaction();
+        tx.begin();
+        users.persist(user);
+        tx.commit();
     }
     
     /**
@@ -71,8 +68,9 @@ public class MicroBlogService {
      * @param   user        user id for the user whose posts we want
      * @return  a list of posts from the user
      */
-    public List<MessageData> getPosts( String user ) {
-        return posts.get(user);
+    public List<MessageData> getPosts( String userName ) {
+        UserData user = users.find(UserData.class, userName);
+        return user.getMessages();
     }    
 
     /**
@@ -84,7 +82,12 @@ public class MicroBlogService {
      * @param   user        user id for the user who will be posting
      * @param   post        message which should be posted by the user
      */
-    public void addPost( String user, MessageData post ) {
+    public void addPost( String userName, MessageData post ) {
+    	EntityTransaction tx = users.getTransaction();
+        UserData user = users.find(UserData.class, userName);
+        List<MessageData> md = user.getMessages();
+        
+        md.add(post);
 		posts.put(user, post);
     }
     

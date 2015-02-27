@@ -1,7 +1,14 @@
 package com.github.arven.rs.services.example;
 
+import java.util.List;
+
 import com.github.arven.rs.types.PasswordStringAdapter;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -17,22 +24,31 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  * @author Brian Becker
  */
+@Entity
+@Table(name="users")
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.NONE)
 public class UserData {
 
+	@Basic @Column(name="id", unique=true)
     @XmlID @XmlAttribute
     private String id;
     
+	@Basic @Column(name="nick")
     @XmlElement
     private String nickname;
     
+	@Basic @Column(name="email")
     @XmlElement
     private String email;
     
+	@Basic @Column(name="password")
     @XmlElement
     @XmlJavaTypeAdapter(PasswordStringAdapter.class)
     private String password;
+	
+	@OneToMany @Column(name="message")
+	private List<MessageData> messages;
     
     public UserData() { }
     
@@ -73,6 +89,13 @@ public class UserData {
      */
     public String getPassword() {
     	return this.password;
+    }
+    
+    /**
+     * Get the list of messages for this user
+     */
+    public List<MessageData> getMessages() {
+    	return this.messages;
     }
     
 }

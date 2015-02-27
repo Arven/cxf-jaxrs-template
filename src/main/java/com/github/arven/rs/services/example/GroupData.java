@@ -1,5 +1,9 @@
 package com.github.arven.rs.services.example;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -14,13 +18,17 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  * @author Brian Becker
  */
+@Entity
+@Table(name="groups")
 @XmlRootElement(name = "group")
 @XmlAccessorType(XmlAccessType.NONE)
 public class GroupData {
 
+	@Basic @Column(name="id", unique=true)
     @XmlID @XmlAttribute
     private String id;
     
+	@Basic @Column(name="description")
     @XmlValue
     private String description;
     
