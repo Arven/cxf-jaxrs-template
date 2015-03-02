@@ -135,8 +135,10 @@ public class MicroBlogService {
     public void addGroupMember( String groupName, String userName ) {
         GroupData group = test.find(GroupData.class, groupName);
         UserData user = test.find(UserData.class, userName);
-        group.getMembers().add(user);
-        test.persist(group);
+        if(!group.getMembers().contains(user)) {
+        	group.getMembers().add(user);
+        	test.persist(group);
+        }
     }
     
     /**
@@ -149,11 +151,14 @@ public class MicroBlogService {
      * @param   group       group id which user is trying to leave
      * @param   username    user id which is leaving the group
      */
-    public void leaveGroup( String group, String username ) {
-        //members.remove(group, username);
-        //if(members.get(group).isEmpty()) {
-        //    this.removeGroup(group);
-        //}
+    public void leaveGroup( String groupName, String userName ) {
+        GroupData group = test.find(GroupData.class, groupName);
+        UserData user = test.find(UserData.class, userName);
+        group.getMembers().remove(user);
+        test.persist(group);
+        if(group.getMembers().isEmpty()) {
+        	removeGroup(groupName);
+        }
     }
     
     /**
@@ -163,8 +168,8 @@ public class MicroBlogService {
      * 
      * @param   group       group id for removal
      */
-    public void removeGroup( String group ) {
-        //groups.remove(group);
+    public void removeGroup( String groupName ) {
+        test.remove(test.find(GroupData.class, groupName));
     }
     
     /**
