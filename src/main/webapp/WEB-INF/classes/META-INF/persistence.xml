@@ -5,8 +5,11 @@
   version="2.0">
   <persistence-unit name="test">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <class>Test</class>
+    <class>com.github.arven.rs.services.example.UserData</class>
+    <class>com.github.arven.rs.services.example.MessageData</class>
+    <class>com.github.arven.rs.services.example.GroupData</class>
     <properties>
+      <property name="hibernate.archive.autodetection" value="class, hbm"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
       <!--
         if you don't have a database already created

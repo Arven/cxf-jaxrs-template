@@ -4,6 +4,7 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.MultimapBuilder;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,11 +29,10 @@ import javax.ws.rs.ClientErrorException;
 @Named
 public class MicroBlogService {
 	
-	final EntityManager users;
+	final EntityManager test;
         
     public MicroBlogService() {       
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("users");  
-        users = emf.createEntityManager();    
+        test = Persistence.createEntityManagerFactory("test").createEntityManager();    
     }
     
     /**
@@ -42,8 +42,7 @@ public class MicroBlogService {
      * @return  The data for the user
      */
     public UserData getUser( String userName ) {
-    	UserData user = users.find(UserData.class, userName);
-    	return user;
+    	return test.find(UserData.class, userName);
     }
     
     /**
@@ -53,10 +52,7 @@ public class MicroBlogService {
      * @param   user        user data for the user, containing user id
      */
     public void addUser( UserData user ) {
-    	EntityTransaction tx = users.getTransaction();
-        tx.begin();
-        users.persist(user);
-        tx.commit();
+        test.persist(user);
     }
     
     /**
@@ -69,8 +65,7 @@ public class MicroBlogService {
      * @return  a list of posts from the user
      */
     public List<MessageData> getPosts( String userName ) {
-        UserData user = users.find(UserData.class, userName);
-        return user.getMessages();
+        return test.find(UserData.class, userName).getMessages();
     }    
 
     /**
@@ -83,12 +78,12 @@ public class MicroBlogService {
      * @param   post        message which should be posted by the user
      */
     public void addPost( String userName, MessageData post ) {
-    	EntityTransaction tx = users.getTransaction();
-        UserData user = users.find(UserData.class, userName);
-        List<MessageData> md = user.getMessages();
-        
-        md.add(post);
-		posts.put(user, post);
+    	test.persist(post);
+    	if(test.contains(post)) {
+	        UserData user = test.find(UserData.class, userName);
+	        user.getMessages().add(post);
+	        test.persist(user);
+    	}
     }
     
     /**
@@ -98,8 +93,8 @@ public class MicroBlogService {
      * @param   group       group id for the group we want information about
      * @return  The group information
      */
-    public GroupData getGroup( String group ) {
-        return groups.get(group);
+    public GroupData getGroup( String groupName ) {
+        return test.find(GroupData.class, groupName);
     }
     
     /**
@@ -109,8 +104,8 @@ public class MicroBlogService {
      * @param   group       group id for the group we want members of
      * @return  The group member list
      */
-    public List<String> getGroupMembers( String group ) {
-        return members.get(group);
+    public List<UserData> getGroupMembers( String groupName ) {
+    	return test.find(GroupData.class, groupName).getMembers();
     }
     
     /**
@@ -122,13 +117,12 @@ public class MicroBlogService {
      * @param   group       group data for the group we want to create
      * @param   username    username of the person who is creating the group
      */
-    public void addGroup( GroupData group, String username ) {
-        if(!groups.containsKey(group.getId())) {
-            groups.put(group.getId(), group);
-            addGroupMember(group.getId(), username);
-        } else {
-            throw new ClientErrorException(Status.CONFLICT);
-        }
+    public void addGroup( GroupData group, String userName ) {
+    	if(!test.contains(group)) {
+    		UserData user = test.find(UserData.class, userName);
+    		group.getMembers().add(user);    		
+    		test.persist(group);
+    	}
     }
     
     /**
@@ -138,10 +132,11 @@ public class MicroBlogService {
      * @param   group       group data for the group we want to join
      * @param   username    username who is joining the group
      */
-    public void addGroupMember( String group, String username ) {
-        if(groups.containsKey(group) && !members.containsEntry(group, username)) {
-            members.put(group, username);
-        }
+    public void addGroupMember( String groupName, String userName ) {
+        GroupData group = test.find(GroupData.class, groupName);
+        UserData user = test.find(UserData.class, userName);
+        group.getMembers().add(user);
+        test.persist(group);
     }
     
     /**
@@ -155,10 +150,10 @@ public class MicroBlogService {
      * @param   username    user id which is leaving the group
      */
     public void leaveGroup( String group, String username ) {
-        members.remove(group, username);
-        if(members.get(group).isEmpty()) {
-            this.removeGroup(group);
-        }
+        //members.remove(group, username);
+        //if(members.get(group).isEmpty()) {
+        //    this.removeGroup(group);
+        //}
     }
     
     /**
@@ -169,7 +164,7 @@ public class MicroBlogService {
      * @param   group       group id for removal
      */
     public void removeGroup( String group ) {
-        groups.remove(group);
+        //groups.remove(group);
     }
     
     /**
@@ -181,7 +176,8 @@ public class MicroBlogService {
      * @return  the friends list, or empty if not valid
      */
     public List<String> getFriends( String username ) {
-        return friends.get(username);
+    	return new LinkedList<String>();
+        //return friends.get(username);
     }
     
     /**
@@ -194,9 +190,9 @@ public class MicroBlogService {
      * @param   friendname  user id which is being added as a friend
      */
     public void addFriend( String username, String friendname ) {
-        if(users.containsKey(friendname) && !friends.containsEntry(username, friendname)) {
-            friends.put(username, friendname);
-        }
+        //if(users.containsKey(friendname) && !friends.containsEntry(username, friendname)) {
+        //    friends.put(username, friendname);
+        //}
     }
     
     /**
@@ -208,7 +204,7 @@ public class MicroBlogService {
      * @param   friendname  user id which is being removed as a friend
      */
     public void removeFriend( String username, String friendname ) {
-        friends.remove(username, friendname);
+        //friends.remove(username, friendname);
     }
     
 }

@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -26,20 +27,20 @@ import org.apache.commons.lang.StringUtils;
  * @author Brian Becker
  */
 @Entity
-@Table(name="messages")
+@Table(name="MESSAGE")
 @XmlRootElement(name = "message")
 @XmlAccessorType(XmlAccessType.NONE)
 public class MessageData {
     
-	@Basic @Column(name="id", unique=true)
+	@Id
     @XmlID @XmlAttribute
     private String id;
     
-	@Basic @Column(name="date")
+	@Basic
     @XmlAttribute
     private Date date;
     
-	@Basic @Column(name="message")
+	@Basic
     @XmlValue
     private String message;
     

@@ -1,8 +1,13 @@
 package com.github.arven.rs.services.example;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -19,20 +24,25 @@ import javax.xml.bind.annotation.XmlValue;
  * @author Brian Becker
  */
 @Entity
-@Table(name="groups")
+@Table(name="GROUP")
 @XmlRootElement(name = "group")
 @XmlAccessorType(XmlAccessType.NONE)
 public class GroupData {
 
-	@Basic @Column(name="id", unique=true)
+	@Id
     @XmlID @XmlAttribute
     private String id;
     
-	@Basic @Column(name="description")
+	@Basic
     @XmlValue
     private String description;
+	
+	@ManyToMany
+	private List<UserData> members;
     
-    public GroupData() { }
+    public GroupData() {
+    	this.members = new LinkedList<UserData>();
+    }
     
     /**
      * Create a new GroupData with the given id and description.
@@ -41,6 +51,7 @@ public class GroupData {
      * @param   description     Description of the group
      */
     public GroupData(String id, String description) {
+    	super();
         this.id = id;
         this.description = description;
     }
@@ -53,5 +64,19 @@ public class GroupData {
     public String getId() {
     	return this.id;
     }
+    
+    /**
+     * Get the list of members
+     */
+    public List<UserData> getMembers() {
+    	return this.members;
+    }
+    
+    /**
+     * Set the list of members
+     */
+    public void setMembers(List<UserData> members) {
+    	this.members = members;
+    }    
     
 }

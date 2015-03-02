@@ -1,12 +1,15 @@
 package com.github.arven.rs.services.example;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import com.github.arven.rs.types.PasswordStringAdapter;
 
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -25,32 +28,38 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * @author Brian Becker
  */
 @Entity
-@Table(name="users")
+@Table(name="USER")
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.NONE)
 public class UserData {
 
-	@Basic @Column(name="id", unique=true)
+	@Id
     @XmlID @XmlAttribute
     private String id;
     
-	@Basic @Column(name="nick")
+	@Basic
     @XmlElement
     private String nickname;
     
-	@Basic @Column(name="email")
+	@Basic
     @XmlElement
     private String email;
     
-	@Basic @Column(name="password")
+	@Basic
     @XmlElement
     @XmlJavaTypeAdapter(PasswordStringAdapter.class)
     private String password;
 	
-	@OneToMany @Column(name="message")
+	@OneToMany @JoinColumn(name="USER_ID")
 	private List<MessageData> messages;
+	
+	@ManyToMany(mappedBy = "members")
+	private List<GroupData> groups;
     
-    public UserData() { }
+    public UserData() {
+    	this.messages = new LinkedList<MessageData>();
+    	this.groups = new LinkedList<GroupData>();
+    }
     
     /**
      * Create a new UserData with the user id, nickname, email, and password
@@ -67,6 +76,7 @@ public class UserData {
      * @param   password    Password for the user (used for authentication)
      */
     public UserData(String id, String nickname, String email, String password) {
+    	super();
         this.id       = id;
         this.nickname = nickname;
         this.email    = email;
@@ -96,6 +106,20 @@ public class UserData {
      */
     public List<MessageData> getMessages() {
     	return this.messages;
+    }
+    
+    /**
+     * Get the groups this user is in
+     */
+    public List<GroupData> getGroups() {
+    	return this.groups;
+    }
+    
+    /**
+     * Set the groups this user is in
+     */
+    public void setGroups(List<GroupData> groups) {
+    	this.groups = groups;
     }
     
 }

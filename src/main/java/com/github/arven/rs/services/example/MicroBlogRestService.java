@@ -90,8 +90,8 @@ public class MicroBlogRestService {
     }
     
     @Path("/group/{name}/members") @GET
-    public ReferenceList getGroupMembers(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
-        return new ReferenceList(blogService.getGroupMembers(name), offset, MAX_LIST_SPAN, false);
+    public DataList getGroupMembers(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
+        return new DataList(blogService.getGroupMembers(name), offset, MAX_LIST_SPAN, false);
     }
     
     @Path("/group/{name}/join") @POST @RolesAllowed({"ROLE_USER"})
