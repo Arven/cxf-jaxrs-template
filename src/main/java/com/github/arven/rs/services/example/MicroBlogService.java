@@ -1,5 +1,6 @@
 package com.github.arven.rs.services.example;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.inject.Named;
@@ -22,9 +23,6 @@ public class MicroBlogService {
 	
 	@PersistenceContext
 	private EntityManager test;
-        
-    public MicroBlogService() {       
-    }
     
     /**
      * Get the user data for a given user.
@@ -58,8 +56,8 @@ public class MicroBlogService {
      */
     @Transactional
     public List<MessageData> getPosts( String userName ) {
-        return test.find(UserData.class, userName).getMessages();
-    }    
+        return new LinkedList<MessageData>(test.find(UserData.class, userName).getMessages());
+    }
 
     /**
      * Add a post for the given user. If the user does not exist, the post
@@ -98,8 +96,9 @@ public class MicroBlogService {
      * @param   group       group id for the group we want members of
      * @return  The group member list
      */
+    @Transactional
     public List<UserData> getGroupMembers( String groupName ) {
-    	return test.find(GroupData.class, groupName).getMembers();
+    	return new LinkedList<UserData>(test.find(GroupData.class, groupName).getMembers());
     }
     
     /**
@@ -127,6 +126,7 @@ public class MicroBlogService {
      * @param   group       group data for the group we want to join
      * @param   username    username who is joining the group
      */
+    @Transactional
     public void addGroupMember( String groupName, String userName ) {
         GroupData group = test.find(GroupData.class, groupName);
         UserData user = test.find(UserData.class, userName);
@@ -146,6 +146,7 @@ public class MicroBlogService {
      * @param   group       group id which user is trying to leave
      * @param   username    user id which is leaving the group
      */
+    @Transactional
     public void leaveGroup( String groupName, String userName ) {
         GroupData group = test.find(GroupData.class, groupName);
         UserData user = test.find(UserData.class, userName);
@@ -163,6 +164,7 @@ public class MicroBlogService {
      * 
      * @param   group       group id for removal
      */
+    @Transactional
     public void removeGroup( String groupName ) {
         test.remove(test.find(GroupData.class, groupName));
     }
@@ -175,8 +177,9 @@ public class MicroBlogService {
      * @param   username    user id for friends list
      * @return  the friends list, or empty if not valid
      */
+    @Transactional
     public List<UserData> getFriends( String userName ) {
-    	return test.find(UserData.class, userName).getFriends();
+    	return new LinkedList<UserData>(test.find(UserData.class, userName).getFriends());
     }
     
     /**
@@ -210,7 +213,6 @@ public class MicroBlogService {
     	UserData friend = test.find(UserData.class, friendName);
     	user.getFriends().remove(friend);
     	test.persist(user);
-    	test.remove(friend);
     }
     
 }

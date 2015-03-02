@@ -282,7 +282,6 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.3.0.M1</version>
                 <configuration>       
-                	<jettyXml>src/main/webapp/WEB-INF/jetty.xml</jettyXml>    
                     <systemProperties>
                       <systemProperty>
                          <name>logback.configurationFile</name>
