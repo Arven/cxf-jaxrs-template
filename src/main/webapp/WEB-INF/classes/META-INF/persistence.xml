@@ -12,6 +12,7 @@
     <properties>
       <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
       <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.transaction.jta.platform" value="com.atomikos.icatch.jta.hibernate4.AtomikosPlatform" />
     </properties>
   </persistence-unit>
 </persistence>

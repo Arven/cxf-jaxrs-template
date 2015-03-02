@@ -118,6 +118,12 @@
 			<groupId>com.atomikos</groupId>
 			<artifactId>transactions-jdbc</artifactId>
 			<version>4.0.0M4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.atomikos</groupId>
+			<artifactId>transactions-hibernate4</artifactId>
+			<version>4.0.0M4</version>
 		</dependency>		
     
         <!-- SLF4J Logging with Logback --> 

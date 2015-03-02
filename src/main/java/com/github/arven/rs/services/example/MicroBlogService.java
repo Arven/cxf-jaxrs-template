@@ -56,6 +56,7 @@ public class MicroBlogService {
      * @param   user        user id for the user whose posts we want
      * @return  a list of posts from the user
      */
+    @Transactional
     public List<MessageData> getPosts( String userName ) {
         return test.find(UserData.class, userName).getMessages();
     }    
@@ -69,6 +70,7 @@ public class MicroBlogService {
      * @param   user        user id for the user who will be posting
      * @param   post        message which should be posted by the user
      */
+    @Transactional
     public void addPost( String userName, MessageData post ) {
     	test.persist(post);
     	if(test.contains(post)) {
@@ -109,6 +111,7 @@ public class MicroBlogService {
      * @param   group       group data for the group we want to create
      * @param   username    username of the person who is creating the group
      */
+    @Transactional
     public void addGroup( GroupData group, String userName ) {
     	if(!test.contains(group)) {
     		UserData user = test.find(UserData.class, userName);
@@ -185,6 +188,7 @@ public class MicroBlogService {
      * @param   username    user id which is adding a friend
      * @param   friendname  user id which is being added as a friend
      */
+    @Transactional
     public void addFriend( String userName, String friendName ) {
     	UserData user = test.find(UserData.class, userName);
     	UserData friend = test.find(UserData.class, friendName);
@@ -200,6 +204,7 @@ public class MicroBlogService {
      * @param   username    user id which is removing a friend
      * @param   friendname  user id which is being removed as a friend
      */
+    @Transactional
     public void removeFriend( String userName, String friendName ) {
     	UserData user = test.find(UserData.class, userName);
     	UserData friend = test.find(UserData.class, friendName);
