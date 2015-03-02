@@ -51,10 +51,9 @@
 		
 		<!-- Embedded Database -->
 		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derby</artifactId>
-			<version>10.11.1.1</version>
-			<scope>compile</scope>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.185</version>
 		</dependency>
         
         <!-- Jettison Providers -->
@@ -93,6 +92,33 @@
             <version>2.6</version>
             <scope>compile</scope>
         </dependency>
+        
+        <!-- Apache Connection Pooling -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- Atomikos Transactions -->
+		<dependency>
+			<groupId>com.atomikos</groupId>
+			<artifactId>transactions</artifactId>
+			<version>4.0.0M4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.atomikos</groupId>
+			<artifactId>transactions-jta</artifactId>
+			<version>4.0.0M4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.atomikos</groupId>
+			<artifactId>transactions-jdbc</artifactId>
+			<version>4.0.0M4</version>
+		</dependency>		
     
         <!-- SLF4J Logging with Logback --> 
         <dependency>
@@ -160,6 +186,21 @@
             <version>3.2.5.RELEASE</version>
             <scope>compile</scope>
         </dependency>        
+        
+        <!-- Spring JTA -->
+        <dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-tx</artifactId>
+    		<version>4.1.0.RELEASE</version>
+    		<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>4.1.5.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
 
         <!-- Apache CXF Web Container -->
         <dependency>
@@ -234,7 +275,8 @@
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.3.0.M1</version>
-                <configuration>               
+                <configuration>       
+                	<jettyXml>src/main/webapp/WEB-INF/jetty.xml</jettyXml>    
                     <systemProperties>
                       <systemProperty>
                          <name>logback.configurationFile</name>

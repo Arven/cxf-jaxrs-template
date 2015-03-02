@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlValue;
  * @author Brian Becker
  */
 @Entity
-@Table(name="GROUP")
+@Table(name="GROUPDATA")
 @XmlRootElement(name = "group")
 @XmlAccessorType(XmlAccessType.NONE)
 public class GroupData {

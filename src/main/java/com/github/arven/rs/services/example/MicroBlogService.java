@@ -5,7 +5,8 @@ import java.util.List;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 /**
  * MicroBlogService is a backend implementation, with no database or any
@@ -19,10 +20,10 @@ import javax.persistence.Persistence;
 @Named
 public class MicroBlogService {
 	
-	final EntityManager test;
+	@PersistenceContext
+	private EntityManager test;
         
     public MicroBlogService() {       
-        test = Persistence.createEntityManagerFactory("test").createEntityManager();    
     }
     
     /**
@@ -41,6 +42,7 @@ public class MicroBlogService {
      * 
      * @param   user        user data for the user, containing user id
      */
+    @Transactional
     public void addUser( UserData user ) {
         test.persist(user);
     }

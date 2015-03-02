@@ -26,7 +26,7 @@ import org.apache.commons.lang.StringUtils;
  * @author Brian Becker
  */
 @Entity
-@Table(name="MESSAGE")
+@Table(name="MESSAGEDATA")
 @XmlRootElement(name = "message")
 @XmlAccessorType(XmlAccessType.NONE)
 public class MessageData {

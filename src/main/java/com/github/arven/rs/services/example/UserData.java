@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * @author Brian Becker
  */
 @Entity
-@Table(name="USER")
+@Table(name="USERDATA")
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.NONE)
 public class UserData {
@@ -51,7 +51,7 @@ public class UserData {
     @XmlJavaTypeAdapter(PasswordStringAdapter.class)
     private String password;
 	
-	@OneToMany @JoinColumn(name="USER_ID")
+	@OneToMany @JoinColumn(name="USERDATA_ID")
 	private List<MessageData> messages;
 	
 	@ManyToMany(mappedBy = "members")
