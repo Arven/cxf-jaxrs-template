@@ -1,7 +1,6 @@
 package com.github.arven.rs.services.example;
 
 import com.github.arven.rs.types.DataList;
-import com.github.arven.rs.types.ReferenceList;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
@@ -46,8 +45,8 @@ public class MicroBlogRestService {
     }
     
     @Path("/user/{name}/friends") @GET
-    public ReferenceList getFriendsList(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
-        return new ReferenceList(blogService.getFriends(name), offset, MAX_LIST_SPAN, false);
+    public DataList getFriendsList(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
+        return new DataList(blogService.getFriends(name), offset, MAX_LIST_SPAN, false);
     }
     
     @Path("/user/{name}/friends/{friend}") @PUT @RolesAllowed({"ROLE_USER"})

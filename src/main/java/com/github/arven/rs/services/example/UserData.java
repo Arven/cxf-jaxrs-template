@@ -9,6 +9,7 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -55,10 +56,14 @@ public class UserData {
 	
 	@ManyToMany(mappedBy = "members")
 	private List<GroupData> groups;
+	
+	@OneToMany @JoinTable(name="HAS_FRIEND")
+	private List<UserData> friends;
     
     public UserData() {
     	this.messages = new LinkedList<MessageData>();
     	this.groups = new LinkedList<GroupData>();
+    	this.friends = new LinkedList<UserData>();
     }
     
     /**
@@ -120,6 +125,20 @@ public class UserData {
      */
     public void setGroups(List<GroupData> groups) {
     	this.groups = groups;
+    }
+    
+    /**
+     * Get the friends this user has
+     */
+    public List<UserData> getFriends() {
+    	return this.friends;
+    }
+    
+    /**
+     * Set the friends this user has
+     */
+    public void setFriends(List<UserData> friends) {
+    	this.friends = friends;
     }
     
 }

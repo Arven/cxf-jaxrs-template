@@ -1,21 +1,11 @@
 package com.github.arven.rs.services.example;
 
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.MultimapBuilder;
-
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.ClientErrorException;
 
 /**
  * MicroBlogService is a backend implementation, with no database or any
@@ -180,9 +170,8 @@ public class MicroBlogService {
      * @param   username    user id for friends list
      * @return  the friends list, or empty if not valid
      */
-    public List<String> getFriends( String username ) {
-    	return new LinkedList<String>();
-        //return friends.get(username);
+    public List<UserData> getFriends( String userName ) {
+    	return test.find(UserData.class, userName).getFriends();
     }
     
     /**
@@ -194,10 +183,11 @@ public class MicroBlogService {
      * @param   username    user id which is adding a friend
      * @param   friendname  user id which is being added as a friend
      */
-    public void addFriend( String username, String friendname ) {
-        //if(users.containsKey(friendname) && !friends.containsEntry(username, friendname)) {
-        //    friends.put(username, friendname);
-        //}
+    public void addFriend( String userName, String friendName ) {
+    	UserData user = test.find(UserData.class, userName);
+    	UserData friend = test.find(UserData.class, friendName);
+    	user.getFriends().add(friend);
+    	test.persist(user);
     }
     
     /**
@@ -208,8 +198,12 @@ public class MicroBlogService {
      * @param   username    user id which is removing a friend
      * @param   friendname  user id which is being removed as a friend
      */
-    public void removeFriend( String username, String friendname ) {
-        //friends.remove(username, friendname);
+    public void removeFriend( String userName, String friendName ) {
+    	UserData user = test.find(UserData.class, userName);
+    	UserData friend = test.find(UserData.class, friendName);
+    	user.getFriends().remove(friend);
+    	test.persist(user);
+    	test.remove(friend);
     }
     
 }
