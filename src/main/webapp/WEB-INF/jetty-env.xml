@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+
+<Configure id="wac" class="org.eclipse.jetty.webapp.WebAppContext">
+    <New id="tx" class="org.eclipse.jetty.plus.jndi.Transaction">
+  		<Arg>
+    		<New class="com.atomikos.icatch.jta.J2eeUserTransaction"/>
+  		</Arg>
+	</New>
+	<New id="XATestDS" class="org.eclipse.jetty.plus.jndi.Resource">
+	  <Arg><Ref id='wac'/></Arg>
+	  <Arg>jdbc/TestDS</Arg>
+	  <Arg>
+	    <New class="com.atomikos.jdbc.AtomikosDataSourceBean">
+	      <Set name="xaDataSourceClassName">org.h2.jdbcx.JdbcDataSource</Set>
+	      <Set name="xaProperties">
+	        <New class="java.util.Properties">
+	          <Call name="setProperty"><Arg>url</Arg><Arg>jdbc:h2:./db/repository</Arg></Call>
+	          <Call name="setProperty"><Arg>user</Arg><Arg>root</Arg></Call>
+	          <Call name="setProperty"><Arg>password</Arg><Arg>rft78</Arg></Call>
+	        </New>
+	      </Set>
+	      <Set name="UniqueResourceName">TestDS</Set>
+	    </New>
+	  </Arg>
+	</New>
+	<New id="TransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager">
+		<Call name="init"></Call>
+	</New>
+</Configure>
