@@ -34,31 +34,31 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlAccessorType(XmlAccessType.NONE)
 public class UserData {
 
-	@Id
+    @Id
     @XmlID @XmlAttribute
     private String id;
     
-	@Basic
+    @Basic
     @XmlElement
     private String nickname;
     
-	@Basic
+    @Basic
     @XmlElement
     private String email;
     
-	@Basic
+    @Basic
     @XmlElement
     @XmlJavaTypeAdapter(PasswordStringAdapter.class)
     private String password;
 	
-	@OneToMany @JoinColumn(name="USERDATA_ID")
-	private List<MessageData> messages;
+    @OneToMany @JoinColumn(name="USERDATA_ID")
+    private List<MessageData> messages;
 	
-	@ManyToMany(mappedBy = "members")
-	private List<GroupData> groups;
+    @ManyToMany(mappedBy = "members")
+    private List<GroupData> groups;
 	
-	@OneToMany @JoinTable(name="HAS_FRIEND")
-	private List<UserData> friends;
+    @OneToMany @JoinTable(name="HAS_FRIEND")
+    private List<UserData> friends;
     
     public UserData() {
     	this.messages = new LinkedList<MessageData>();

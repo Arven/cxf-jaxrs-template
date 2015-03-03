@@ -40,12 +40,13 @@
             <scope>compile</scope>
         </dependency>       
         
+        <!-- Java EE 7 API -->
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
             <scope>provided</scope>
-        </dependency>
+        </dependency>        
         
     </dependencies>
 
@@ -82,4 +83,3 @@
     </build>
 
 </project>
-
