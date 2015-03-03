@@ -8,12 +8,12 @@ package com.github.arven.rs.services.example;
 import java.util.Arrays;
 import javax.inject.Inject;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.userdetails.User;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
  * The MicroBlogUserService is a simple implementation of the
@@ -23,7 +23,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * 
  * @author Brian Becker
  */
-public class MicroBlogUserService implements UserDetailsService {
+public class MicroBlogUserService {
     
     @Inject
     private MicroBlogService blogService;    
@@ -37,11 +37,12 @@ public class MicroBlogUserService implements UserDetailsService {
      * @return  the user details (username, password, credentials)
      * @throws  UsernameNotFoundException
      */
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserData data = blogService.getUser(username);
-        if(data == null) throw new UsernameNotFoundException("User by the requested name was not found.");
-        return new User(data.getId(), data.getPassword(), Arrays.asList(new GrantedAuthority[] { new SimpleGrantedAuthority("ROLE_USER") }) );
+    //@Override
+    public String loadUserByUsername(String username) {
+        return "SomeUser";
+        //UserData data = blogService.getUser(username);
+        //if(data == null) throw new UsernameNotFoundException("User by the requested name was not found.");
+        //return new User(data.getId(), data.getPassword(), Arrays.asList(new GrantedAuthority[] { new SimpleGrantedAuthority("ROLE_USER") }) );
     }    
     
 }
