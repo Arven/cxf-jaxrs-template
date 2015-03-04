@@ -56,7 +56,7 @@ public class UserData implements Serializable {
     
     @Basic
     @XmlElement
-    //@XmlJavaTypeAdapter(PasswordStringAdapter.class)
+    @XmlJavaTypeAdapter(PasswordStringAdapter.class)
     private String password;
 	
     @OneToMany @JoinColumn(name="USERDATA_ID")
@@ -68,10 +68,14 @@ public class UserData implements Serializable {
     @OneToMany @JoinTable(name="HAS_FRIEND")
     private List<UserData> friends;
     
+    @ManyToMany(mappedBy = "members")
+    private List<RoleData> roles;
+    
     public UserData() {
     	this.messages = new LinkedList<MessageData>();
     	this.groups = new LinkedList<GroupData>();
     	this.friends = new LinkedList<UserData>();
+        this.roles = new LinkedList<RoleData>();
     }
     
     /**
@@ -93,12 +97,7 @@ public class UserData implements Serializable {
         this.id       = id;
         this.nickname = nickname;
         this.email    = email;
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            this.password = BaseEncoding.base64().encode(md.digest(password.getBytes("UTF-8")));
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-            Logger.getLogger(UserData.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.password = password;
     }
     
     /**
@@ -152,6 +151,20 @@ public class UserData implements Serializable {
      */
     public void setFriends(List<UserData> friends) {
     	this.friends = friends;
+    }
+    
+    /**
+     * Get the roles that this user has
+     */
+    public List<RoleData> getRoles() {
+        return this.roles;
+    }
+    
+    /**
+     * Set the roles that this user has
+     */
+    public void setRoles(List<RoleData> roles) {
+        this.roles = roles;
     }
     
 }

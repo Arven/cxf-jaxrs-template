@@ -1,5 +1,7 @@
 package com.github.arven.rs.types;
 
+import com.google.common.io.BaseEncoding;
+import java.security.MessageDigest;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
@@ -14,12 +16,13 @@ public class PasswordStringAdapter extends XmlAdapter<String, String> {
 
     @Override
     public String marshal(String string) throws Exception {
-        return "[REDACTED]";
+        return string;
     }
 
     @Override
     public String unmarshal(String string) throws Exception {
-        return string;
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        return BaseEncoding.base64().encode(md.digest(string.getBytes("UTF-8")));
     }
 
 }

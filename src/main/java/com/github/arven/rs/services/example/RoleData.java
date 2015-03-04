@@ -1,8 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.github.arven.rs.services.example;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,17 +20,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 
 /**
- * The GroupData class is a simple class which provides a description to
- * a given group. This description does not contain a list of members,
- * just the group name and description.
+ * The RoleData class is a simple class which provides a description to
+ * a given role. These roles are for permissions in the REST service.
  * 
  * @author Brian Becker
  */
 @Entity
-@Table(name="GROUPDATA")
-@XmlRootElement(name = "group")
+@Table(name="ROLEDATA")
+@XmlRootElement(name = "role-group")
 @XmlAccessorType(XmlAccessType.NONE)
-public class GroupData {
+public class RoleData {
 
     @Id
     @XmlID @XmlAttribute
@@ -39,7 +42,7 @@ public class GroupData {
     @ManyToMany
     private List<UserData> members;
     
-    public GroupData() {
+    public RoleData() {
     	this.members = new LinkedList<UserData>();
     }
     
@@ -49,7 +52,7 @@ public class GroupData {
      * @param   id              Name of the group which will be used in API
      * @param   description     Description of the group
      */
-    public GroupData(String id, String description) {
+    public RoleData(String id, String description) {
     	super();
         this.id = id;
         this.description = description;

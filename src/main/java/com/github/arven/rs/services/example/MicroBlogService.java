@@ -21,8 +21,8 @@ import javax.transaction.Transactional;
 @Named
 public class MicroBlogService {
 	
-	@PersistenceContext
-	private EntityManager test;
+    @PersistenceContext
+    private EntityManager test;
     
     /**
      * Get the user data for a given user.
@@ -42,6 +42,8 @@ public class MicroBlogService {
      */
     @Transactional
     public void addUser( UserData user ) {
+        //user.setRoles(null);
+        user.getRoles().add(test.find(RoleData.class, "ROLE_RESTUSER"));
         test.persist(user);
     }
     

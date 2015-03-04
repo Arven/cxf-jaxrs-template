@@ -31,15 +31,15 @@ import org.apache.commons.lang.StringUtils;
 @XmlAccessorType(XmlAccessType.NONE)
 public class MessageData {
     
-	@Id
+    @Id
     @XmlID @XmlAttribute
     private String id;
     
-	@Basic
+    @Basic
     @XmlAttribute
     private Date date;
     
-	@Basic
+    @Basic
     @XmlValue
     private String message;
     
