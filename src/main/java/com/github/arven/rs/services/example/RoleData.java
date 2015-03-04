@@ -5,6 +5,7 @@
  */
 package com.github.arven.rs.services.example;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Basic;
@@ -30,7 +31,7 @@ import javax.xml.bind.annotation.XmlValue;
 @Table(name="ROLEDATA")
 @XmlRootElement(name = "role-group")
 @XmlAccessorType(XmlAccessType.NONE)
-public class RoleData {
+public class RoleData implements Serializable {
 
     @Id
     @XmlID @XmlAttribute

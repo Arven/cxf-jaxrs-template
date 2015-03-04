@@ -6,6 +6,7 @@
   <persistence-unit name="testPU" transaction-type="JTA">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <jta-data-source>jdbc/TestDS</jta-data-source>
+    <non-jta-data-source>jdbc/TestDS</non-jta-data-source>
     <class>com.github.arven.rs.services.example.UserData</class>
     <class>com.github.arven.rs.services.example.MessageData</class>
     <class>com.github.arven.rs.services.example.GroupData</class>

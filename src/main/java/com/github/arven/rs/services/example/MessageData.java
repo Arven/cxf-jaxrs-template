@@ -1,6 +1,7 @@
 package com.github.arven.rs.services.example;
 
 import com.github.arven.rs.types.DataList;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,7 +32,7 @@ import org.apache.commons.lang.StringUtils;
 @Table(name="MESSAGEDATA")
 @XmlRootElement(name = "message")
 @XmlAccessorType(XmlAccessType.NONE)
-public class MessageData {
+public class MessageData implements Serializable {
         
     @Id
     @XmlID @XmlAttribute

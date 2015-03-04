@@ -1,5 +1,6 @@
 package com.github.arven.rs.services.example;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ import javax.xml.bind.annotation.XmlValue;
 @Table(name="GROUPDATA")
 @XmlRootElement(name = "group")
 @XmlAccessorType(XmlAccessType.NONE)
-public class GroupData {
+public class GroupData implements Serializable {
 
     @Id
     @XmlID @XmlAttribute

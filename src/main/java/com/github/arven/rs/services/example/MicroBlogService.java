@@ -2,12 +2,13 @@ package com.github.arven.rs.services.example;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.inject.Named;
-import javax.inject.Singleton;
+import javax.ejb.Stateful;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 /**
  * MicroBlogService is a backend implementation, with no database or any
@@ -17,8 +18,8 @@ import javax.transaction.Transactional;
  * 
  * @author Brian Becker
  */
-@Singleton
-@Named
+@Stateful
+@TransactionManagement(TransactionManagementType.CONTAINER)
 public class MicroBlogService {
 	
     @PersistenceContext
@@ -40,7 +41,7 @@ public class MicroBlogService {
      * 
      * @param   user        user data for the user, containing user id
      */
-    @Transactional
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void addUser( UserData user ) {
         //user.setRoles(null);
         user.getRoles().add(test.find(RoleData.class, "ROLE_RESTUSER"));
@@ -53,11 +54,12 @@ public class MicroBlogService {
      * 
      * @param   userName        user data for the user, containing user id
      */
-    @Transactional
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void removeUser( String userName ) {
         UserData user = test.find(UserData.class, userName);
         user.getGroups().clear();
         user.getRoles().clear();
+        user.getMessages().clear();
         test.persist(user);
         test.remove(user);
     }    
@@ -71,7 +73,7 @@ public class MicroBlogService {
      * @param   userName        user id for the user whose posts we want
      * @return  a list of posts from the user
      */
-    @Transactional
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public List<MessageData> getPosts( String userName ) {
         return new LinkedList<MessageData>(test.find(UserData.class, userName).getMessages());
     }
@@ -85,7 +87,7 @@ public class MicroBlogService {
      * @param   userName        user id for the user who will be posting
      * @param   post        message which should be posted by the user
      */
-    @Transactional
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void addPost( String userName, MessageData post ) {
     	test.persist(post);
     	if(test.contains(post)) {
@@ -113,7 +115,7 @@ public class MicroBlogService {
      * @param   groupName       group id for the group we want members of
      * @return  The group member list
      */
-    @Transactional
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public List<UserData> getGroupMembers( String groupName ) {
     	return new LinkedList<UserData>(test.find(GroupData.class, groupName).getMembers());
     }
@@ -127,7 +129,7 @@ public class MicroBlogService {
      * @param   group       group data for the group we want to create
      * @param   userName    username of the person who is creating the group
      */
-    @Transactional
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void addGroup( GroupData group, String userName ) {
     	if(!test.contains(group)) {
     		UserData user = test.find(UserData.class, userName);
@@ -143,7 +145,7 @@ public class MicroBlogService {
      * @param   groupName       group data for the group we want to join
      * @param   userName    username who is joining the group
      */
-    @Transactional
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void addGroupMember( String groupName, String userName ) {
         GroupData group = test.find(GroupData.class, groupName);
         UserData user = test.find(UserData.class, userName);
@@ -163,7 +165,7 @@ public class MicroBlogService {
      * @param   groupName       group id which user is trying to leave
      * @param   userName    user id which is leaving the group
      */
-    @Transactional
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void leaveGroup( String groupName, String userName ) {
         GroupData group = test.find(GroupData.class, groupName);
         UserData user = test.find(UserData.class, userName);
@@ -181,7 +183,7 @@ public class MicroBlogService {
      * 
      * @param   groupName       group id for removal
      */
-    @Transactional
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void removeGroup( String groupName ) {
         test.remove(test.find(GroupData.class, groupName));
     }
@@ -194,7 +196,7 @@ public class MicroBlogService {
      * @param   userName    user id for friends list
      * @return  the friends list, or empty if not valid
      */
-    @Transactional
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public List<UserData> getFriends( String userName ) {
     	return new LinkedList<UserData>(test.find(UserData.class, userName).getFriends());
     }
@@ -208,7 +210,7 @@ public class MicroBlogService {
      * @param   userName    user id which is adding a friend
      * @param   friendName  user id which is being added as a friend
      */
-    @Transactional
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void addFriend( String userName, String friendName ) {
     	UserData user = test.find(UserData.class, userName);
     	UserData friend = test.find(UserData.class, friendName);
@@ -224,7 +226,7 @@ public class MicroBlogService {
      * @param   userName    user id which is removing a friend
      * @param   friendName  user id which is being removed as a friend
      */
-    @Transactional
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void removeFriend( String userName, String friendName ) {
     	UserData user = test.find(UserData.class, userName);
     	UserData friend = test.find(UserData.class, friendName);
