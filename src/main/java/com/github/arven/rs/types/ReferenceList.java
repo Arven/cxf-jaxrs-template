@@ -25,7 +25,7 @@ import com.google.common.collect.Lists;
 @XmlAccessorType(XmlAccessType.NONE)
 public class ReferenceList {
 
-    @XmlElement 		private List<String> id;
+    @XmlElement         private List<String> id;
     @XmlAttribute   	private Integer offset;
     @XmlAttribute   	private Integer limit;
     @XmlAttribute   	private Integer size;

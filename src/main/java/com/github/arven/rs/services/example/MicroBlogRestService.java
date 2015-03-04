@@ -1,8 +1,6 @@
 package com.github.arven.rs.services.example;
 
 import com.github.arven.rs.types.DataList;
-import javax.annotation.security.PermitAll;
-
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
@@ -17,6 +15,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  * MicroBlogRestService is the REST service front end for the MicroBlogService.
@@ -41,13 +40,8 @@ public class MicroBlogRestService {
     public String getVersion() {
         return "v1.0";
     }
-    
-    @Path("/logininfo") @GET
-    public SecurityContext getLoginInfo(final @Context SecurityContext ctx) {
-        return ctx;
-    }    
 
-    @Path("/user") @POST 
+    @Path("/user") @POST
     public void addUser(UserData user) {
         blogService.addUser(user);
     }
@@ -57,9 +51,11 @@ public class MicroBlogRestService {
         return blogService.getUser(name);
     }
     
-    @Path("/user/{name}") @DELETE
-    public void removeUser(@PathParam("name") String name) {
-        blogService.removeUser(name);
+    @Path("/user/{name}") @DELETE @RolesAllowed({"ROLE_RESTUSER"})
+    public void removeUser(@PathParam("name") String name, final @Context SecurityContext ctx) {
+        if(ctx.getUserPrincipal().getName().equals(name)) {
+            blogService.removeUser(name);
+        }
     }    
     
     @Path("/user/{name}/friends") @GET

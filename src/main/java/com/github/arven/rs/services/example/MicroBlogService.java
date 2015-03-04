@@ -55,7 +55,11 @@ public class MicroBlogService {
      */
     @Transactional
     public void removeUser( String userName ) {
-        test.remove(test.find(UserData.class, userName));
+        UserData user = test.find(UserData.class, userName);
+        user.getGroups().clear();
+        user.getRoles().clear();
+        test.persist(user);
+        test.remove(user);
     }    
     
     /**

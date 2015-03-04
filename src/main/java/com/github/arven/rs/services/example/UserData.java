@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -59,13 +60,13 @@ public class UserData implements Serializable {
     @XmlJavaTypeAdapter(PasswordStringAdapter.class)
     private String password;
 	
-    @OneToMany @JoinColumn(name="USERDATA_ID")
+    @OneToMany(cascade = CascadeType.ALL) @JoinColumn(name="USERDATA_ID")
     private List<MessageData> messages;
 	
     @ManyToMany(mappedBy = "members")
     private List<GroupData> groups;
 	
-    @OneToMany @JoinTable(name="HAS_FRIEND")
+    @OneToMany(cascade = CascadeType.ALL) @JoinTable(name="HAS_FRIEND")
     private List<UserData> friends;
     
     @ManyToMany(mappedBy = "members")

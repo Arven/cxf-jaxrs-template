@@ -27,13 +27,43 @@
 		"4c0ff244-c624-3e1e-1b67-0159f1c8944e",
 		"5008bc3d-a63a-7cb5-4181-8dbda73b2458",
 		"dbd2ea3b-03d3-971b-50a7-7b540c4818de",
-		"66c50d7d-15fc-5dfe-dd30-447b4bb4d22f"
+		"66c50d7d-15fc-5dfe-dd30-447b4bb4d22f",
+		"0065c972-bb17-e54d-c88e-401997eb9a9c"
 	],
 	"folders": [],
 	"timestamp": 1424898466022,
 	"synced": false,
+	"owner": "",
+	"subscribed": false,
 	"remoteLink": "https://www.getpostman.com/collections/1a71f7983c259b72efaf",
+	"public": false,
+	"write": true,
 	"requests": [
+		{
+			"id": "0065c972-bb17-e54d-c88e-401997eb9a9c",
+			"headers": "Accept: application/json\nAuthorization: Basic dHJmaWVsZHM6c25vd2luZw==\n",
+			"url": "http://localhost:8080/spring-cxf-example/v1/user/trfields",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "basicAuth",
+			"helperAttributes": {
+				"username": "trfields",
+				"password": "snowing",
+				"id": "basic",
+				"timestamp": 1424811863757
+			},
+			"time": 1425484398649,
+			"name": "Delete User Tom",
+			"description": "",
+			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
+			"responses": [],
+			"synced": false
+		},
 		{
 			"id": "08deba5a-b11c-f54c-5f61-c52a4e49cf9c",
 			"headers": "Content-Type: application/json\nAuthorization: Basic dHJmaWVsZHM6c25vd2luZw==\n",
@@ -52,13 +82,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1425052590675,
+			"time": 1425480641874,
 			"name": "Create Group Alpha",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "{\n    \"group\": {\n        \"@id\": \"alpha\",\n        \"$\": \"This is the first group.\"\n    }\n}"
+			"rawModeData": "{\n    \"id\": \"alpha\",\n    \"value\": \"This is the first group.\"\n}"
 		},
 		{
 			"id": "1aa9d2d8-b025-07e7-bfb8-b33ca086cee3",
@@ -94,13 +124,13 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1425052614474,
+			"time": 1425480667849,
 			"name": "Create User Humphrey",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "{\n    \"user\": {\n      \"@id\": \"hp27\",\n      \"nickname\": \"humphrey\",\n      \"email\": \"hp27@muckdragon.info\",\n      \"password\": \"listing\"\n    }\n}"
+			"rawModeData": "{\n    \"id\": \"hp27\",\n    \"nickname\": \"humphrey\",\n    \"email\": \"hp27@muckdragon.info\",\n    \"password\": \"listing\"\n}"
 		},
 		{
 			"id": "4b0ca704-f05d-e3e8-9fd0-ca133221c7c6",
@@ -181,13 +211,13 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1425052727561,
+			"time": 1425480731854,
 			"name": "Create User Kate",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "{\n  \"user\": {\n    \"@id\": \"katherine\",\n    \"nickname\": \"kate\",\n    \"email\": \"katherine@trfields.name\",\n    \"password\": \"correcthorsebatterystaple\"\n  }\n}"
+			"rawModeData": "{\n    \"id\": \"katherine\",\n    \"nickname\": \"kate\",\n    \"email\": \"katherine@trfields.name\",\n    \"password\": \"correcthorsebatterystaple\"\n}"
 		},
 		{
 			"id": "66c50d7d-15fc-5dfe-dd30-447b4bb4d22f",
@@ -253,13 +283,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1425052629657,
+			"time": 1425480681368,
 			"name": "Create Group Omega",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "{\n    \"group\": {\n        \"@id\": \"omega\",\n        \"$\": \"This is the last group.\"\n    }\n}"
+			"rawModeData": "{\n    \"id\": \"omega\",\n    \"value\": \"This is the last group.\"\n}"
 		},
 		{
 			"id": "712d0ef3-fd8d-84b2-f63d-a0b75c601d77",
@@ -274,13 +304,13 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1425052544806,
+			"time": 1425421794982,
 			"name": "Create User Tom",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "{\n    \"user\": {\n      \"@id\": \"trfields\",\n      \"nickname\": \"tom\",\n      \"email\": \"tom@trfields.name\",\n      \"password\": \"snowing\"\n    }\n}"
+			"rawModeData": "{\n  \"id\": \"trfields\",\n  \"nickname\": \"tom\",\n  \"email\": \"tom@trfields.name\",\n  \"password\": \"snowing\"\n}"
 		},
 		{
 			"id": "870570e2-7241-fcfc-bbb6-b1cda7ba1ed6",
@@ -366,13 +396,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1425052568281,
+			"time": 1425475842018,
 			"name": "Post Message",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "{\n    \"message\": {\n        \"@id\": \"TestMessage01\",\n        \"$\": \"This is #just a #sample #message.\"\n    }\n}"
+			"rawModeData": "{\n    \"id\": \"TestMessage01\",\n    \"value\": \"This is #just a #sample #message.\"\n}"
 		},
 		{
 			"id": "b3cebd44-1caf-6144-6b1c-c8caa0436607",
@@ -530,13 +560,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1425052654261,
+			"time": 1425480694928,
 			"name": "Post Message As Humphrey",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "{\n    \"message\": {\n        \"@id\": \"DemoMessage01\",\n        \"$\": \"This is a really short message which is just here to test the demo #webapp\"\n    }\n}"
+			"rawModeData": "{\n    \"id\": \"DemoMessage01\",\n    \"value\": \"This is a really short message which is just here to test the demo #webapp\"\n}"
 		},
 		{
 			"id": "f291196b-70b6-3932-5e7e-1de0303ffd4a",

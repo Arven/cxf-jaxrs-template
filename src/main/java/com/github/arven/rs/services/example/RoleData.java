@@ -8,6 +8,7 @@ package com.github.arven.rs.services.example;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;

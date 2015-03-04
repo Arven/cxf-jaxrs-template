@@ -1,5 +1,9 @@
 package com.github.arven.rs.types;
 
+import com.github.arven.rs.services.example.GroupData;
+import com.github.arven.rs.services.example.MessageData;
+import com.github.arven.rs.services.example.RoleData;
+import com.github.arven.rs.services.example.UserData;
 import com.google.common.collect.Lists;
 
 import java.util.Collection;
@@ -11,6 +15,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  * The DataList class provides a list message for JAXB. This works around
@@ -24,9 +29,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "list")
 @XmlAccessorType(XmlAccessType.NONE)
+@XmlSeeAlso({GroupData.class, MessageData.class, RoleData.class, UserData.class})
 public class DataList {
     
-	@XmlAnyElement		private Collection<? extends Object> list;
+    @XmlAnyElement      private Collection<? extends Object> list;
     @XmlAttribute   	private Integer offset;
     @XmlAttribute   	private Integer limit;
     @XmlAttribute   	private Integer size;
@@ -68,7 +74,7 @@ public class DataList {
             this.list = Collections.emptyList();
         }
     }
-    
+        
     /**
      * Create a new List message with the verbatim list contents, from any
      * valid Java collection. The order of the collection items will be

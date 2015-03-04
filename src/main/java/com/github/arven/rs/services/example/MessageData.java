@@ -1,5 +1,6 @@
 package com.github.arven.rs.services.example;
 
+import com.github.arven.rs.types.DataList;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,6 +16,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlValue;
 
 import org.apache.commons.lang.StringUtils;
@@ -30,7 +32,7 @@ import org.apache.commons.lang.StringUtils;
 @XmlRootElement(name = "message")
 @XmlAccessorType(XmlAccessType.NONE)
 public class MessageData {
-    
+        
     @Id
     @XmlID @XmlAttribute
     private String id;
