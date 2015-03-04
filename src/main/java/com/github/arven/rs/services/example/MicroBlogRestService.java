@@ -84,7 +84,7 @@ public class MicroBlogRestService {
     @Path("/post/{name}") @GET
     public DataList getMessagesByUser(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
         return new DataList(blogService.getPosts(name), offset, MAX_LIST_SPAN, true);
-    }    
+    }
     
     @Path("/group") @POST @RolesAllowed({"ROLE_RESTUSER"})
     public void createGroup(GroupData group, final @Context SecurityContext ctx) {
