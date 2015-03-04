@@ -15,7 +15,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
-import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  * MicroBlogRestService is the REST service front end for the MicroBlogService.

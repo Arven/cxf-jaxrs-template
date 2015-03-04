@@ -1,18 +1,10 @@
 package com.github.arven.rs.services.example;
 
+import com.github.arven.rs.types.PasswordStringAdapter;
+
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.github.arven.rs.types.PasswordStringAdapter;
-import com.google.common.io.BaseEncoding;
-import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.security.CryptoPrimitive;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
