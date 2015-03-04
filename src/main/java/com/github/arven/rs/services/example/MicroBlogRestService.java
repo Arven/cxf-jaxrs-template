@@ -51,6 +51,11 @@ public class MicroBlogRestService {
         return blogService.getUser(name);
     }
     
+    @Path("/user/{name}") @DELETE
+    public void removeUser(@PathParam("name") String name) {
+        blogService.removeUser(name);
+    }    
+    
     @Path("/user/{name}/friends") @GET
     public DataList getFriendsList(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
         return new DataList(blogService.getFriends(name), offset, MAX_LIST_SPAN, false);

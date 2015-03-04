@@ -27,7 +27,7 @@ public class MicroBlogService {
     /**
      * Get the user data for a given user.
      * 
-     * @param   user        user id for the user
+     * @param   userName        user id for the user
      * @return  The data for the user
      */
     public UserData getUser( String userName ) {
@@ -46,12 +46,23 @@ public class MicroBlogService {
     }
     
     /**
+     * Delete a given user with a given user id, which will be used to remove
+     * the user from the database.
+     * 
+     * @param   userName        user data for the user, containing user id
+     */
+    @Transactional
+    public void removeUser( String userName ) {
+        test.remove(test.find(UserData.class, userName));
+    }    
+    
+    /**
      * Get a list of posts from the given user. If the user does not exist,
      * then we will get back an empty list containing no posts. If the user
      * has not posted anything, we will also get back an empty list of no
      * posts.
      * 
-     * @param   user        user id for the user whose posts we want
+     * @param   userName        user id for the user whose posts we want
      * @return  a list of posts from the user
      */
     @Transactional
@@ -65,7 +76,7 @@ public class MicroBlogService {
      * necessary to check whether the user exists in the user list before
      * posting a message.
      * 
-     * @param   user        user id for the user who will be posting
+     * @param   userName        user id for the user who will be posting
      * @param   post        message which should be posted by the user
      */
     @Transactional
@@ -82,7 +93,7 @@ public class MicroBlogService {
      * Get the group information for a given group. If the group does not
      * exist then we will get a null value.
      * 
-     * @param   group       group id for the group we want information about
+     * @param   groupName       group id for the group we want information about
      * @return  The group information
      */
     public GroupData getGroup( String groupName ) {
@@ -93,7 +104,7 @@ public class MicroBlogService {
      * Get a list of group members for a given group. If the group does not
      * exist then we will get an empty list.
      * 
-     * @param   group       group id for the group we want members of
+     * @param   groupName       group id for the group we want members of
      * @return  The group member list
      */
     @Transactional
@@ -108,7 +119,7 @@ public class MicroBlogService {
      * contingent on the user who created the group staying in the group.
      * 
      * @param   group       group data for the group we want to create
-     * @param   username    username of the person who is creating the group
+     * @param   userName    username of the person who is creating the group
      */
     @Transactional
     public void addGroup( GroupData group, String userName ) {
@@ -123,8 +134,8 @@ public class MicroBlogService {
      * Add a group member to a group which does exist. The group must exist,
      * or the method will do nothing, but the username is expected to exist.
      * 
-     * @param   group       group data for the group we want to join
-     * @param   username    username who is joining the group
+     * @param   groupName       group data for the group we want to join
+     * @param   userName    username who is joining the group
      */
     @Transactional
     public void addGroupMember( String groupName, String userName ) {
@@ -143,8 +154,8 @@ public class MicroBlogService {
      * simply remove the entire group data. This allows groups to be
      * reclaimed.
      * 
-     * @param   group       group id which user is trying to leave
-     * @param   username    user id which is leaving the group
+     * @param   groupName       group id which user is trying to leave
+     * @param   userName    user id which is leaving the group
      */
     @Transactional
     public void leaveGroup( String groupName, String userName ) {
@@ -162,7 +173,7 @@ public class MicroBlogService {
      * the group then the entire group becomes empty and it is reclaimed
      * for creation.
      * 
-     * @param   group       group id for removal
+     * @param   groupName       group id for removal
      */
     @Transactional
     public void removeGroup( String groupName ) {
@@ -174,7 +185,7 @@ public class MicroBlogService {
      * friends yet, or the user does not exist, then the friends list will
      * be empty.
      * 
-     * @param   username    user id for friends list
+     * @param   userName    user id for friends list
      * @return  the friends list, or empty if not valid
      */
     @Transactional
@@ -188,8 +199,8 @@ public class MicroBlogService {
      * bottom of the list. If the friend user id does not exist, then no
      * friend will be added.
      * 
-     * @param   username    user id which is adding a friend
-     * @param   friendname  user id which is being added as a friend
+     * @param   userName    user id which is adding a friend
+     * @param   friendName  user id which is being added as a friend
      */
     @Transactional
     public void addFriend( String userName, String friendName ) {
@@ -204,8 +215,8 @@ public class MicroBlogService {
      * not added the user to their friend list, then the remove operation
      * will remove nothing.
      * 
-     * @param   username    user id which is removing a friend
-     * @param   friendname  user id which is being removed as a friend
+     * @param   userName    user id which is removing a friend
+     * @param   friendName  user id which is being removed as a friend
      */
     @Transactional
     public void removeFriend( String userName, String friendName ) {

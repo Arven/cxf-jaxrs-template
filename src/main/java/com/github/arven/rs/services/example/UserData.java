@@ -4,6 +4,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.github.arven.rs.types.PasswordStringAdapter;
+import com.google.common.io.BaseEncoding;
+import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.CryptoPrimitive;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -32,7 +40,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @Table(name="USERDATA")
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.NONE)
-public class UserData {
+public class UserData implements Serializable {
 
     @Id
     @XmlID @XmlAttribute
@@ -48,7 +56,7 @@ public class UserData {
     
     @Basic
     @XmlElement
-    @XmlJavaTypeAdapter(PasswordStringAdapter.class)
+    //@XmlJavaTypeAdapter(PasswordStringAdapter.class)
     private String password;
 	
     @OneToMany @JoinColumn(name="USERDATA_ID")
@@ -85,7 +93,12 @@ public class UserData {
         this.id       = id;
         this.nickname = nickname;
         this.email    = email;
-        this.password = password;
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            this.password = BaseEncoding.base64().encode(md.digest(password.getBytes("UTF-8")));
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+            Logger.getLogger(UserData.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**

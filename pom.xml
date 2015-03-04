@@ -38,7 +38,15 @@
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
             <scope>compile</scope>
-        </dependency>       
+        </dependency>
+        
+        <!-- PicketBox Security API -->
+        <dependency>
+                <groupId>org.picketbox</groupId>
+                <artifactId>jboss-security-spi</artifactId>
+                <version>4.0.21.Final</version>
+                <scope>provided</scope>
+        </dependency>        
         
         <!-- Java EE 7 API -->
         <dependency>
