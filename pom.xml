@@ -6,7 +6,7 @@
     <artifactId>spring-cxf-example</artifactId>
     <version>9.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>jaxrs-jpa-jta example service</name>
+    <name>jaxrs-jee6 example service</name>
     <description>Example service using JAX-RS, JPA, and JTA</description>
 
     <url>http://github.com/Arven/spring-cxf-example</url>
