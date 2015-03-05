@@ -5,6 +5,14 @@
      version="2.5">
 
     <display-name>spring-cxf-example</display-name>
+    
+    <!-- Generic Servlet Class -->
+    <servlet>
+        <servlet-name>javax.ws.rs.core.Application</servlet-name>
+        <display-name>CXF ApplicationServlet</display-name>
+        <servlet-class>javax.ws.rs.core.Application</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 
     <!-- Attach servlet to all patterns -->
     <servlet-mapping>

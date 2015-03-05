@@ -39,6 +39,11 @@ public class MicroBlogRestService {
     public String getVersion() {
         return "v1.0";
     }
+    
+    @Path("/login") @GET
+    public String getLoginInfo(final @Context SecurityContext ctx) {
+        return ctx.getUserPrincipal().toString();
+    }    
 
     @Path("/user") @POST
     public void addUser(UserData user) {
