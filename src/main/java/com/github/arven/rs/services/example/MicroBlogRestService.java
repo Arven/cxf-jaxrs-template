@@ -59,7 +59,7 @@ public class MicroBlogRestService {
         return ctx.getAuthenticationScheme();
     }
     
-    @Path("/secure/user/{name}") @DELETE @RolesAllowed({"rest-user"})
+    @Path("/user/{name}") @DELETE @RolesAllowed({"manager"})
     public void removeUser(@PathParam("name") String name, final @Context SecurityContext ctx) {
         if(ctx.getUserPrincipal().getName().equals(name)) {
             blogService.removeUser(name);
@@ -71,21 +71,21 @@ public class MicroBlogRestService {
         return new DataList(blogService.getFriends(name), offset, MAX_LIST_SPAN, false);
     }
     
-    @Path("/secure/user/{name}/friends/{friend}") @PUT @RolesAllowed({"rest-user"})
+    @Path("/user/{name}/friends/{friend}") @PUT @RolesAllowed({"manager"})
     public void addFriend(@PathParam("name") String name, @PathParam("friend") String friend, final @Context SecurityContext ctx) {
         if(ctx.getUserPrincipal().getName().equals(name)) {
             blogService.addFriend(name, friend);
         }
     }
     
-    @Path("/secure/user/{name}/friends/{friend}") @DELETE @RolesAllowed({"rest-user"})
+    @Path("/user/{name}/friends/{friend}") @DELETE @RolesAllowed({"manager"})
     public void removeFriend(@PathParam("name") String name, @PathParam("friend") String friend, final @Context SecurityContext ctx) {
         if(ctx.getUserPrincipal().getName().equals(name)) {
             blogService.removeFriend(name, friend);
         }
     }
     
-    @Path("/secure/post") @POST @RolesAllowed({"rest-user"})
+    @Path("/post") @POST @RolesAllowed({"manager"})
     public void postMessage(MessageData post, final @Context SecurityContext ctx) {
         blogService.addPost(ctx.getUserPrincipal().getName(), post);
     }
@@ -95,7 +95,7 @@ public class MicroBlogRestService {
         return new DataList(blogService.getPosts(name), offset, MAX_LIST_SPAN, true);
     }
     
-    @Path("/secure/group") @POST @RolesAllowed({"rest-user"})
+    @Path("/group") @POST @RolesAllowed({"manager"})
     public void createGroup(GroupData group, final @Context SecurityContext ctx) {
         blogService.addGroup(group, ctx.getUserPrincipal().getName());
     }
@@ -105,7 +105,7 @@ public class MicroBlogRestService {
         return blogService.getGroup(name);
     }
     
-    @Path("/secure/group/{name}") @DELETE @RolesAllowed({"rest-user"})
+    @Path("/group/{name}") @DELETE @RolesAllowed({"manager"})
     public void leaveOrDisbandGroup(@PathParam("name") String name, final @Context SecurityContext ctx) {
         blogService.leaveGroup(name, ctx.getUserPrincipal().getName());
     }
@@ -115,7 +115,7 @@ public class MicroBlogRestService {
         return new DataList(blogService.getGroupMembers(name), offset, MAX_LIST_SPAN, false);
     }
     
-    @Path("/secure/group/{name}/join") @POST @RolesAllowed({"rest-user"})
+    @Path("/group/{name}/join") @POST @RolesAllowed({"manager"})
     public void joinGroup(@PathParam("name") String name, final @Context SecurityContext ctx) {
         blogService.addGroupMember(name, ctx.getUserPrincipal().getName());
     }

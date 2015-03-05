@@ -2,7 +2,7 @@ package com.github.arven.rs.services.example;
 
 import java.util.LinkedList;
 import java.util.List;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
@@ -18,7 +18,7 @@ import javax.persistence.PersistenceContext;
  * 
  * @author Brian Becker
  */
-@Stateful
+@Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class MicroBlogService {
 	

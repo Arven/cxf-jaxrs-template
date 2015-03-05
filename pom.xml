@@ -33,14 +33,21 @@
             <scope>compile</scope>
         </dependency>       
         
-        <!-- Java EE 7 API -->
+        <!-- Java EE 6 API -->
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>6.0</version>
             <scope>provided</scope>
-        </dependency>        
+        </dependency>
         
+        <!-- TomEE Workaround -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>3.2.6.RELEASE</version>
+        </dependency>
+   
     </dependencies>
 
     <build>
