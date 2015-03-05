@@ -1,7 +1,9 @@
 package com.github.arven.rs.services.example;
 
 import com.github.arven.rs.types.DataList;
+import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.Singleton;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
@@ -27,6 +29,8 @@ import javax.ws.rs.core.SecurityContext;
 @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @Path("/v1")
+@Singleton
+@DeclareRoles({"rest-user"})
 public class MicroBlogRestService {
     
     public static int MAX_LIST_SPAN = 10;
@@ -39,11 +43,6 @@ public class MicroBlogRestService {
     public String getVersion() {
         return "v1.0";
     }
-    
-    @Path("/login") @GET
-    public String getLoginInfo(final @Context SecurityContext ctx) {
-        return ctx.getUserPrincipal().toString();
-    }    
 
     @Path("/user") @POST
     public void addUser(UserData user) {
@@ -55,33 +54,38 @@ public class MicroBlogRestService {
         return blogService.getUser(name);
     }
     
-    @Path("/user/{name}") @DELETE @RolesAllowed({"ROLE_RESTUSER"})
+    @Path("/test") @GET
+    public String testSecure(final @Context SecurityContext ctx) {
+        return ctx.getAuthenticationScheme();
+    }
+    
+    @Path("/secure/user/{name}") @DELETE @RolesAllowed({"rest-user"})
     public void removeUser(@PathParam("name") String name, final @Context SecurityContext ctx) {
         if(ctx.getUserPrincipal().getName().equals(name)) {
             blogService.removeUser(name);
         }
-    }    
+    }
     
     @Path("/user/{name}/friends") @GET
     public DataList getFriendsList(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
         return new DataList(blogService.getFriends(name), offset, MAX_LIST_SPAN, false);
     }
     
-    @Path("/user/{name}/friends/{friend}") @PUT @RolesAllowed({"ROLE_RESTUSER"})
+    @Path("/secure/user/{name}/friends/{friend}") @PUT @RolesAllowed({"rest-user"})
     public void addFriend(@PathParam("name") String name, @PathParam("friend") String friend, final @Context SecurityContext ctx) {
         if(ctx.getUserPrincipal().getName().equals(name)) {
             blogService.addFriend(name, friend);
         }
     }
     
-    @Path("/user/{name}/friends/{friend}") @DELETE @RolesAllowed({"ROLE_RESTUSER"})
+    @Path("/secure/user/{name}/friends/{friend}") @DELETE @RolesAllowed({"rest-user"})
     public void removeFriend(@PathParam("name") String name, @PathParam("friend") String friend, final @Context SecurityContext ctx) {
         if(ctx.getUserPrincipal().getName().equals(name)) {
             blogService.removeFriend(name, friend);
         }
     }
     
-    @Path("/post") @POST @RolesAllowed({"ROLE_RESTUSER"})
+    @Path("/secure/post") @POST @RolesAllowed({"rest-user"})
     public void postMessage(MessageData post, final @Context SecurityContext ctx) {
         blogService.addPost(ctx.getUserPrincipal().getName(), post);
     }
@@ -91,7 +95,7 @@ public class MicroBlogRestService {
         return new DataList(blogService.getPosts(name), offset, MAX_LIST_SPAN, true);
     }
     
-    @Path("/group") @POST @RolesAllowed({"ROLE_RESTUSER"})
+    @Path("/secure/group") @POST @RolesAllowed({"rest-user"})
     public void createGroup(GroupData group, final @Context SecurityContext ctx) {
         blogService.addGroup(group, ctx.getUserPrincipal().getName());
     }
@@ -101,7 +105,7 @@ public class MicroBlogRestService {
         return blogService.getGroup(name);
     }
     
-    @Path("/group/{name}") @DELETE @RolesAllowed({"ROLE_RESTUSER"})
+    @Path("/secure/group/{name}") @DELETE @RolesAllowed({"rest-user"})
     public void leaveOrDisbandGroup(@PathParam("name") String name, final @Context SecurityContext ctx) {
         blogService.leaveGroup(name, ctx.getUserPrincipal().getName());
     }
@@ -111,7 +115,7 @@ public class MicroBlogRestService {
         return new DataList(blogService.getGroupMembers(name), offset, MAX_LIST_SPAN, false);
     }
     
-    @Path("/group/{name}/join") @POST @RolesAllowed({"ROLE_RESTUSER"})
+    @Path("/secure/group/{name}/join") @POST @RolesAllowed({"rest-user"})
     public void joinGroup(@PathParam("name") String name, final @Context SecurityContext ctx) {
         blogService.addGroupMember(name, ctx.getUserPrincipal().getName());
     }

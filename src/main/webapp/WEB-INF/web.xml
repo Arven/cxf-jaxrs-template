@@ -20,9 +20,10 @@
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
     
-    <login-config>
-        <auth-method>BASIC</auth-method>
-        <realm-name>RealmUsersRoles</realm-name>
-    </login-config>
+    <!-- Workaround for TomEE -->
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>com.github.arven.rs.filters.AuthFilter</filter-class>
+    </filter-mapping>
     
 </web-app>
