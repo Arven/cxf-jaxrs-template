@@ -22,7 +22,11 @@
     
     <login-config>
         <auth-method>BASIC</auth-method>
-        <realm-name>RealmUsersRoles</realm-name>
+        <realm-name>UserDatabase</realm-name>
     </login-config>
+    
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>    
     
 </web-app>
