@@ -21,9 +21,19 @@
     </servlet-mapping>
     
     <!-- Workaround for TomEE -->
-    <filter-mapping>
-        <filter-name>AuthFilter</filter-name>
-        <filter-class>com.github.arven.rs.filters.AuthFilter</filter-class>
-    </filter-mapping>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Hello Services</web-resource-name>
+            <url-pattern>/v1/secure/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>rest-user</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>default</realm-name>
+    </login-config>
     
 </web-app>

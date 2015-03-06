@@ -28,7 +28,8 @@
 		"5008bc3d-a63a-7cb5-4181-8dbda73b2458",
 		"dbd2ea3b-03d3-971b-50a7-7b540c4818de",
 		"66c50d7d-15fc-5dfe-dd30-447b4bb4d22f",
-		"0065c972-bb17-e54d-c88e-401997eb9a9c"
+		"0065c972-bb17-e54d-c88e-401997eb9a9c",
+		"6625291e-fafe-5873-b877-e57755e1abcf"
 	],
 	"folders": [],
 	"timestamp": 1424898466022,
@@ -67,7 +68,7 @@
 		{
 			"id": "08deba5a-b11c-f54c-5f61-c52a4e49cf9c",
 			"headers": "Content-Type: application/json\nAuthorization: Basic dHJmaWVsZHM6c25vd2luZw==\n",
-			"url": "http://localhost:8080/spring-cxf-example/v1/group",
+			"url": "http://localhost:8080/spring-cxf-example/v1/secure/group",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "POST",
@@ -82,13 +83,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1425480641874,
+			"time": 1425653127228,
 			"name": "Create Group Alpha",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "{\n    \"id\": \"alpha\",\n    \"value\": \"This is the first group.\"\n}"
+			"rawModeData": "{\n    \"group\": {\n        \"@id\": \"alpha\",\n        \"$\": \"This is the first group.\"\n    }\n}"
 		},
 		{
 			"id": "1aa9d2d8-b025-07e7-bfb8-b33ca086cee3",
@@ -124,13 +125,13 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1425480667849,
+			"time": 1425653144178,
 			"name": "Create User Humphrey",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "{\n    \"id\": \"hp27\",\n    \"nickname\": \"humphrey\",\n    \"email\": \"hp27@muckdragon.info\",\n    \"password\": \"listing\"\n}"
+			"rawModeData": "{\n    \"user\": {\n        \"@id\": \"hp27\",\n        \"nickname\": \"humphrey\",\n        \"email\": \"hp27@muckdragon.info\",\n        \"password\": \"listing\"\n    }\n}"
 		},
 		{
 			"id": "4b0ca704-f05d-e3e8-9fd0-ca133221c7c6",
@@ -145,7 +146,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1424898633859,
+			"time": 1425653094871,
 			"name": "Get Posts From Tom",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
@@ -191,7 +192,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1424898579035,
+			"time": 1425653076720,
 			"name": "Get User Tom",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
@@ -211,18 +212,43 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1425480731854,
+			"time": 1425653331410,
 			"name": "Create User Kate",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "{\n    \"id\": \"katherine\",\n    \"nickname\": \"kate\",\n    \"email\": \"katherine@trfields.name\",\n    \"password\": \"correcthorsebatterystaple\"\n}"
+			"rawModeData": "{\n    \"user\": { \n        \"@id\": \"katherine\",\n        \"nickname\": \"kate\",\n        \"email\": \"katherine@trfields.name\",\n        \"password\": \"correcthorsebatterystaple\"\n    }\n}"
+		},
+		{
+			"id": "6625291e-fafe-5873-b877-e57755e1abcf",
+			"headers": "Accept: application/json\nAuthorization: Basic dHJmaWVsZHM6c25vd2luZw==\n",
+			"url": "http://localhost:8080/spring-cxf-example/v1/login",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "basicAuth",
+			"helperAttributes": {
+				"username": "trfields",
+				"password": "snowing",
+				"id": "basic",
+				"timestamp": 1424811863757
+			},
+			"time": 1425653360801,
+			"name": "Login Info",
+			"description": "",
+			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
+			"responses": [],
+			"synced": false
 		},
 		{
 			"id": "66c50d7d-15fc-5dfe-dd30-447b4bb4d22f",
 			"headers": "Authorization: Basic a2F0aGVyaW5lOmNvcnJlY3Rob3JzZWJhdHRlcnlzdGFwbGU=\nContent-Type: application/json\n",
-			"url": "http://localhost:8080/spring-cxf-example/v1/group/alpha/join",
+			"url": "http://localhost:8080/spring-cxf-example/v1/secure/group/alpha/join",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "POST",
@@ -237,7 +263,7 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1425047301764,
+			"time": 1425653348871,
 			"name": "Kate Joins Group Alpha",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
@@ -258,7 +284,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1424898773206,
+			"time": 1425653166964,
 			"name": "Get User Humphrey",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
@@ -268,7 +294,7 @@
 		{
 			"id": "70ec2a82-eeed-8387-afbd-55657fbf3590",
 			"headers": "Content-Type: application/json\nAuthorization: Basic aHAyNzpsaXN0aW5n\n",
-			"url": "http://localhost:8080/spring-cxf-example/v1/group",
+			"url": "http://localhost:8080/spring-cxf-example/v1/secure/group",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "POST",
@@ -283,13 +309,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1425480681368,
+			"time": 1425653188996,
 			"name": "Create Group Omega",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "{\n    \"id\": \"omega\",\n    \"value\": \"This is the last group.\"\n}"
+			"rawModeData": "{\n    \"group\": {\n        \"@id\": \"omega\",\n        \"$\": \"This is the last group.\"\n    }\n}"
 		},
 		{
 			"id": "712d0ef3-fd8d-84b2-f63d-a0b75c601d77",
@@ -304,13 +330,13 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1425421794982,
+			"time": 1425579076106,
 			"name": "Create User Tom",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "{\n  \"id\": \"trfields\",\n  \"nickname\": \"tom\",\n  \"email\": \"tom@trfields.name\",\n  \"password\": \"snowing\"\n}"
+			"rawModeData": "{\n  \"user\": { \n    \"@id\": \"trfields\",\n    \"nickname\": \"tom\",\n    \"email\": \"tom@trfields.name\",\n    \"password\": \"snowing\"\n  }\n}"
 		},
 		{
 			"id": "870570e2-7241-fcfc-bbb6-b1cda7ba1ed6",
@@ -325,7 +351,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1424898814968,
+			"time": 1425653198939,
 			"name": "Get Group Omega",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
@@ -355,7 +381,7 @@
 		{
 			"id": "a05ea9c2-297a-5d20-cf29-533c64c687fa",
 			"headers": "Authorization: Basic dHJmaWVsZHM6c25vd2luZw==\nContent-Type: application/json\n",
-			"url": "http://localhost:8080/spring-cxf-example/v1/user/trfields/friends/hp27",
+			"url": "http://localhost:8080/spring-cxf-example/v1/secure/user/trfields/friends/hp27",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "DELETE",
@@ -370,7 +396,7 @@
 				"id": "basic",
 				"timestamp": 1424800887137
 			},
-			"time": 1425047278814,
+			"time": 1425653275409,
 			"name": "Tom Removes Humphrey",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
@@ -380,8 +406,8 @@
 		},
 		{
 			"id": "a9e49543-a387-5712-82b9-d972bef273ce",
-			"headers": "Content-Type: application/json\nAuthorization: Basic dHJmaWVsZHM6c25vd2luZw==\n",
-			"url": "http://localhost:8080/spring-cxf-example/v1/post",
+			"headers": "Authorization: Basic dHJmaWVsZHM6c25vd2luZw==\nContent-Type: application/json\n",
+			"url": "http://localhost:8080/spring-cxf-example/v1/secure/post",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "POST",
@@ -396,13 +422,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1425475842018,
+			"time": 1425653087504,
 			"name": "Post Message",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "{\n    \"id\": \"TestMessage01\",\n    \"value\": \"This is #just a #sample #message.\"\n}"
+			"rawModeData": "{\n    \"message\": {\n        \"@id\": \"TestMessage01\",\n        \"$\": \"This is #just a #sample #message.\"\n    }\n}"
 		},
 		{
 			"id": "b3cebd44-1caf-6144-6b1c-c8caa0436607",
@@ -427,7 +453,7 @@
 		{
 			"id": "cf7bf4a0-15d4-9c65-d767-e34894329803",
 			"headers": "Content-Type: application/json\nAuthorization: Basic aHAyNzpsaXN0aW5n\n",
-			"url": "http://localhost:8080/spring-cxf-example/v1/user/hp27/friends/trfields",
+			"url": "http://localhost:8080/spring-cxf-example/v1/secure/user/hp27/friends/trfields",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "DELETE",
@@ -442,7 +468,7 @@
 				"id": "basic",
 				"timestamp": 1424800887137
 			},
-			"time": 1425047290061,
+			"time": 1425653312689,
 			"name": "Humphrey Removes Tom",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
@@ -463,7 +489,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1424898997099,
+			"time": 1425653339426,
 			"name": "Get User Kate",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
@@ -473,7 +499,7 @@
 		{
 			"id": "e525b94e-328e-bfff-477a-473ea44e011d",
 			"headers": "Authorization: Basic aHAyNzpsaXN0aW5n\nContent-Type: application/json\n",
-			"url": "http://localhost:8080/spring-cxf-example/v1/user/hp27/friends/trfields",
+			"url": "http://localhost:8080/spring-cxf-example/v1/secure/user/hp27/friends/trfields",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "PUT",
@@ -488,7 +514,7 @@
 				"id": "basic",
 				"timestamp": 1424800887137
 			},
-			"time": 1425047284281,
+			"time": 1425653302649,
 			"name": "Humphrey Adds Tom",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
@@ -499,7 +525,7 @@
 		{
 			"id": "e8d84e1c-7817-f95f-41db-72b5d9e41786",
 			"headers": "Authorization: Basic dHJmaWVsZHM6c25vd2luZw==\nContent-Type: application/json\n",
-			"url": "http://localhost:8080/spring-cxf-example/v1/user/trfields/friends/hp27",
+			"url": "http://localhost:8080/spring-cxf-example/v1/secure/user/trfields/friends/hp27",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "PUT",
@@ -514,7 +540,7 @@
 				"id": "basic",
 				"timestamp": 1424800887137
 			},
-			"time": 1425047227459,
+			"time": 1425653262979,
 			"name": "Tom Adds Humphrey",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
@@ -535,7 +561,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1424898869002,
+			"time": 1425653245155,
 			"name": "Get Group Alpha Members",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
@@ -545,7 +571,7 @@
 		{
 			"id": "f219e539-5718-3b60-db36-0589132d8cdc",
 			"headers": "Content-Type: application/json\nAuthorization: Basic aHAyNzpsaXN0aW5n\n",
-			"url": "http://localhost:8080/spring-cxf-example/v1/post",
+			"url": "http://localhost:8080/spring-cxf-example/v1/secure/post",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "POST",
@@ -560,13 +586,13 @@
 				"id": "basic",
 				"timestamp": 1424811863757
 			},
-			"time": 1425480694928,
+			"time": 1425653234023,
 			"name": "Post Message As Humphrey",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "{\n    \"id\": \"DemoMessage01\",\n    \"value\": \"This is a really short message which is just here to test the demo #webapp\"\n}"
+			"rawModeData": "{\n    \"message\": {\n        \"@id\": \"DemoMessage01\",\n        \"$value\": \"This is a really short message which is just here to test the demo #webapp\"\n    }\n}"
 		},
 		{
 			"id": "f291196b-70b6-3932-5e7e-1de0303ffd4a",
@@ -581,7 +607,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1424898719890,
+			"time": 1425653131287,
 			"name": "Get Group Alpha",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
@@ -601,7 +627,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1424898897896,
+			"time": 1425653254413,
 			"name": "Get Group Omega Members",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
@@ -621,7 +647,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1424898929962,
+			"time": 1425653267122,
 			"name": "Tom Checks Friends List",
 			"description": "",
 			"collectionId": "83cb37bd-c578-b8e5-46b9-2c5c4afd72ea",
