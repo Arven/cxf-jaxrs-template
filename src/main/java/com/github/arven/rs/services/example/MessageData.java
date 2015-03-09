@@ -10,6 +10,7 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -37,14 +38,15 @@ public class MessageData implements Serializable {
     
     @Basic
     @XmlAttribute
-    private Date date;
+    @Temporal(javax.persistence.TemporalType.TIME)
+    private Date sent_date;
     
     @Basic
     @XmlValue
     private String message;
     
     public MessageData () {
-        this.date = (Calendar.getInstance().getTime());
+        this.sent_date = (Calendar.getInstance().getTime());
     }
     
     /**

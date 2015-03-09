@@ -43,8 +43,6 @@ public class MicroBlogService {
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void addUser( UserData user ) {
-        //user.setRoles(null);
-        user.getRoles().add(test.find(RoleData.class, "ROLE_RESTUSER"));
         test.persist(user);
     }
     
