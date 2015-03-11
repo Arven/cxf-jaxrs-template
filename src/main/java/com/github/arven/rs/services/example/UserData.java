@@ -61,14 +61,10 @@ public class UserData implements Serializable {
     @OneToMany(cascade = CascadeType.ALL) @JoinTable(name="HAS_FRIEND")
     private List<UserData> friends;
     
-    @ManyToMany(mappedBy = "members")
-    private List<RoleData> roles;
-    
     public UserData() {
     	this.messages = new LinkedList<MessageData>();
     	this.groups = new LinkedList<GroupData>();
     	this.friends = new LinkedList<UserData>();
-        this.roles = new LinkedList<RoleData>();
     }
     
     /**
@@ -144,20 +140,6 @@ public class UserData implements Serializable {
      */
     public void setFriends(List<UserData> friends) {
     	this.friends = friends;
-    }
-    
-    /**
-     * Get the roles that this user has
-     */
-    public List<RoleData> getRoles() {
-        return this.roles;
-    }
-    
-    /**
-     * Set the roles that this user has
-     */
-    public void setRoles(List<RoleData> roles) {
-        this.roles = roles;
     }
     
 }

@@ -58,7 +58,6 @@ public class MicroBlogService {
     public void removeUser( String userName ) {
         UserData user = test.find(UserData.class, userName);
         user.getGroups().clear();
-        user.getRoles().clear();
         user.getMessages().clear();
         test.persist(user);
         test.remove(user);
@@ -91,9 +90,9 @@ public class MicroBlogService {
     public void addPost( String userName, MessageData post ) {
     	test.persist(post);
     	if(test.contains(post)) {
-	        UserData user = test.find(UserData.class, userName);
-	        user.getMessages().add(post);
-	        test.persist(user);
+            UserData user = test.find(UserData.class, userName);
+            user.getMessages().add(post);
+            test.persist(user);
     	}
     }
     
