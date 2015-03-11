@@ -79,7 +79,7 @@ public class MicroBlogService {
         if (d != null) {
             return new LinkedList<MessageData>(d.getMessages());
         }
-        return Collections.EMPTY_LIST;
+        return new LinkedList<MessageData>();
     }
 
     /**
@@ -125,7 +125,7 @@ public class MicroBlogService {
         if (d != null) {
             return new LinkedList<UserData>(d.getMembers());
         }
-        return Collections.EMPTY_LIST;
+        return new LinkedList<UserData>();
     }
     
     /**
@@ -210,7 +210,7 @@ public class MicroBlogService {
         if (d != null) {
             return new LinkedList<UserData>(d.getFriends());
         }
-        return Collections.EMPTY_LIST;
+        return new LinkedList<UserData>();
     }
     
     /**
