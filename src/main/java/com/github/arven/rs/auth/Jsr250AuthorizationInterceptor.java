@@ -15,10 +15,13 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
 
 @Secured @Interceptor
 public class Jsr250AuthorizationInterceptor {
+    
+    private @Context SecurityContext sctx;
     
      public static Annotation permissions(AnnotatedElement ae) {
         for(Annotation a : ae.getDeclaredAnnotations()) {
@@ -41,22 +44,12 @@ public class Jsr250AuthorizationInterceptor {
         return false;
     }
     
-    public static SecurityContext security(InvocationContext params) {
-        for(Object o : params.getParameters()) {
-            if(o instanceof SecurityContext) {
-                return (SecurityContext)o;
-            }
-        }
-        return null;
-    }
-    
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
-        SecurityContext security = security(ctx);
         Annotation inner = permissions(ctx.getMethod());
         Annotation outer = permissions(ctx.getMethod().getDeclaringClass());
-        if(outer.annotationType().equals(PermitAll.class) || allows(outer, security)) {
-            if(inner.annotationType().equals(PermitAll.class) || allows(inner, security)) {
+        if(outer.annotationType().equals(PermitAll.class) || allows(outer, sctx)) {
+            if(inner.annotationType().equals(PermitAll.class) || allows(inner, sctx)) {
                 return ctx.proceed();
             }
         }
