@@ -44,7 +44,6 @@ public class AuthenticationFilter implements Filter {
         
         @Override
         public Principal getUserPrincipal() {
-            System.out.println(this.p.toString());
             return this.p;
         }
         

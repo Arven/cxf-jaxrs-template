@@ -41,8 +41,8 @@ public class Jsr250AuthorizationInterceptor {
         return false;
     }
     
-    public static SecurityContext security(Object[] params) {
-        for(Object o : params) {
+    public static SecurityContext security(InvocationContext params) {
+        for(Object o : params.getParameters()) {
             if(o instanceof SecurityContext) {
                 return (SecurityContext)o;
             }
@@ -52,7 +52,7 @@ public class Jsr250AuthorizationInterceptor {
     
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
-        SecurityContext security = security(ctx.getParameters());
+        SecurityContext security = security(ctx);
         Annotation inner = permissions(ctx.getMethod());
         Annotation outer = permissions(ctx.getMethod().getDeclaringClass());
         if(outer.annotationType().equals(PermitAll.class) || allows(outer, security)) {
