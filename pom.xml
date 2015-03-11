@@ -56,6 +56,29 @@
                 <version>1.0.2.Final</version>
             </plugin>
             
+            <!-- GlassFish plugin to deploy war -->
+            <plugin>
+                <groupId>org.glassfish.maven.plugin</groupId>
+                <artifactId>maven-glassfish-plugin</artifactId>
+                <version>2.1</version>
+                <configuration>
+                    <user>admin</user>
+                    <adminPassword>examplepassword</adminPassword>
+                    <glassfishDirectory>C:\\Users\\brian.becker\\Downloads\\glassfish4</glassfishDirectory>
+                    <domain>
+                        <name>domain1</name>
+                        <httpPort>8080</httpPort>
+                        <adminPort>4848</adminPort>
+                    </domain>
+                    <components>
+                        <component>
+                            <name>${project.artifactId}</name>
+                            <artifact>${project.build.directory}/${project.build.finalName}</artifact>
+                        </component>
+                    </components>
+                </configuration>
+            </plugin>            
+            
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.2</version>

@@ -13,6 +13,8 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -38,6 +40,7 @@ public class MessageData implements Serializable {
     
     @Basic
     @XmlAttribute
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     
     @Basic

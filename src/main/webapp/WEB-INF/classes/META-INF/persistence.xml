@@ -10,12 +10,10 @@
     <class>com.github.arven.rs.services.example.MessageData</class>
     <class>com.github.arven.rs.services.example.GroupData</class>
     <properties>
-        <property name="openjpa.jdbc.SynchronizeMappings" 
-                  value="buildSchema(foreignKeys=true,schemaAction='dropDB,add')"/>
-        <property name="openjpa.jdbc.SchemaFactory" 
-                  value="native(foreignKeys=true)" />
-        <property name="openjpa.jdbc.MappingDefaults" 
-                  value="ForeignKeyDeleteAction=restrict, JoinForeignKeyDeleteAction=restrict"/>
+        <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(foreignKeys=true,schemaAction='dropDB,add')"/>
+        <property name="openjpa.jdbc.SchemaFactory" value="native(foreignKeys=true)" />
+        <property name="openjpa.jdbc.MappingDefaults" value="ForeignKeyDeleteAction=restrict, JoinForeignKeyDeleteAction=restrict"/>
+        <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
     </properties>
   </persistence-unit>
 </persistence>
