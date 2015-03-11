@@ -32,7 +32,6 @@ import javax.ws.rs.core.SecurityContext;
 public class MicroBlogRestService {
     
     public static int MAX_LIST_SPAN = 10;
-    public @Context SecurityContext ctx;
     
     @Inject
     private MicroBlogService blogService;
