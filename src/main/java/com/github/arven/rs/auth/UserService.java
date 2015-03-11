@@ -5,8 +5,6 @@
  */
 package com.github.arven.rs.auth;
 
-import java.util.Map;
-
 /**
  *
  * @author Brian Becker

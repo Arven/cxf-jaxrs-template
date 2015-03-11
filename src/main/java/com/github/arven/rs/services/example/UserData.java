@@ -109,6 +109,7 @@ public class UserData implements Serializable {
     
     /**
      * Get the list of messages for this user
+     * @return 
      */
     public List<MessageData> getMessages() {
     	return this.messages;
@@ -116,6 +117,7 @@ public class UserData implements Serializable {
     
     /**
      * Get the groups this user is in
+     * @return 
      */
     public List<GroupData> getGroups() {
     	return this.groups;
@@ -123,6 +125,7 @@ public class UserData implements Serializable {
     
     /**
      * Set the groups this user is in
+     * @param groups
      */
     public void setGroups(List<GroupData> groups) {
     	this.groups = groups;
@@ -130,6 +133,7 @@ public class UserData implements Serializable {
     
     /**
      * Get the friends this user has
+     * @return 
      */
     public List<UserData> getFriends() {
     	return this.friends;
@@ -137,6 +141,7 @@ public class UserData implements Serializable {
     
     /**
      * Set the friends this user has
+     * @param friends
      */
     public void setFriends(List<UserData> friends) {
     	this.friends = friends;

@@ -2,9 +2,7 @@ package com.github.arven.rs.services.example;
 
 import com.github.arven.rs.auth.Secured;
 import com.github.arven.rs.types.DataList;
-import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
-import javax.ejb.Singleton;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
