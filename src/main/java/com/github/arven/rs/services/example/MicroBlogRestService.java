@@ -112,7 +112,7 @@ public class MicroBlogRestService {
         blogService.leaveGroup(name, ctx.getUserPrincipal().getName());
     }
     
-    @Path("/{name}/members") @GET
+    @Path("/group/{name}/members") @GET
     public DataList getGroupMembers(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
         return new DataList(blogService.getGroupMembers(name), offset, MAX_LIST_SPAN, false);
     }
