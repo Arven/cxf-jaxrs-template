@@ -1,5 +1,6 @@
 package com.github.arven.rs.services.example;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -74,7 +75,11 @@ public class MicroBlogService {
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public List<MessageData> getPosts( String userName ) {
-        return new LinkedList<MessageData>(test.find(UserData.class, userName).getMessages());
+        UserData d = test.find(UserData.class, userName);
+        if (d != null) {
+            return new LinkedList<MessageData>(d.getMessages());
+        }
+        return Collections.EMPTY_LIST;
     }
 
     /**
@@ -116,7 +121,11 @@ public class MicroBlogService {
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public List<UserData> getGroupMembers( String groupName ) {
-    	return new LinkedList<UserData>(test.find(GroupData.class, groupName).getMembers());
+        GroupData d = test.find(GroupData.class, groupName);
+        if (d != null) {
+            return new LinkedList<UserData>(d.getMembers());
+        }
+        return Collections.EMPTY_LIST;
     }
     
     /**
