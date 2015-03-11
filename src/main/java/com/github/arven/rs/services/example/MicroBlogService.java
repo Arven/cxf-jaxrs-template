@@ -206,7 +206,11 @@ public class MicroBlogService {
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public List<UserData> getFriends( String userName ) {
-    	return new LinkedList<UserData>(test.find(UserData.class, userName).getFriends());
+        UserData d = test.find(UserData.class, userName);
+        if (d != null) {
+            return new LinkedList<UserData>(d.getFriends());
+        }
+        return Collections.EMPTY_LIST;
     }
     
     /**
