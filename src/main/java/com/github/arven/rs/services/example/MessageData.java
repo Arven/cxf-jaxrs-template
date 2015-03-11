@@ -1,7 +1,12 @@
 package com.github.arven.rs.services.example;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -73,12 +78,8 @@ public class MessageData implements Serializable {
     @XmlAttribute
     public List<String> getTags() {
         List<String> tags = new ArrayList<String>();
-        String[] temp = StringUtils.substringsBetween(this.message.replaceAll("[" + Pattern.quote("!\"$%&'()*+,-./:;<=>?@[\\]^_`{|}~") + "]", " ").concat(" "), "#", " ");
-        if (temp != null) {
-            for(String tag : temp) {
-                tags.add(StringUtils.lowerCase(tag));
-            }
-        }
+        Iterable<String> it = Iterables.filter(Splitter.on(" ").omitEmptyStrings().split(message), Predicates.containsPattern("^#.*$"));
+        tags.addAll(Arrays.asList(Iterables.toArray(it, String.class)));
         if(tags.isEmpty()) { return null; }
         return tags;
     }

@@ -5,7 +5,7 @@
  */
 package com.github.arven.rs.auth;
 
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import com.google.common.io.BaseEncoding;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Arrays;
@@ -28,14 +28,14 @@ import javax.servlet.http.HttpServletRequestWrapper;
 @WebFilter(filterName = "AuthenticationFilter")
 public class AuthenticationFilter implements Filter {
     
+    @Inject
+    UserService svc;
+    
     public static class SecurityWrapper extends HttpServletRequestWrapper {
-        
-        @Inject
-        UserService svc;
-        
+
         private final UsernamePasswordPrincipal p;
 
-        public SecurityWrapper(HttpServletRequest request) {
+        public SecurityWrapper(UserService svc, HttpServletRequest request) {
             super(request);
             this.p = UsernamePasswordPrincipal.fromHeaders(svc, request);
         }
@@ -71,7 +71,7 @@ public class AuthenticationFilter implements Filter {
 
         @Override
         public String toString() {
-            return Base64.encode((this.user + ":" + this.password).getBytes()) + " " + this.roles.toString();
+            return BaseEncoding.base64().encode((this.user + ":" + this.password).getBytes()) + " " + this.roles.toString();
         }
         
         public boolean isUserInRole(String role) {
@@ -82,7 +82,7 @@ public class AuthenticationFilter implements Filter {
             if(req.getHeader("Authorization") == null) {
                 return new UsernamePasswordPrincipal("anonymous", "", Arrays.asList(new String[] { "ANONYMOUS" }));
             } else {
-                String s[] = new String(Base64.decode(req.getHeader("Authorization").split(" ")[1])).split(":");
+                String s[] = new String(BaseEncoding.base64().decode(req.getHeader("Authorization").split(" ")[1])).split(":");
                 HashedUserInfo info = svc.loadUserByUsername(s[0]);
                 if(info.checkPassword(s[1])) {
                     return new UsernamePasswordPrincipal(s[0], s[1], info.getRoles());
@@ -101,7 +101,7 @@ public class AuthenticationFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         if (request instanceof HttpServletRequest) {
             HttpServletRequest req = (HttpServletRequest) request;
-            chain.doFilter(new SecurityWrapper(req), response);
+            chain.doFilter(new SecurityWrapper(svc, req), response);
         }
     }
 

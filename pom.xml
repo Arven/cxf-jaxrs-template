@@ -33,14 +33,6 @@
             <scope>compile</scope>
         </dependency>     
         
-        <!-- Apache Commons API -->
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.10</version>
-            <scope>compile</scope>
-        </dependency>             
-        
         <!-- Java EE 6 API -->
         <dependency>
             <groupId>javax</groupId>
@@ -56,22 +48,22 @@
             is deployed -->
         <finalName>${project.artifactId}</finalName>
         <plugins>
+            
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
-               <!-- Java EE 7 doesn't require web.xml, Maven needs to catch up! -->
                     <failOnMissingWebXml>true</failOnMissingWebXml>
                 </configuration>
             </plugin>
+            
             <!-- WildFly plugin to deploy war -->
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>1.0.2.Final</version>
             </plugin>
-            <!-- Compiler plugin enforces Java 1.6 compatibility and activates 
-                annotation processors -->
+            
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.2</version>
@@ -80,6 +72,7 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
+            
         </plugins>
     </build>
 
