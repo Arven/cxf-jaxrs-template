@@ -28,18 +28,16 @@ import javax.servlet.http.HttpServletRequestWrapper;
 @WebFilter(filterName = "AuthenticationFilter")
 public class AuthenticationFilter implements Filter {
     
-    @Inject
-    UserService svc;
-    
     public static class SecurityWrapper extends HttpServletRequestWrapper {
         
+        @Inject
+        UserService svc;
+        
         private final UsernamePasswordPrincipal p;
-        private final UserService svc;
 
-        public SecurityWrapper(UserService svc, UsernamePasswordPrincipal p, HttpServletRequest request) {
+        public SecurityWrapper(HttpServletRequest request) {
             super(request);
-            this.p = p;
-            this.svc = svc;
+            this.p = UsernamePasswordPrincipal.fromHeaders(svc, request);
         }
         
         @Override
@@ -103,7 +101,7 @@ public class AuthenticationFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         if (request instanceof HttpServletRequest) {
             HttpServletRequest req = (HttpServletRequest) request;
-            chain.doFilter(new SecurityWrapper(svc, UsernamePasswordPrincipal.fromHeaders(svc, req), req), response);
+            chain.doFilter(new SecurityWrapper(req), response);
         }
     }
 
