@@ -1,5 +1,4 @@
-# Spring Powered Apache JaxRS Template
-Apache CXF JAXRS Template
+# JAX-RS Service Template for Java EE 6
 
 ### JSON Postman Tests
 Postman tests using the JSON format are located in the postman
