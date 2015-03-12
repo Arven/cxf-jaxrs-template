@@ -1,6 +1,6 @@
 package com.github.arven.rs.services.example;
 
-import com.github.arven.rs.auth.Secured;
+import com.github.arven.rs.auth.Secure;
 import com.github.arven.rs.types.DataList;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
@@ -28,7 +28,7 @@ import javax.ws.rs.core.SecurityContext;
 @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @Path("/v1")
-@Secured
+@Secure
 public class MicroBlogRestService {
     
     public static int MAX_LIST_SPAN = 10;

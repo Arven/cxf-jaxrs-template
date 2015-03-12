@@ -18,7 +18,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
 
-@Secured @Interceptor
+@Secure @Interceptor
 public class Jsr250AuthorizationInterceptor {
     
     private @Context SecurityContext sctx;
