@@ -1,6 +1,5 @@
 package com.github.arven.rs.services.example;
 
-import com.github.arven.rs.auth.Secure;
 import com.github.arven.rs.types.DataList;
 import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;

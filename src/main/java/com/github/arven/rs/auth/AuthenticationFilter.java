@@ -19,7 +19,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
  *
@@ -31,37 +30,12 @@ public class AuthenticationFilter implements Filter {
     @Inject
     UserService svc;
     
-    public static class SecurityWrapper extends HttpServletRequestWrapper {
-
-        private final UsernamePasswordPrincipal p;
-
-        public SecurityWrapper(UserService svc, HttpServletRequest request) {
-            super(request);
-            this.p = UsernamePasswordPrincipal.fromHeaders(svc, request);
-        }
-        
-        @Override
-        public Principal getUserPrincipal() {
-            return this.p;
-        }
-        
-        @Override
-        public boolean isUserInRole(String role) {
-            return this.p.isUserInRole(role);
-        }
-        
-    }
-    
-    public static class UsernamePasswordPrincipal implements Principal {
+    public static class UserPrincipal implements Principal {
         
         private final String user;
-        private final String password;
-        private final Collection<String> roles;
 
-        public UsernamePasswordPrincipal(String user, String pass, Collection<String> roles) {
+        public UserPrincipal(String user) {
             this.user = user;
-            this.password = pass;
-            this.roles = roles;
         }
 
         @Override
@@ -69,23 +43,14 @@ public class AuthenticationFilter implements Filter {
             return this.user;
         }
 
-        @Override
-        public String toString() {
-            return BaseEncoding.base64().encode((this.user + ":" + this.password).getBytes()) + " " + this.roles.toString();
-        }
-        
-        public boolean isUserInRole(String role) {
-            return this.roles.contains(role);
-        }
-
-        public static UsernamePasswordPrincipal fromHeaders(UserService svc, HttpServletRequest req) {
+        public static UserPrincipal fromHeaders(UserService svc, HttpServletRequest req) {
             if(req.getHeader("Authorization") == null) {
-                return new UsernamePasswordPrincipal("anonymous", "", Arrays.asList(new String[] { "ANONYMOUS" }));
+                return new UserPrincipal("anonymous");
             } else {
                 String s[] = new String(BaseEncoding.base64().decode(req.getHeader("Authorization").split(" ")[1])).split(":");
                 HashedUserInfo info = svc.loadUserByUsername(s[0]);
                 if(info.checkPassword(s[1])) {
-                    return new UsernamePasswordPrincipal(s[0], s[1], info.getRoles());
+                    return new UserPrincipal(s[0]);
                 }
             }
             throw new RuntimeException("Authentication failed");
@@ -101,7 +66,7 @@ public class AuthenticationFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         if (request instanceof HttpServletRequest) {
             HttpServletRequest req = (HttpServletRequest) request;
-            UsernamePasswordPrincipal p = UsernamePasswordPrincipal.fromHeaders(svc, req);
+            UserPrincipal p = UserPrincipal.fromHeaders(svc, req);
             req.login(p.getName(), p.getName());
             chain.doFilter(request, response);
         }
