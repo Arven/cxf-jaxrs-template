@@ -2,7 +2,10 @@ package com.github.arven.rs.services.example;
 
 import com.github.arven.rs.auth.Secure;
 import com.github.arven.rs.types.DataList;
+import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.EJBContext;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
@@ -28,10 +31,13 @@ import javax.ws.rs.core.SecurityContext;
 @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @Path("/v1")
-@Secure
+@Stateless
 public class MicroBlogRestService {
     
     public static int MAX_LIST_SPAN = 10;
+    
+    @Resource
+    private EJBContext ectx;
     
     @Inject
     private MicroBlogService blogService;
@@ -45,7 +51,7 @@ public class MicroBlogRestService {
     @Path("/info") @GET
     @Produces("text/plain")
     public String getInfo(final @Context SecurityContext ctx) {
-        return ctx.getUserPrincipal().toString();
+        return ectx.getCallerPrincipal().getName();
     }
 
     @Path("/user") @POST

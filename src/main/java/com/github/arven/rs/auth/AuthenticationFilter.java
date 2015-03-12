@@ -101,7 +101,9 @@ public class AuthenticationFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         if (request instanceof HttpServletRequest) {
             HttpServletRequest req = (HttpServletRequest) request;
-            chain.doFilter(new SecurityWrapper(svc, req), response);
+            UsernamePasswordPrincipal p = UsernamePasswordPrincipal.fromHeaders(svc, req);
+            req.login(p.getName(), p.getName());
+            chain.doFilter(request, response);
         }
     }
 
