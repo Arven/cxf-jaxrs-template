@@ -1,0 +1,4 @@
+<resources>
+    <Resource id="json" class-name="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider">
+    </Resource>
+</resources>
