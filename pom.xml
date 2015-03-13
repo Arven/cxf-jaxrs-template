@@ -32,6 +32,14 @@
             <version>6.0</version>
             <scope>provided</scope>
         </dependency>
+        
+        <!-- Programmatic Login Framework -->
+        <dependency>
+            <groupId>com.github.arven</groupId>
+            <artifactId>jaas</artifactId>
+            <version>1.0.1</version>
+            <scope>provided</scope>
+        </dependency>
    
     </dependencies>
 
@@ -90,6 +98,15 @@
             </plugin>
             
         </plugins>
+        
+        <extensions>
+            <!-- Enabling the use of FTP -->
+            <extension>
+              <groupId>org.apache.maven.wagon</groupId>
+               <artifactId>wagon-ftp</artifactId>
+               <version>2.8</version>
+            </extension>
+        </extensions>
     </build>
 
 </project>

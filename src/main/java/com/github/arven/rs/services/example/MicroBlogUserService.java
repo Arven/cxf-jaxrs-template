@@ -5,8 +5,9 @@
  */
 package com.github.arven.rs.services.example;
 
-import com.github.arven.rs.auth.HashedUserInfo;
-import com.github.arven.rs.auth.UserService;
+import com.github.arven.auth.HashedUserInfo;
+import com.github.arven.auth.UserInfo;
+import com.github.arven.auth.UserService;
 import java.util.Arrays;
 import javax.inject.Inject;
 
@@ -32,10 +33,10 @@ public class MicroBlogUserService implements UserService {
      * @return  the user details (username, password, credentials)
      */
     @Override
-    public HashedUserInfo loadUserByUsername(String username) {
+    public UserInfo loadUserByUsername(String username) {
         UserData data = blogService.getUser(username);
         if(data == null) throw new RuntimeException("User by the requested name was not found.");
-        return new HashedUserInfo("SHA-256", data.getId(), data.getPassword(), Arrays.asList(new String[] {"REST_USER"}));
+        return new HashedUserInfo("SHA-256", data.getId(), data.getPassword(), Arrays.asList(new String[] {"user"}));
     }    
     
 }
