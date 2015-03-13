@@ -16,10 +16,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlValue;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -44,8 +44,10 @@ public class MessageData implements Serializable {
     private Date date;
     
     @Basic
-    @XmlValue
+    @XmlElement
     private String message;
+    
+    private List<String> tag;
     
     public MessageData () {
         this.date = (Calendar.getInstance().getTime());
@@ -68,19 +70,18 @@ public class MessageData implements Serializable {
     /**
      * Get the list of tags from the message by parsing the string with a
      * regular expression. The tags are in the format #tagname throughout
-     * the message, and they should all be picked up by the parser. This
-     * cannot be set on a message, and is only available as an attribute
-     * to be read by JAXB or a direct call.
+     * the message, and they should all be picked up by the parser.
      * 
      * @return  List of tags in a message, generated on demand
      */
-    @XmlAttribute
+    @XmlElement
     public List<String> getTags() {
-        List<String> tags = new ArrayList<String>();
-        Iterable<String> it = Iterables.filter(Splitter.on(" ").omitEmptyStrings().split(message), Predicates.containsPattern("^#.*$"));
-        tags.addAll(Arrays.asList(Iterables.toArray(it, String.class)));
-        if(tags.isEmpty()) { return null; }
-        return tags;
+        if(message != null) {
+            tag = new ArrayList<String>();
+            Iterable<String> it = Iterables.filter(Splitter.on(" ").omitEmptyStrings().split(message), Predicates.containsPattern("^#.*$"));
+            tag.addAll(Arrays.asList(Iterables.toArray(it, String.class)));
+        }
+        return tag;
     }
     
 }
