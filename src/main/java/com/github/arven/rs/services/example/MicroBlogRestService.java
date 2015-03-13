@@ -2,6 +2,8 @@ package com.github.arven.rs.services.example;
 
 import com.github.arven.rs.types.DataList;
 import javax.annotation.Resource;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJBContext;
 import javax.ejb.Stateless;
@@ -31,6 +33,7 @@ import javax.ws.rs.core.SecurityContext;
 @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @Path("/v1")
 @Stateless
+@DeclareRoles({"user", "anonymous"})
 public class MicroBlogRestService {
     
     public static int MAX_LIST_SPAN = 10;
@@ -53,7 +56,7 @@ public class MicroBlogRestService {
         return ectx.getCallerPrincipal().getName();
     }
 
-    @Path("/user") @POST
+    @Path("/user") @POST @PermitAll
     public void addUser(UserData user) {
         blogService.addUser(user);
     }

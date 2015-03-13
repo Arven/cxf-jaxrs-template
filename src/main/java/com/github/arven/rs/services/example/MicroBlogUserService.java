@@ -25,9 +25,11 @@ public class MicroBlogUserService implements UserService {
     private MicroBlogService blogService;    
     
     /**
-     * Load the Spring Security UserDetails by the username. These details
-     * consist of the user id and the password which were created when the
-     * user signed up by posting to the /user resource.
+     * The UserService is very similar to that of Spring Security. It should
+     * take a string representing the username and return a UserInfo data
+     * type which will be used by the authentication layer. The JAAS service
+     * will look up the UserService via JNDI and rely on it to authenticate
+     * users.
      * 
      * @param   username    user id to retrieve user details for
      * @return  the user details (username, password, credentials)

@@ -4,7 +4,7 @@
 	      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	      version="3.0">
     
-    <display-name>spring-cxf-example</display-name>
+    <display-name>jaxrs-java-ee6-example</display-name>
     
     <!-- Generic Servlet Class -->
     <servlet>
@@ -18,6 +18,7 @@
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
     
+    <!-- Guest and user authentication filter for Servlet 3.0 -->
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
         <filter-class>com.github.arven.rs.auth.AuthenticationFilter</filter-class>
