@@ -6,8 +6,8 @@
 package com.github.arven.rs.services.example;
 
 import java.util.Random;
-import org.apache.activemq.security.SecurityContext;
-import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
+//import org.apache.activemq.security.SecurityContext;
+//import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

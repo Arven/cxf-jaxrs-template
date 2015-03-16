@@ -3,7 +3,6 @@ package com.github.arven.rs.services.example;
 import com.github.arven.rs.types.DataList;
 import javax.annotation.Resource;
 import javax.annotation.security.DeclareRoles;
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJBContext;
 import javax.ejb.Stateless;
@@ -53,10 +52,10 @@ public class MicroBlogRestService {
     @Path("/info") @GET
     @Produces("text/plain")
     public String getInfo(final @Context SecurityContext ctx) {
-        return ectx.getCallerPrincipal().getName();
+        return ectx.getCallerPrincipal().getName() + " --- " + ectx.isCallerInRole("user") + " --- " + ctx.isUserInRole("user");
     }
 
-    @Path("/user") @POST @PermitAll
+    @Path("/user") @POST
     public void addUser(UserData user) {
         blogService.addUser(user);
     }

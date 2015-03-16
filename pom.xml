@@ -26,21 +26,22 @@
         </dependency>        
         
         <!-- Java EE 6 API -->
-        <!-- <dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>6.0</version>
             <scope>provided</scope>
-        </dependency> -->
+        </dependency>
         
-        <!-- Programmatic Login Framework -->
+        <!-- Login Framework -->
         <dependency>
             <groupId>com.github.arven</groupId>
             <artifactId>jaas</artifactId>
             <version>1.0.1</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
         
+        <!-- Jackson JSON Data Binding -->
         <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
             <artifactId>jackson-jaxrs-json-provider</artifactId>
@@ -54,34 +55,6 @@
             <artifactId>testng</artifactId>
             <version>6.8.21</version>
             <scope>test</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-simple</artifactId>
-            <version>3.0.4</version>
-            <scope>test</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-rs-client</artifactId>
-            <version>3.0.4</version>
-            <scope>test</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib-nodep</artifactId>
-            <version>3.1</version>
-            <scope>test</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.apache.openejb</groupId>
-            <artifactId>apache-tomee</artifactId>
-            <version>1.7.1</version>
-            <scope>provided</scope>
         </dependency>
 
     </dependencies>
