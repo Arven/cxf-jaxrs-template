@@ -52,7 +52,9 @@ public class MicroBlogRestService {
     @Path("/info") @GET
     @Produces("text/plain")
     public String getInfo(final @Context SecurityContext ctx) {
-        return ectx.getCallerPrincipal().getName() + " --- " + ectx.isCallerInRole("user") + " --- " + ctx.isUserInRole("user");
+        // Thread.dumpStack();
+        return ectx.getCallerPrincipal().toString()+":"+ectx.getCallerPrincipal().getName()+"=(guest:"+ectx.isCallerInRole("guest")+")";
+        //return ectx.getCallerPrincipal().getName() + " --- " + ectx.isCallerInRole("user") + " --- " + ctx.getUserPrincipal().getName() + "---" + ctx.isUserInRole("user");
     }
 
     @Path("/user") @POST

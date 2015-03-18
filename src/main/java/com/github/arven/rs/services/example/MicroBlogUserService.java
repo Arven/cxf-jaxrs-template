@@ -22,7 +22,7 @@ import javax.inject.Inject;
 public class MicroBlogUserService implements UserService {
     
     @Inject
-    private MicroBlogService blogService;    
+    private MicroBlogService blogService;
     
     /**
      * The UserService is very similar to that of Spring Security. It should
@@ -36,6 +36,7 @@ public class MicroBlogUserService implements UserService {
      */
     @Override
     public UserInfo loadUserByUsername(String username) {
+        if(username.equals("anonymous")) return new HashedUserInfo("SHA-256", "anonymous", "anonymous", Arrays.asList("anonymous"));
         UserData data = blogService.getUser(username);
         if(data == null) throw new RuntimeException("User by the requested name was not found.");
         return new HashedUserInfo("SHA-256", data.getId(), data.getPassword(), Arrays.asList(new String[] {"user"}));
