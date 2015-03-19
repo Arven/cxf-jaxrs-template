@@ -1,21 +1,14 @@
 package com.github.arven.rs.services.example;
 
-import com.github.arven.rs.auth.EmbeddedDirectoryService;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Properties;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.apache.directory.api.ldap.model.exception.LdapException;
 
 /**
  * MicroBlogService is a backend implementation, with no database or any
@@ -31,10 +24,7 @@ public class MicroBlogService {
 	
     @PersistenceContext
     private EntityManager test;
-    
-    @Inject
-    private EmbeddedDirectoryService directory;
-    
+        
     /**
      * Get the user data for a given user.
      * 
@@ -52,12 +42,12 @@ public class MicroBlogService {
      * @param   user        user data for the user, containing user id
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void addUser( UserData user ) throws LdapException {
+    public void addUser( UserData user ) {
         //user.setRoles(null);
         //user.getRoles().add(test.find(RoleData.class, "ROLE_RESTUSER"));
-        Map<String,String[]> p = new HashMap<String,String[]>();
-        p.put("cn", new String[] { "trfields" });
-        directory.createEntry("trfields", p);
+        //Map<String,String[]> p = new HashMap<String,String[]>();
+        //p.put("cn", new String[] { "trfields" });
+        //directory.createEntry("trfields", p);
         test.persist(user);
     }
     

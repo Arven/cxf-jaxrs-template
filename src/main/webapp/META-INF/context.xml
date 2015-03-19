@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-	<Realm className="org.apache.catalina.realm.JAASRealm" appName="example"
-		userClassNames="com.github.arven.auth.UserPrincipal" roleClassNames="com.github.arven.auth.RolePrincipal" />
+	<!-- <Realm className="org.apache.catalina.realm.JNDIRealm" appName="example"
+		userClassNames="com.github.arven.auth.UserPrincipal" roleClassNames="com.github.arven.auth.RolePrincipal" /> -->
+    <Realm className="org.apache.catalina.realm.JNDIRealm"  
+        connectionURL="ldap://localhost:10389"  
+        userPattern="uid={0},dc=arven,dc=github,dc=com"  
+        roleBase="ou=groups,dc=arven,dc=github,dc=com"  
+        roleName="uid"  
+        roleSearch="uniqueMember={0}"  
+        roleSubtree="true" />
 </Context>

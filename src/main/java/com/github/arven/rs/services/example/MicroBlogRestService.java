@@ -19,7 +19,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
-import org.apache.directory.api.ldap.model.exception.LdapException;
 
 /**
  * MicroBlogRestService is the REST service front end for the MicroBlogService.
@@ -59,7 +58,7 @@ public class MicroBlogRestService {
     }
 
     @Path("/user") @POST
-    public void addUser(UserData user) throws LdapException {
+    public void addUser(UserData user) {
         blogService.addUser(user);
     }
     
