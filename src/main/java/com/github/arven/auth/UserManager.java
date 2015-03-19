@@ -5,8 +5,10 @@
  */
 package com.github.arven.auth;
 
+import com.google.common.base.Splitter;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,13 +44,25 @@ public class UserManager {
         GROUP_CONTEXT = PROPERTIES.getProperty("com.github.arven.auth.groups");
     }
     
-    public static void create(String id, String name, String last, String pass, Collection<String> roles) {
+    public static void create(String id, String name, String pass, Collection<String> roles) {
+        String first = "John";
+        String last = "Anonymous";
+        Iterator<String> split = Splitter.on(" ").omitEmptyStrings().trimResults().split(name).iterator();
+        
+        if(split.hasNext()) {
+            first = split.next();
+        }
+        
+        if(split.hasNext()) {
+            last = split.next();
+        }
+        
         try {
             InitialDirContext context = new InitialDirContext( PROPERTIES );
             Attributes attributes = new BasicAttributes();
             attributes.put(new BasicAttribute("objectClass", "inetOrgPerson"));
             attributes.put(new BasicAttribute("uid", id));
-            attributes.put(new BasicAttribute("cn", name));
+            attributes.put(new BasicAttribute("cn", first));
             attributes.put(new BasicAttribute("sn", last));
             attributes.put(new BasicAttribute("userPassword", pass ));
             context.createSubcontext("uid=" + id + "," + USER_CONTEXT, attributes);

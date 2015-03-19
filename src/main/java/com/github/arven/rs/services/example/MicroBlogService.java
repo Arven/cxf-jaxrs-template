@@ -46,7 +46,7 @@ public class MicroBlogService {
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void addUser( UserData user ) {
-        UserManager.create(user.getId(), user.getNickname(), "User", user.getPassword(), Arrays.asList("User"));
+        UserManager.create(user.getId(), user.getNickname(), user.getPassword(), Arrays.asList("User"));
         test.persist(user);
     }
     
