@@ -21,8 +21,8 @@ public class PasswordStringAdapter extends XmlAdapter<String, String> {
 
     @Override
     public String unmarshal(String string) throws Exception {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        return BaseEncoding.base64().encode(md.digest(string.getBytes("UTF-8")));
+        MessageDigest md = MessageDigest.getInstance("SHA-512");
+        return "{SHA512}" + BaseEncoding.base64().encode(md.digest(string.getBytes("UTF-8")));
     }
 
 }

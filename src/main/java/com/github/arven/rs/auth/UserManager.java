@@ -37,7 +37,7 @@ public class UserManager {
             attributes.put(new BasicAttribute("uid", id));
             attributes.put(new BasicAttribute("cn", name));
             attributes.put(new BasicAttribute("sn", "User"));
-            attributes.put(new BasicAttribute("userPassword", "{SHA256}" + pass ));
+            attributes.put(new BasicAttribute("userPassword", pass ));
             context.createSubcontext("uid=" + id + ",ou=users,dc=arven,dc=github,dc=com", attributes);
 
             ModificationItem[] mods =
