@@ -5,8 +5,6 @@
  */
 package com.github.arven.rs.auth;
 
-import com.github.arven.auth.RolePrincipal;
-import com.github.arven.auth.UserPrincipal;
 import com.google.common.io.BaseEncoding;
 import java.io.IOException;
 import java.security.AccessControlContext;
@@ -43,66 +41,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebFilter(filterName = "AuthenticationFilter")
 public class AuthenticationFilter implements Filter {
-    
-    public static class BasicPrincipal implements Principal {
-
-        @Override
-        public String getName() {
-            return "user";
-        }
-        
-    }
-    
-    public static class SecurityClientCallbackHandler implements CallbackHandler
-    {
-      public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException
-      {
-        //loop over parameter Callbacks
-        for (int intIndexCallback = 0; intIndexCallback < callbacks.length; intIndexCallback++)
-        {
-          //NameCallback: set Login
-          if (callbacks[intIndexCallback] instanceof NameCallback)
-          {
-            NameCallback nameCallback = (NameCallback) callbacks[intIndexCallback];
-            nameCallback.setName( "anonymous" );
-          }
-          //PasswordCallback: set password.
-          else if (callbacks[intIndexCallback] instanceof PasswordCallback)
-          {
-            PasswordCallback passwordCallback = (PasswordCallback) callbacks[intIndexCallback];
-            passwordCallback.setPassword ("anonymous".toCharArray() );
-          }
-          else
-          {
-            throw new UnsupportedCallbackException (callbacks[intIndexCallback], "Unsupported Callback!");
-          }
-
-        }
-      }
-    }    
-    
-    public static class WrapAuthentication extends HttpServletRequestWrapper {
-
-        public WrapAuthentication(HttpServletRequest request) {
-            super(request);
-        }
-        
-        @Override
-        public Principal getUserPrincipal() {
-            return new BasicPrincipal();
-        }
-        
-        @Override
-        public String getRemoteUser() {
-            return this.getUserPrincipal().getName();
-        }
-        
-        @Override
-        public String getAuthType() {
-            return "BASIC";
-        }
-        
-    }
     
     @Override
     public void init(FilterConfig cfg) throws ServletException {
