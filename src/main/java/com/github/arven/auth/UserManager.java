@@ -27,51 +27,58 @@ import javax.naming.directory.SearchResult;
  */
 public class UserManager {
     
-    public static final String USERS = "com.github.arven.auth.users";
-    public static final String GROUPS = "com.github.arven.auth.groups";
+    public static final Properties PROPERTIES;
+    public static final String USER_CONTEXT;
+    public static final String GROUP_CONTEXT;
+    
+    static {
+        PROPERTIES = new Properties();
+        try {
+            PROPERTIES.load(UserManager.class.getResourceAsStream("/jndi.properties"));
+        } catch (IOException ex) {
+            Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        USER_CONTEXT = PROPERTIES.getProperty("com.github.arven.auth.users");
+        GROUP_CONTEXT = PROPERTIES.getProperty("com.github.arven.auth.groups");
+    }
     
     public static void create(String id, String name, String last, String pass, Collection<String> roles) {
         try {
-            Properties properties = new Properties();
-            properties.load(UserManager.class.getResourceAsStream("/jndi.properties"));
-            InitialDirContext context = new InitialDirContext( properties );
-            
+            InitialDirContext context = new InitialDirContext( PROPERTIES );
             Attributes attributes = new BasicAttributes();
             attributes.put(new BasicAttribute("objectClass", "inetOrgPerson"));
             attributes.put(new BasicAttribute("uid", id));
             attributes.put(new BasicAttribute("cn", name));
             attributes.put(new BasicAttribute("sn", last));
             attributes.put(new BasicAttribute("userPassword", pass ));
-            context.createSubcontext("uid=" + id + "," + properties.getProperty(USERS), attributes);
+            context.createSubcontext("uid=" + id + "," + USER_CONTEXT, attributes);
 
             for(String role : roles) {
                 ModificationItem[] mods =
-                { new ModificationItem(DirContext.ADD_ATTRIBUTE, new BasicAttribute("uniqueMember", "uid=" + id + "," + properties.getProperty(USERS))) };
-                context.modifyAttributes("cn=" + role + "," + properties.getProperty(GROUPS), mods);
+                { new ModificationItem(DirContext.ADD_ATTRIBUTE, new BasicAttribute("uniqueMember", "uid=" + id + "," + USER_CONTEXT)) };
+                context.modifyAttributes("cn=" + role + "," + GROUP_CONTEXT, mods);
             }
-        } catch (NamingException | IOException ex) {
+        } catch (NamingException ex) {
             Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public static void destroy(String id) {
         try {
-            Properties properties = new Properties();
-            properties.load(UserManager.class.getResourceAsStream("/jndi.properties"));
-            InitialDirContext context = new InitialDirContext( properties );
+            InitialDirContext context = new InitialDirContext( PROPERTIES );
             
-            context.destroySubcontext("uid=" + id + "," + properties.getProperty(USERS));
+            context.destroySubcontext("uid=" + id + "," + USER_CONTEXT);
             
             Attributes matchAttrs = new BasicAttributes(true);
-            matchAttrs.put(new BasicAttribute("uniqueMember", "uid=" + id + "," + properties.getProperty(USERS)));
-            NamingEnumeration answer = context.search(properties.getProperty(GROUPS), matchAttrs);
+            matchAttrs.put(new BasicAttribute("uniqueMember", "uid=" + id + "," + USER_CONTEXT));
+            NamingEnumeration answer = context.search(GROUP_CONTEXT, matchAttrs);
             while(answer.hasMore()) {
                 SearchResult sr = (SearchResult)answer.next();
                 ModificationItem[] mods =
-                { new ModificationItem(DirContext.REMOVE_ATTRIBUTE, new BasicAttribute("uniqueMember", "uid=" + id + "," + properties.getProperty(USERS))) };
-                context.modifyAttributes(sr.getName() + "," + properties.getProperty(GROUPS), mods);
+                { new ModificationItem(DirContext.REMOVE_ATTRIBUTE, new BasicAttribute("uniqueMember", "uid=" + id + "," + USER_CONTEXT)) };
+                context.modifyAttributes(sr.getName() + "," + GROUP_CONTEXT, mods);
             }
-        } catch (NamingException | IOException ex) {
+        } catch (NamingException ex) {
             Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
