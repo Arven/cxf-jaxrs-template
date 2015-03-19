@@ -1,12 +1,26 @@
 package com.github.arven.rs.services.example;
 
+import com.github.arven.rs.auth.UserManager;
+import com.google.common.io.BaseEncoding;
+import com.google.common.primitives.Bytes;
+import java.security.MessageDigest;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Properties;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.naming.Context;
+import javax.naming.directory.Attribute;
+import javax.naming.directory.Attributes;
+import javax.naming.directory.BasicAttribute;
+import javax.naming.directory.BasicAttributes;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.InitialDirContext;
+import javax.naming.directory.ModificationItem;
+import javax.naming.directory.SearchControls;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -43,11 +57,7 @@ public class MicroBlogService {
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void addUser( UserData user ) {
-        //user.setRoles(null);
-        //user.getRoles().add(test.find(RoleData.class, "ROLE_RESTUSER"));
-        //Map<String,String[]> p = new HashMap<String,String[]>();
-        //p.put("cn", new String[] { "trfields" });
-        //directory.createEntry("trfields", p);
+        UserManager.create(user.getId(), user.getNickname(), "User", user.getPassword());
         test.persist(user);
     }
     
@@ -59,6 +69,7 @@ public class MicroBlogService {
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void removeUser( String userName ) {
+        UserManager.destroy( userName );
         UserData user = test.find(UserData.class, userName);
         user.getGroups().clear();
         user.getMessages().clear();

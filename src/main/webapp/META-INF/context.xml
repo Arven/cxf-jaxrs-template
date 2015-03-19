@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
     <Realm className="org.apache.catalina.realm.JNDIRealm"  
-        connectionURL="ldap://localhost:10389"  
-        userPattern="uid={0},dc=arven,dc=github,dc=com"  
-        roleBase="ou=groups,dc=arven,dc=github,dc=com"  
+        connectionURL="ldap://localhost:10389"
+        userBase="ou=users,dc=arven,dc=github,dc=com"
+        userSearch="(uid={0})"  
+        roleBase="ou=groups,dc=arven,dc=github,dc=com"
         roleName="cn"  
-        roleSearch="(uniqueMember={0})"
+        roleSearch="(uniqueMember={0})" />
 </Context>

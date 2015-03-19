@@ -99,6 +99,15 @@ public class UserData implements Serializable {
     }
     
     /**
+     * Get the user id
+     * 
+     * @return	the user's id
+     */
+    public String getNickname() {
+    	return this.nickname;
+    }    
+    
+    /**
      * Get the user password
      * 
      * @return the user's password

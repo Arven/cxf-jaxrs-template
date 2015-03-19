@@ -32,7 +32,7 @@ import javax.ws.rs.core.SecurityContext;
 @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @Path("/v1")
 @Stateless
-@DeclareRoles({"user", "anonymous"})
+@DeclareRoles({"User", "Anonymous"})
 public class MicroBlogRestService {
     
     public static int MAX_LIST_SPAN = 10;
@@ -53,7 +53,7 @@ public class MicroBlogRestService {
     @Produces("text/plain")
     public String getInfo(final @Context SecurityContext ctx) {
         // Thread.dumpStack();
-        return ectx.getCallerPrincipal().toString()+":"+ectx.getCallerPrincipal().getName()+"=(guest:"+ectx.isCallerInRole("guest")+")";
+        return ectx.getCallerPrincipal().toString()+":"+ectx.getCallerPrincipal().getName()+"=(user:"+ectx.isCallerInRole("user")+")";
         //return ectx.getCallerPrincipal().getName() + " --- " + ectx.isCallerInRole("user") + " --- " + ctx.getUserPrincipal().getName() + "---" + ctx.isUserInRole("user");
     }
 
@@ -67,7 +67,7 @@ public class MicroBlogRestService {
         return blogService.getUser(name);
     }
     
-    @Path("/user/{name}") @DELETE @RolesAllowed({"user"})
+    @Path("/user/{name}") @DELETE @RolesAllowed({"User"})
     public void removeUser(@PathParam("name") String name, final @Context SecurityContext ctx) {
         if(ctx.getUserPrincipal().getName().equals(name)) {
             blogService.removeUser(name);
@@ -79,21 +79,21 @@ public class MicroBlogRestService {
         return new DataList(blogService.getFriends(name), offset, MAX_LIST_SPAN, false);
     }
     
-    @Path("/user/{name}/friends/{friend}") @PUT @RolesAllowed({"user"})
+    @Path("/user/{name}/friends/{friend}") @PUT @RolesAllowed({"User"})
     public void addFriend(@PathParam("name") String name, @PathParam("friend") String friend, final @Context SecurityContext ctx) {
         if(ctx.getUserPrincipal().getName().equals(name)) {
             blogService.addFriend(name, friend);
         }
     }
     
-    @Path("/user/{name}/friends/{friend}") @DELETE @RolesAllowed({"user"})
+    @Path("/user/{name}/friends/{friend}") @DELETE @RolesAllowed({"User"})
     public void removeFriend(@PathParam("name") String name, @PathParam("friend") String friend, final @Context SecurityContext ctx) {
         if(ctx.getUserPrincipal().getName().equals(name)) {
             blogService.removeFriend(name, friend);
         }
     }
     
-    @Path("/post") @POST @RolesAllowed({"user"})
+    @Path("/post") @POST @RolesAllowed({"User"})
     public void postMessage(MessageData post, final @Context SecurityContext ctx) {
         blogService.addPost(ctx.getUserPrincipal().getName(), post);
     }
@@ -103,7 +103,7 @@ public class MicroBlogRestService {
         return new DataList(blogService.getPosts(name), offset, MAX_LIST_SPAN, true);
     }
     
-    @Path("/group") @POST @RolesAllowed({"user"})
+    @Path("/group") @POST @RolesAllowed({"User"})
     public void createGroup(GroupData group, final @Context SecurityContext ctx) {
         blogService.addGroup(group, ctx.getUserPrincipal().getName());
     }
@@ -113,7 +113,7 @@ public class MicroBlogRestService {
         return blogService.getGroup(name);
     }
     
-    @Path("/group/{name}") @DELETE @RolesAllowed({"user"})
+    @Path("/group/{name}") @DELETE @RolesAllowed({"User"})
     public void leaveOrDisbandGroup(@PathParam("name") String name, final @Context SecurityContext ctx) {
         blogService.leaveGroup(name, ctx.getUserPrincipal().getName());
     }
@@ -123,7 +123,7 @@ public class MicroBlogRestService {
         return new DataList(blogService.getGroupMembers(name), offset, MAX_LIST_SPAN, false);
     }
     
-    @Path("/group/{name}/join") @POST @RolesAllowed({"user"})
+    @Path("/group/{name}/join") @POST @RolesAllowed({"User"})
     public void joinGroup(@PathParam("name") String name, final @Context SecurityContext ctx) {
         blogService.addGroupMember(name, ctx.getUserPrincipal().getName());
     }
