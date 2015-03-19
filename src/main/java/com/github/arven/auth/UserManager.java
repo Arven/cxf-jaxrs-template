@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.arven.rs.auth;
+package com.github.arven.auth;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -29,7 +29,6 @@ public class UserManager {
     
     public static final String USERS = "com.github.arven.auth.users";
     public static final String GROUPS = "com.github.arven.auth.groups";
-    public static final String DOMAIN = "com.github.arven.auth.domain";
     
     public static void create(String id, String name, String last, String pass, Collection<String> roles) {
         try {
@@ -43,12 +42,12 @@ public class UserManager {
             attributes.put(new BasicAttribute("cn", name));
             attributes.put(new BasicAttribute("sn", last));
             attributes.put(new BasicAttribute("userPassword", pass ));
-            context.createSubcontext("uid=" + id + "," + properties.getProperty(USERS) + "," + properties.getProperty(DOMAIN), attributes);
+            context.createSubcontext("uid=" + id + "," + properties.getProperty(USERS), attributes);
 
             for(String role : roles) {
                 ModificationItem[] mods =
-                { new ModificationItem(DirContext.ADD_ATTRIBUTE, new BasicAttribute("uniqueMember", "uid=" + id + "," + properties.getProperty(USERS) + "," + properties.getProperty(DOMAIN))) };
-                context.modifyAttributes("cn=" + role + "," + properties.getProperty(GROUPS) + "," + properties.getProperty(DOMAIN), mods);
+                { new ModificationItem(DirContext.ADD_ATTRIBUTE, new BasicAttribute("uniqueMember", "uid=" + id + "," + properties.getProperty(USERS))) };
+                context.modifyAttributes("cn=" + role + "," + properties.getProperty(GROUPS), mods);
             }
         } catch (NamingException | IOException ex) {
             Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,16 +60,16 @@ public class UserManager {
             properties.load(UserManager.class.getResourceAsStream("/jndi.properties"));
             InitialDirContext context = new InitialDirContext( properties );
             
-            context.destroySubcontext("uid=" + id + "," + properties.getProperty(USERS) + "," + properties.getProperty(DOMAIN));
+            context.destroySubcontext("uid=" + id + "," + properties.getProperty(USERS));
             
             Attributes matchAttrs = new BasicAttributes(true);
-            matchAttrs.put(new BasicAttribute("uniqueMember", "uid=" + id + "," + properties.getProperty(USERS) + "," + properties.getProperty(DOMAIN)));
-            NamingEnumeration answer = context.search(properties.getProperty(GROUPS) + "," + properties.getProperty(DOMAIN), matchAttrs);
+            matchAttrs.put(new BasicAttribute("uniqueMember", "uid=" + id + "," + properties.getProperty(USERS)));
+            NamingEnumeration answer = context.search(properties.getProperty(GROUPS), matchAttrs);
             while(answer.hasMore()) {
                 SearchResult sr = (SearchResult)answer.next();
                 ModificationItem[] mods =
-                { new ModificationItem(DirContext.REMOVE_ATTRIBUTE, new BasicAttribute("uniqueMember", "uid=" + id + "," + properties.getProperty(USERS) + "," + properties.getProperty(DOMAIN))) };
-                context.modifyAttributes(sr.getName() + "," + properties.getProperty(GROUPS) + "," + properties.getProperty(DOMAIN), mods);
+                { new ModificationItem(DirContext.REMOVE_ATTRIBUTE, new BasicAttribute("uniqueMember", "uid=" + id + "," + properties.getProperty(USERS))) };
+                context.modifyAttributes(sr.getName() + "," + properties.getProperty(GROUPS), mods);
             }
         } catch (NamingException | IOException ex) {
             Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);

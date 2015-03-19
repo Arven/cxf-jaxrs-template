@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.arven.rs.auth;
+package com.github.arven.auth;
 
 import com.google.common.io.BaseEncoding;
 import java.io.IOException;

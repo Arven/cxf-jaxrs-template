@@ -1,6 +1,6 @@
 package com.github.arven.rs.services.example;
 
-import com.github.arven.rs.auth.UserManager;
+import com.github.arven.auth.UserManager;
 import java.util.Arrays;
 
 import java.util.LinkedList;
