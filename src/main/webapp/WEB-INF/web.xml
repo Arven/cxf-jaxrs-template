@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <display-name>jaxrs-java-ee6-example</display-name>
+    <!-- Guest and user authentication filter for Servlet 3.0 -->
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
         <filter-class>com.github.arven.auth.AuthenticationFilter</filter-class>

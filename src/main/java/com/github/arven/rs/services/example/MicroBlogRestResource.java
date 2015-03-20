@@ -26,14 +26,15 @@ import javax.ws.rs.core.SecurityContext;
  */
 @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-@Path("/")
-@Stateless
+@Path("/v1")
 @DeclareRoles({"User", "Anonymous"})
+@Stateless
 public class MicroBlogRestResource {
     
     public static int MAX_LIST_SPAN = 10;
     
-    @Inject private MicroBlogService blogService;
+    @Inject
+    private MicroBlogService blogService;
     
     /**
      * The most trivial example of a REST method, simply get the version and
