@@ -5,15 +5,17 @@
  */
 package com.github.arven.rs.services.example;
 
-import static com.github.arven.rs.services.example.MicroBlogRestService.MAX_LIST_SPAN;
+import static com.github.arven.rs.services.example.MicroBlogRestResource.MAX_LIST_SPAN;
 import com.github.arven.rs.types.DataList;
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.MatrixParam;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -27,19 +29,12 @@ import javax.ws.rs.core.SecurityContext;
  */
 @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+@Stateless
+@Path("/v1/group/{name}")
 public class GroupRestResource {
-    
-    private GroupData group;
-    private MicroBlogService blogService;
-    
-    public GroupRestResource() {
         
-    }
-
-    public GroupRestResource(MicroBlogService svc, @PathParam("name") String name) {
-        blogService = svc;
-        group = blogService.getGroup(name);
-    }
+    @Inject
+    private MicroBlogService blogService;
     
     /**
      * For a given group, this method gets the information and returns it back

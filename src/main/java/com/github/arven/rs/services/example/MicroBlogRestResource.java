@@ -1,16 +1,13 @@
 package com.github.arven.rs.services.example;
 
 import com.github.arven.rs.types.DataList;
-import javax.annotation.Resource;
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
-import javax.ejb.EJBContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.MatrixParam;
 import javax.ws.rs.Produces;
@@ -32,7 +29,7 @@ import javax.ws.rs.core.SecurityContext;
 @Path("/v1")
 @Stateless
 @DeclareRoles({"User", "Anonymous"})
-public class MicroBlogRestService {
+public class MicroBlogRestResource {
     
     public static int MAX_LIST_SPAN = 10;
     
@@ -87,29 +84,6 @@ public class MicroBlogRestService {
     @Path("/post") @POST @RolesAllowed({"User"})
     public void postMessage(MessageData post, final @Context SecurityContext ctx) {
         blogService.addPost(ctx.getUserPrincipal().getName(), post);
-    }    
-    
-    /**
-     * Get the User Sub Resource Locator
-     * 
-     * @param name
-     * @return 
-     */
-    @Path("/user/{name}")
-    public UserRestResource getUserResource(@PathParam("name") String name) {
-        return new UserRestResource(blogService, name);
-    }
-    
-    /**
-     * For a given group, this method gets the information and returns it back
-     * to the user. Any group can be viewed by any user.
-     * 
-     * @param name
-     * @return 
-     */
-    @Path("/group/{name}")
-    public GroupRestResource getGroupResource(@PathParam("name") String name) {
-        return new GroupRestResource(blogService, name);
     }    
     
     /**
