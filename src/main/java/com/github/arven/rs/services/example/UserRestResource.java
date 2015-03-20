@@ -8,8 +8,9 @@ package com.github.arven.rs.services.example;
 import static com.github.arven.rs.services.example.MicroBlogRestResource.MAX_LIST_SPAN;
 
 import com.github.arven.rs.types.DataList;
+import java.io.Serializable;
 import javax.annotation.security.RolesAllowed;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -30,22 +31,23 @@ import javax.ws.rs.core.SecurityContext;
  */
 @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-@Stateless
-@Path("/v1/user/{name}")
-public class UserRestResource {
+@Path("/user/{name}")
+public class UserRestResource implements Serializable {
         
     @Inject
     private MicroBlogService blogService;
+    
+    @PathParam("name")
+    private String name;
     
     /**
      * This method gets a user and displays it as one of the primary content
      * types.
      * 
-     * @param name
      * @return 
      */
     @GET
-    public UserData getUser(@PathParam("name") String name) {
+    public UserData getUser() {
         return blogService.getUser(name);
     }
     
@@ -54,11 +56,10 @@ public class UserRestResource {
      * this function. Only the user himself can delete the user, there is no
      * concept of administrator users in this demo.
      * 
-     * @param name
      * @param ctx 
      */
     @DELETE @RolesAllowed({"User"})
-    public void removeUser(@PathParam("name") String name, final @Context SecurityContext ctx) {
+    public void removeUser(final @Context SecurityContext ctx) {
         if(ctx.getUserPrincipal().getName().equals(name)) {
             blogService.removeUser(name);
         }
@@ -68,12 +69,11 @@ public class UserRestResource {
      * This method gets a list of friends for a given user, all users are
      * allowed to look at this information.
      * 
-     * @param name
      * @param offset
      * @return 
      */
     @Path("/friends") @GET
-    public DataList getFriendsList(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
+    public DataList getFriendsList(@MatrixParam("offset") Integer offset) {
         return new DataList(blogService.getFriends(name), offset, MAX_LIST_SPAN, false);
     }
     
@@ -90,7 +90,7 @@ public class UserRestResource {
      * @param ctx 
      */
     @Path("/friends/{friend}") @PUT @RolesAllowed({"User"})
-    public void addFriend(@PathParam("name") String name, @PathParam("friend") String friend, final @Context SecurityContext ctx) {
+    public void addFriend(@PathParam("friend") String friend, final @Context SecurityContext ctx) {
         if(ctx.getUserPrincipal().getName().equals(name)) {
             blogService.addFriend(name, friend);
         }
@@ -103,12 +103,11 @@ public class UserRestResource {
      * The friends list is not mutual, therefore it has no effect on the
      * other user in this demo.
      * 
-     * @param name
      * @param friend
      * @param ctx 
      */
     @Path("/friends/{friend}") @DELETE @RolesAllowed({"User"})
-    public void removeFriend(@PathParam("name") String name, @PathParam("friend") String friend, final @Context SecurityContext ctx) {
+    public void removeFriend(@PathParam("friend") String friend, final @Context SecurityContext ctx) {
         if(ctx.getUserPrincipal().getName().equals(name)) {
             blogService.removeFriend(name, friend);
         }

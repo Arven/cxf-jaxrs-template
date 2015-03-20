@@ -7,8 +7,9 @@ package com.github.arven.rs.services.example;
 
 import static com.github.arven.rs.services.example.MicroBlogRestResource.MAX_LIST_SPAN;
 import com.github.arven.rs.types.DataList;
+import java.io.Serializable;
 import javax.annotation.security.RolesAllowed;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -29,12 +30,14 @@ import javax.ws.rs.core.SecurityContext;
  */
 @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-@Stateless
-@Path("/v1/group/{name}")
-public class GroupRestResource {
+@Path("/group/{name}")
+public class GroupRestResource implements Serializable {
         
     @Inject
     private MicroBlogService blogService;
+    
+    @PathParam("name")
+    private String name;
     
     /**
      * For a given group, this method gets the information and returns it back
@@ -44,7 +47,7 @@ public class GroupRestResource {
      * @return 
      */
     @GET
-    public GroupData getGroupInfo(@PathParam("name") String name) {
+    public GroupData getGroupInfo() {
         return blogService.getGroup(name);
     }
     
@@ -57,7 +60,7 @@ public class GroupRestResource {
      * @param ctx 
      */
     @DELETE @RolesAllowed({"User"})
-    public void leaveOrDisbandGroup(@PathParam("name") String name, final @Context SecurityContext ctx) {
+    public void leaveOrDisbandGroup(final @Context SecurityContext ctx) {
         blogService.leaveGroup(name, ctx.getUserPrincipal().getName());
     }
     
@@ -70,7 +73,7 @@ public class GroupRestResource {
      * @return 
      */
     @Path("/members") @GET
-    public DataList getGroupMembers(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
+    public DataList getGroupMembers(@MatrixParam("offset") Integer offset) {
         return new DataList(blogService.getGroupMembers(name), offset, MAX_LIST_SPAN, false);
     }
     
@@ -83,7 +86,7 @@ public class GroupRestResource {
      * @param ctx 
      */
     @Path("/join") @POST @RolesAllowed({"User"})
-    public void joinGroup(@PathParam("name") String name, final @Context SecurityContext ctx) {
+    public void joinGroup(final @Context SecurityContext ctx) {
         blogService.addGroupMember(name, ctx.getUserPrincipal().getName());
     }
     
