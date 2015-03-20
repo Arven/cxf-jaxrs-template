@@ -31,6 +31,7 @@ import javax.ws.rs.core.SecurityContext;
 @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @Path("/v1/group/{name}")
+@Stateless
 public class GroupRestResource implements Serializable {
         
     @Inject
