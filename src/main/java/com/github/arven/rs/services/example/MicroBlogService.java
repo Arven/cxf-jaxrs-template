@@ -104,6 +104,22 @@ public class MicroBlogService {
     }
     
     /**
+     * Delete a give post.
+     * 
+     * @param   userName        user id for the user who will be posting
+     * @param postName
+     */
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void removePost( String userName, String postName ) {
+        UserData user = test.find(UserData.class, userName);
+        for(MessageData p : user.getMessages()) {
+            if(p.getId().equals(postName)) {
+                user.getMessages().remove(p);
+            }
+        }
+    }    
+    
+    /**
      * Get the group information for a given group. If the group does not
      * exist then we will get a null value.
      * 

@@ -56,6 +56,15 @@ public class GroupData implements Serializable {
     }
     
     /**
+     * Set the group id
+     * 
+     * @param id 
+     */
+    public void setId(String id) {
+        this.id = id;
+    }    
+    
+    /**
      * Get the group id
      * 
      * @return	the group id

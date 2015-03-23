@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -41,6 +42,7 @@ public class MessageData implements Serializable {
     
     @Basic
     @XmlAttribute
+    @Column(name = "created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     
@@ -68,6 +70,23 @@ public class MessageData implements Serializable {
         this.id = id;
         this.message = message;
     }
+    
+    /**
+     * Set the message id
+     * 
+     * @param id 
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+    
+    /**
+     * Get the message id 
+     * @return 
+     */
+    public String getId() {
+        return this.id;
+    }    
     
     /**
      * Get the list of tags from the message by parsing the string with a

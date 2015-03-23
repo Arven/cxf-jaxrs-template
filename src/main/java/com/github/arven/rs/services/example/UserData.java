@@ -90,6 +90,15 @@ public class UserData implements Serializable {
     }
     
     /**
+     * Set the user id
+     * 
+     * @param id 
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+    
+    /**
      * Get the user id
      * 
      * @return	the user's id
@@ -154,6 +163,21 @@ public class UserData implements Serializable {
      */
     public void setFriends(List<UserData> friends) {
     	this.friends = friends;
+    }
+    
+    /**
+     * Set the email address of this user
+     * @param email
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    /**
+     * Get the email address of this user
+     */
+    public String getEmail() {
+        return this.email;
     }
     
 }

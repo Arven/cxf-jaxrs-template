@@ -10,34 +10,49 @@ import static com.github.arven.rs.services.example.MicroBlogRestResource.MAX_LIS
 import com.github.arven.rs.types.DataList;
 import java.io.Serializable;
 import javax.annotation.security.RolesAllowed;
-import javax.ejb.Stateful;
-import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.MatrixParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 
 /**
- *
- * @author brian.becker
+ * This is the User representation for the RESTful web service. You are able
+ * to get user details, remove your own user account, get the friends list
+ * for a user, as well as alter the friends list of your own user account.
+ * 
+ * @author Brian Becker
  */
-@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-@Path("/v1/user/{name}")
-@Stateless
 public class UserRestResource implements Serializable {
         
-    @Inject
-    private MicroBlogService blogService;
+    private final MicroBlogService blogService;
+    
+    public UserRestResource(MicroBlogService blogService) {
+        this.blogService = blogService;
+    }
+    
+    @Path("/group/{group}")
+    public GroupRestResource getGroupSubResource() {
+        return new GroupRestResource(blogService);
+    }
+    
+    /**
+     * This method adds a user via the injected MicroBlogService backend,
+     * which adds the user and credential to the LDAP server as well as adds
+     * the user itself to the database.
+     * 
+     * @param name
+     * @param user 
+     */
+    @PUT
+    public void addUser(@PathParam("name") String name, UserData user) {
+        user.setId(name);
+        blogService.addUser(user);
+    }
     
     /**
      * This method gets a user and displays it as one of the primary content
@@ -115,6 +130,35 @@ public class UserRestResource implements Serializable {
         if(ctx.getUserPrincipal().getName().equals(name)) {
             blogService.removeFriend(name, friend);
         }
+    }
+    
+    /**
+     * For a given user, this method gets all the messages posted in their
+     * name. Any user can call this method with any username as a parameter.
+     * The parameters allow setting the offset where the list is shown, as
+     * the entire list will not be returned if it is too large.
+     * 
+     * @param name
+     * @param offset
+     * @return 
+     */
+    @GET
+    @Path("/messages") public DataList getMessagesByUser(@PathParam("name") String name, @MatrixParam("offset") Integer offset) {
+        return new DataList(blogService.getPosts(name), offset, MAX_LIST_SPAN, true);
+    }        
+    
+    /**
+     * For a given user, this method posts a message in their name. Any
+     * user can call this method with any parameters, the name is recalled
+     * directly from the security context.
+     * 
+     * @param name
+     * @param post
+     * @param ctx 
+     */
+    @Path("/messages") @POST @RolesAllowed({"User"})
+    public void postMessage(@PathParam("name") String name, MessageData post, final @Context SecurityContext ctx) {
+        blogService.addPost(ctx.getUserPrincipal().getName(), post);
     }
     
 }
